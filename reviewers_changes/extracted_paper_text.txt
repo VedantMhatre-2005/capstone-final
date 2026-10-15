@@ -1,0 +1,839 @@
+=== PAGE 1 ===
+Available online at www.sciencedirect.com
+Procedia Computer Science 00 (2025) 000–000
+www.elsevier.com/locate/procedia
+International Conference on Machine Learning and Data Engineering
+A quantum-enhanced graph learning framework for edge-level
+traffic forecasting and QAOA-based congestion rerouting
+Dr. Sharmila Senguptaa, Vedant Mhatrea, Aditya Upasania, Yash Mahajana, Sanjay Askia
+aDepartment of Computer Engineering, Vivekanand Education Society’s Institute of Technology, Mumbai 400074, India
+Abstract
+Urban traffic congestion results from complicated spatiotemporal interactions throughout connected road networks. As such, both
+short-term forecasting and network-wide rerouting are essential for responsive traffic management. This paper proposes a quantum-
+enhanced framework that integrates edge-level traffic forecasting with combinatorial rerouting optimization. A Spatiotemporal
+Quantum Graph Convolutional Network (STQGCN) predicts short-term congestion on road segments by combining classical graph
+message passing with a Variational Quantum Circuit (VQC) layer that enhances learned representations through parameterized
+rotations and entanglement. The congested edges are identified, and the predicted congestion states are discretized into packets and
+candidate detours are formulated as a Quadratic Unconstrained Binary Optimization (QUBO) problem, which is solved by using a
+depth-one Quantum Approximate Optimization Algorithm (QAOA) with classical parameter tuning. Additionally, the framework
+is evaluated against Long Short-Term Memory (LSTM) and classical Spatiotemporal Graph Convolutional Network (STGCN)
+forecasting baselines and a Binary Particle Swarm Optimization (BPSO) rerouting baseline, across single and hierarchical network
+topologies and 45 heterogeneous traffic scenarios. The STQGCN achieves competitive or superior forecasting accuracy, especially
+on bidirectional flow topologies, while using four orders of magnitude fewer trainable parameters than the LSTM baseline. QAOA-
+based rerouting achieves median peak-occupancy reductions of 13–22% depending on network size and never produces a higher
+final peak occupancy than BPSO across all evaluated scenarios. The results demonstrate the feasibility of pairing quantum-enhanced
+representation learning with quantum combinatorial optimization within a unified traffic management pipeline.
+Keywords: Quantum Machine Learning; Spatiotemporal Graph Neural Networks; Traffic Congestion Forecasting; QAOA; QUBO; Intelligent
+Transportation Systems; Traffic Optimization;
+1. Introduction
+Continuous real-time data generation is a prominent feature of modern urban mobility and transportation systems.
+In order to produce dense traffic streams with a high frequency at the level of individual road segments, Intelligent
+Transportation Systems (ITS) and Connected and Automated Vehicles (CAVs) increasingly utilize heterogeneous
+sensor modalities, like loop detectors, roadside cameras, radar and connected-vehicle telemetry [8, 2]. Due to this
+shift from sparse and periodically sampled measurements toward continuous edge-level observation, it is possible
+for systems to act on localized, short-horizon signals as they are generated rather than reacting to network-wide
+∗Dr. Sharmila Sengupta
+E-mail address: sharmila.sengupta@ves.ac.in
+1877-0509 .
+
+
+=== PAGE 2 ===
+2
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+congestion only after it has propagated across multiple junctions. However, realizing this potential requires forecasting
+and decision-making methods that operate at the same edge-level details as the underlying data, thereby motivating
+the short-term forecasting approach at the road segment level proposed through this work.
+Rapid urbanization and rising mobility demand have put substantial pressure on urban transportation networks,
+causing traffic congestion that affects travel efficiency, road utilization and the reliability of daily commute. While ITS
+and CAVs are capable of generating continuous traffic information from distributed transportation infrastructure to
+allow more responsive and data-driven traffic management [8, 2], traffic conditions remain inherently spatiotemporal,
+which means the state of one road segment is affected by neighboring junctions, road capacity, signal conditions,
+upstream and downstream traffic, as well as evolving demand over time. Since junctions and road segments form an
+interconnected topology in which information flows between neighboring components, graph-based learning provides
+a natural representation for such systems. Spatiotemporal graph convolutional architectures have demonstrated the
+ability to learn such structured and temporal relationships, providing a foundation for modeling complex networked
+systems [12].
+Recent research has explored quantum-enhanced learning for transportation applications, including quantum ma-
+chine learning for traffic-density estimation [9]. However, curbing congestion requires converting predicted traffic
+states into actionable network-level decisions. Classical optimization techniques, such as PSO, have been widely
+studied for traffic signal timing and congestion mitigation due to their adaptability and low implementation complex-
+ity [3, 6, 7], but swarm-based search can suffer from parameter sensitivity, premature convergence and increasing
+computational effort as the decision space and network size grow. Quantum computing has emerged as a promis-
+ing alternative in this context, with prior work demonstrating quantum-assisted traffic navigation and quantum-based
+traffic-flow optimization [1, 11], thereby motivating further discussion into combining quantum-enhanced prediction
+with quantum combinatorial optimization for network-level traffic management. Since each congested edge can be
+independently routed along its original path or a candidate detour, the space of rerouting decisions expands and grows
+with the number of congested links, and classical metaheuristic algorithms must search this space heuristically without
+taking advantage of its structure. In contrast, quantum optimization algorithms encode the decision space directly onto
+qubits and offers a different approach to this combinatorial explosion, a property which is revisited when examining
+scalability in Section 6.2.7.
+Adding to these developments, this paper proposes a quantum-enhanced traffic management framework that in-
+tegrates an STQGCN for short-term edge-level traffic prediction with a QUBO formulation solved using QAOA for
+network-level rerouting, thereby combining prediction and optimization within a single closed-loop pipeline [4, 10, 5].
+The main contributions of this work are:
+1. A hybrid classical-quantum STQGCN architecture, that combines graph-based message passing with a VQC
+layer to produce short-term, edge-level predictions of traffic congestion directly on road segments, has been
+proposed.
+2. Network-level traffic rerouting has been formulated as a QUBO problem, which has been solved using a depth-
+one QAOA, thus establishing a closed prediction-to-optimization loop in which the predicted congestion directly
+informs rerouting and signal-retuning decisions rather than treating prediction and optimization as independent
+stages.
+3. The proposed framework was evaluated against LSTM and classical STGCN forecasting baselines and a BPSO
+rerouting baseline, across single and hierarchical network topologies and 45 heterogeneous traffic scenarios.
+Furthermore, the framework has been established within a corridor-level system architecture and Defense-in-
+Depth security model compatible with existing ATCS infrastructure.
+2. Literature Survey
+2.1. Classical Traffic Optimization
+Traditionally, intelligent traffic management systems have relied on classical optimization and classical learning
+techniques to mitigate congestion, coordinate traffic signals and reroute vehicles. Although PSO and the other swarm-
+
+
+=== PAGE 3 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+3
+based methods are adaptable and simple to implement [3, 6, 7], increasing the complexity of the road network leads
+to premature convergence and reduced solution quality.
+2.2. Graph-Based Traffic Prediction
+Additionally, graph-based deep learning has proven to be effective in capturing structured traffic dependencies.
+Spatiotemporal graph convolutional architectures learn relationships over interconnected nodes and evolving states
+[12], while quantum-enhanced studies are beneficial for traffic-density estimation [9, 8].
+2.3. Quantum Computing in Transportation
+Quantum computing has been considered a promising technology to address challenges in transportation opti-
+mization, as routing, signal coordination and redistribution are combinatorial problems. Early works have shown that
+quantum assisted traffic finding and flow optimization is feasible through quantum annealing [1, 11] and recent works
+have formulated this as a QUBO problem for quantum optimization [4, 10]. Quantum circuits offer an alternative
+through QAOA for the near-term hybrid quantum-classical era [5] and works have explored this approach alongside
+other edge quantum architectures and applications for general transportation optimization [2, 8]. However, the quan-
+tum advantage in such works remains limited by circuit depth and hardware availability and practical implementations
+would utilize a hybrid approach that combines classical and quantum processing.
+2.4. Research Gap
+While previous works have focused on either learning methods for prediction or defining optimization problems,
+practical implementation considering both aspects for traffic congestion prediction and coordinated optimization with
+rerouting decisions is not prevalent. This gap can be observed even among the quantum computing works discussed
+above. For instance, Yarkoni et al. [1] and Salloum et al. [10] propose traffic navigation and signal-flow rerouting
+as quantum annealing or iterative QUBO problems, but in both cases, the traffic states causing the optimization are
+an externally supplied input rather than being produced by a forecasting model. In contrast, Wang et al. [9] apply
+quantum machine learning to estimate traffic density but do not optimize the resulting predictions. Therefore, neither
+line of work establishes a pipeline in which predicted congestion states directly inform network-level optimization.
+For practical deployment, continuous congestion prediction, using a learned model, is required to inform large-scale
+coordinated optimization while being compatible with current ITS infrastructure.
+This work proposes a hybrid classical-quantum framework for coordinated optimization based on spatiotemporal
+graph learning and quantum optimization. The proposed solution employs graph message passing with a VQC layer
+for short-term traffic congestion forecast at the edge level. The predicted congestion is then used as an input to a QUBO
+formulation solved with QAOA to determine optimal rerouting decisions for an adaptive and responsive smart city
+transport system. This combined approach differs from previous works which have treated the congestion prediction
+and optimization aspects in isolation.
+3. Proposed Methodology
+3.1. Traffic Congestion Prediction
+As observed in Figure 1, an STQGCN is proposed for edge-level traffic prediction by modeling junction spatial
+dependencies, segment physical attributes, dynamic weather conditions and temporal periodicity.
+3.1.1. Spatio-Temporal Graph Representation
+The network is represented as a directed graph G = (V, E). Each node vi has a feature vector xi ∈Rdv combining
+traffic dynamics (flow, speed, occupancy, queue length) with monsoon weather metrics (temperature, precipitation
+intensity). Each directed edge eij carries structural features fi j ∈Rde (capacity, speed limit, lanes, length, Pavement
+Condition Index [PCI], incident flag). A global temporal vector t ∈Rdt captures periodicity (sin / cos hour encodings,
+weekend and holiday/event flags). All features are Z-score normalized prior to embedding.
+
+
+=== PAGE 4 ===
+4
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+Fig. 1: Proposed STQGCN Framework
+3.1.2. Contextual Message Passing
+Node features are contextualized with global temporal vectors and aggregated across spatial neighborhoods N(i)
+alongside edge attributes:
+h(0)
+i
+= ReLU Wv[xi ∥t] + bv
+,
+fi j →ei j
+(1)
+˜hi = h(0)
+i
++
+X
+j∈N(i)
+MLP [h(0)
+j
+∥eji ∥t]
+(2)
+Residual aggregation preserves local spatial context and incorporates temporal context.
+3.1.3. Hybrid Quantum Update Layer
+The spatial embedding ˜hi is refined using a VQC QΘ: (1) down-projection contextualized with t to single-qubit
+rotation angles, (2) RY angle embedding, (3) parameterized entangling layers, (4) Pauli-Z expectation measurements
+and (5) up-projection with t back to latent dimension:
+h(ℓ)
+i
+= LayerNorm
+˜hi + QΘ
+ [˜hi ∥t]
+(3)
+3.1.4. Edge-wise Forecasting & Objective
+The final edge-level predictions are generated by passing the weather-informed source and destination node em-
+beddings (h(L)
+i , h j(L)), edge attributes eij and temporal vector t through an MLP, followed by inverse Z-score normal-
+ization:
+ˆyij = MLP [h(L)
+i
+∥h(L)
+j
+∥ei j ∥t] · σ + µ
+(4)
+
+
+=== PAGE 5 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+5
+The model is trained end-to-end minimizing MSE loss L =
+1
+ET
+PT
+t=1
+P
+e∈E(ˆy(t)
+e −y(t)
+e )2 using Adam for classical weights
+and the Parameter-Shift Rule for quantum parameters Θ.
+3.2. Traffic Congestion Optimization
+Considering a network graph with edge capacities Ce, lane counts Le and predicted flows qe ≡ˆye,t+1 from the
+STQGCN model, traffic rerouting is formulated as a QUBO problem. To benchmark optimization performance under
+identical physical constraints, two paradigms are evaluated: (1) Binary Particle Swarm Optimization (BPSO) as a
+classical metaheuristic baseline and (2) QAOA as a variational quantum approach.
+3.2.1. Congestion Sensing and QUBO Formulation
+1) Congestion Sensing and Packet Discretization:. Initial edge occupancy is defined as O(0)
+e
+= qe/Ce. Edges exceeding
+operational threshold θhigh = 0.60 (60% of the edge capacity) are flagged as congested. For each congested link, excess
+load above target occupancy O∗= 0.50 (∆qe = max(0, qe −0.50Ce)) is discretized into Ne traffic packets of granularity
+δ = 150 veh/hr:
+Ne = min
+ 
+10,
+$∆qe
+150
+%!
+(5)
+enforcing a total limit of N ≤10 binary decision variables across the network for computational feasibility. Each
+variable xk ∈{0, 1} assigns packet k to either its original route (xk = 0) or a top detour path (xk = 1). Detour candidates
+(≤3 hops) are ranked by score S (r) = Length(r) + 2.0 maxe′∈r O(0)
+e′ . The target occupancy O∗= 0.50 represents a free-
+flow equilibrium operating point (Level of Service A/B under BPR delay curves) and provides a buffer capacity to
+absorb diverted flows without triggering secondary congestion on detour links. The packet granularity δ = 150 veh/hr
+(≈7–10% of single-lane capacity) is selected to maintain fine-grained rerouting control while constraining the overall
+QUBO search space to N ≤10 qubits for NISQ statevector optimization feasibility.
+2) Edge Load and Objective Mapping:. For decision vector x = (x1, . . . , xN)T ∈{0, 1}N, the resulting edge load qe(x)
+is:
+qe(x) = q(0)
+e −
+X
+k:orig(k)=e
+150xk +
+X
+k:e∈detour(k)
+150xk
+(6)
+The global objective J(x) minimizes network occupancy variance from target 0.50:
+J(x) =
+X
+e∈E
+we
+ qe(x)
+Ce
+−0.50
+!2
+,
+where we = 1.0 + 2.0O(0)
+e +
+¯C
+Ce
+(7)
+The weighting factor we balances network stability and bottleneck mitigation. The constant 1.0 maintains non-zero
+baseline weighting across all links, multiplier 2.0 penalizes severe initial occupancy O(0)
+e , and
+¯C
+Ce prioritizes low-
+capacity roads. Finally, the inverse capacity ratio
+¯C
+Ce assigns higher optimization priority to narrow low-capacity links.
+Expanding Eq. (7) generates the QUBO matrix capturing route coupling and bottleneck interactions.
+
+
+=== PAGE 6 ===
+6
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+3.2.2. BPSO Optimization
+BPSO optimizes J(x) by mapping continuous swarm dynamics onto the binary search space {0, 1}N. Each particle
+p maintains position up ∈[−10, 10]N and velocity vp ∈RN, updated at iteration k + 1 via:
+vk+1
+p,i = wvk
+p,i + c1r1
+
+pbest,p,i −uk
+p,i
+
++ c2r2
+
+gbest,i −uk
+p,i
+
+(8)
+uk+1
+p,i = clip
+
+uk
+p,i + vk+1
+p,i , −10, 10
+
+(9)
+with inertia w = 0.5, acceleration factors c1 = c2 = 1.5 and r1, r2 ∼U(0, 1). Continuous states map to binary route
+choices bp ∈{0, 1}N via sigmoidal thresholding: bp,i = 1 if σ(up,i) = (1 + e−up,i)−1 ≥0.5, and 0 otherwise.
+3.2.3. QAOA Optimization
+QAOA maps the QUBO objective in Eq. (7) into an equivalent N-qubit Ising cost Hamiltonian:
+HC =
+N
+X
+i=1
+hiZi +
+X
+i< j
+Ji jZiZj + E0I
+(10)
+Using a Qiskit statevector simulator, a VQC of depth p
+=
+1 prepares parameterized state |ψ(γ1, β1)⟩
+=
+e−iβ1HBe−iγ1HC|+⟩⊗N, where HB = P
+i Xi is the transverse mixer. A COBYLA optimizer (max 50 iterations) tunes
+(γ1, β1) to minimize expectation value E(γ1, β1) = ⟨ψ(γ1, β1)|HC|ψ(γ1, β1)⟩.
+Post-Rerouting Signal Co-Optimization:. Upon obtaining optimal decision vector x∗(from either BPSO or QAOA),
+updated link flows qe(x∗) trigger local intersection signal retuning. Green time allocation ge for each approach is
+dynamically adjusted according to phase splits: ge = splite · Cnode. Thus, the macro-level packet rerouting and micro-
+level signal control operate in a coordinated two-tier architecture.
+4. System Implementation and Security
+The proposed solution is designed as a corridor-based, hybrid centralized-hierarchical traffic-control system that
+will improve the existing Adaptive Traffic Control System (ATCS). The field includes AI cameras, radar, weather,
+signal heads, VMS, an MMU and the certified controller cabinet for every junction, where the existing controller will
+maintain final control over signal operations after considering the data on vehicle traffic, queue and occupancy, as
+well as the weather, provided by the field equipment [13, 14, 15]. The system will be incorporated into Mumbai’s
+hierarchical traffic-control system. A managed fibre/MLLN will be used, a Ward Edge Platform will carry out the
+optimization process and the city traffic management centre will have overall supervision [13, 14, 15, 16]. Every
+corridor is represented as a graph, with junctions as nodes and segments as edges describing the topology, and the
+STQGCN model processes this graph’s local state, learning the patterns of spillback and platoon propagation and
+optimizing offsets, cycle length, phase, priority and VMS policy.
+The operation follows: Ward Edge aggregates observations into a corridor graph, the STQGCN predicts short-
+term traffic and QAOA is invoked only when adjustment is beneficial (event-driven optimization). QAOA currently
+runs on a classical simulator, decoupled from but compatible with future QPU deployment. Where central quantum
+connectivity is needed, a 4G/5G private APN or a WPC-approved 5.825–5.875 GHz wireless bridge, targeting ∼16–
+20 Mbps per junction and sub-50 ms latency can be specified, though Ward Edge remains the primary low-latency
+layer [17, 18]. The execution is conservative: plans pass through the Implementation Decision Engine (IDE), Oper-
+ational Decision Engine (ODE), safety validation and a Signal Transition Manager before reaching the controller;
+
+
+=== PAGE 7 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+7
+active green phases are never abruptly terminated, and minimum green, clearance and conflict-free sequencing rules
+remain enforced [13, 19]. The field controller and detectors form an always-on domain independent of the restartable
+STQGCN/QAOA services, so the last valid plan persists through any Ward Edge outage.
+Defense-in-Depth spans physical infrastructure, communication trust, Ward Edge security, AI processing, decision
+validation, controller protection, monitoring and recovery so a single layer’s failure does not compromise signal safety
+[20, 21]. Roadside and controller cabinets are secured via tamper sensors, firmware authenticity checks and audit
+logging under independent MMU supervision, communication relies on mutual authentication, segmentation and
+replay protection through a session-based lifecycle keeping certificate renewal and auditing off the real-time control
+path [20, 21, 22], and the Ward Edge enforces platform integrity, least-privilege access and continuous supervision [20,
+21]. The AI pipeline is validated at every stage, like input consistency, graph-structure integrity, prediction anomaly
+checks and QAOA feasibility/safety checks, while every recommendation independently undergoes policy, traffic-rule
+and safety validation before the IDE/ODE issue a command, with failed validation leaving the existing safe plan active
+[19, 20, 21]; the architecture also follows the DPDP Act, 2023 via privacy-by-design, extracting only aggregate traffic
+metrics rather than raw CCTV imagery [23, 24], while continuous telemetry correlation and validated recovery protect
+the grid from tampering and unsafe commands without halting field control [20, 21, 22].
+5. Experimental Setup and Datasets
+5.1. Dataset Formulation and Realistic Traffic Synthesis
+Standard benchmarks (e.g., PeMSD4/D8) often lack spatial anisotropy, dynamic edge-level attributes and struc-
+tural heterogeneity. To evaluate STQGCNs under realistic urban dynamics, two physics-informed synthetic datasets
+modeled on the Mumbai metropolitan transportation network were constructed:
+1. Single Network (N = 8): Localized junction hub with 8 signalized intersections connected by 11 unidirectional
+and 22 bidirectional directed links.
+2. Hierarchical Network (N = 24): Multi-zonal corridor split into three 8-node operational zones, joined by inter-
+zone bridges (V8 →V9 and V16 →V17) with 30 unidirectional and 60 bidirectional directed links:
+• Zone 1 (Tree Topology): Suburban inflow feeder that lets commuters flow into central trunks.
+• Zone 2 (Mesh Topology, 2 × 4 grid): Central Business District (CBD) interchange experiencing multidirec-
+tional weaving flow.
+• Zone 3 (Linear Topology): South Mumbai narrow coastal corridor acting as a capacity bottleneck.
+Both datasets span NT = 10, 000 5-second timesteps capturing diurnal/weekend cycles and 5-second lookahead
+targets. Node feature matrices X ∈RNT ×N×6 encode vehicle volume (veh/hr), mean speed (km/h), density (veh/km),
+monsoon rain intensity (mm/hr), incident flags (p = 0.03) and signal split ratios. Edge feature matrices E ∈RNT ×|E|×6
+track link capacity (veh/hr), length (km), PCI, speed limit (km/h), lane count (3–4) and congestion ratio (q/C).
+5.2. Mumbai Traffic Physics Alignment
+The synthetic generation aligns strictly with physical traffic dynamics observed across Mumbai arterials:
+1. Bimodal Commuter Peaks: Dual-peak morning (Am
+≈1200 veh/hr, 08:00–11:00) and evening (Ae
+≈
+1500 veh/hr, 17:00–21:00) surges model heavy directional asymmetry over 5-minute daily intervals tday ∈
+[0, 288]:
+qbase(t) = 800 + 400 sin
+ 2πt
+288
+!
++ Ame−
+(tday−96)2
+200
++ Aee−
+(tday−216)2
+250
+(11)
+
+
+=== PAGE 8 ===
+8
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+Table 1: Comparative Architectural Evaluation on Single Network (N = 8 Nodes) for 5-Second Traffic Forecasting
+Model Architecture
+MAE ↓
+RMSE ↓
+MAPE (%) ↓
+R2 ↑
+Unidirectional Flow Topology
+LSTM (TMS Baseline)
+150.93
+279.58
+14.51
+0.9187
+Classical STGCN
+159.01
+278.26
+14.62
+0.9195
+STQGCN (K = 1)
+152.87
+277.68
+14.45
+0.9198
+Bidirectional Flow Topology
+LSTM (TMS Baseline)
+246.00
+351.80
+27.53
+0.8538
+Classical STGCN
+241.79
+363.52
+26.69
+0.8439
+STQGCN (K = 6)
+238.40
+352.85
+24.67
+0.8529
+Table 2: Comparative Architectural Evaluation on Hierarchical Network (N = 24 Nodes, 3 Zones) for 5-Second Traffic Forecasting
+Model Architecture
+MAE ↓
+RMSE ↓
+MAPE (%) ↓
+R2 ↑
+Unidirectional Flow Topology
+LSTM (TMS Baseline)
+52.97
+67.49
+4.70
+0.9876
+Classical STGCN
+46.27
+58.41
+4.22
+0.9907
+STQGCN (K = 4)
+46.68
+58.97
+4.22
+0.9905
+Bidirectional Flow Topology
+LSTM (TMS Baseline)
+173.14
+252.70
+18.63
+0.8261
+Classical STGCN
+177.34
+258.94
+18.79
+0.8174
+STQGCN (K = 6)
+175.27
+257.37
+18.50
+0.8196
+2. Non-Linear Traffic Breakdown: Speeds vi(t) and densities ρi(t) govern capacity drops and shockwave propa-
+gation according to non-linear flow theory:
+vi(t) = max
+vfree
+1 −
+ qi(t)
+Cmax
+!1.8+ ϵ, vmin
+
+(12)
+3. Monsoon, Stochastic Disturbances & Multi-Scale Heterogeneity: Exponential rainfall pulses (R(t) ∼Exp(λ))
+and random incident flags (p = 0.03) test model robustness under sudden capacity degradation, while combining
+Tree →Mesh →Linear topologies evaluates GNN scalability from localized junctions to multi-zonal bottleneck
+corridors.
+6. Results and Discussion
+6.1. Experimental Evaluation for Short-Term Traffic Prediction
+The STQGCN prediction phase is evaluated over a 5-second horizon against two baselines: an LSTM (non-spatial
+sequence baseline) and a classical STGCN (lacking the VQC update layer). Benchmark topologies include:
+1. Single Network (N = 8): Localized junction topology with 11 unidirectional / 22 bidirectional links.
+2. Hierarchical Network (N = 24): 3-zone arterial system with 30 unidirectional / 60 bidirectional links.
+Performance is reported on un-normalized throughput (veh/hr) using MAE, RMSE, MAPE (%) and R2.
+6.1.1. Architectural Performance Comparison
+Tables 1 and 2 detail forecasting performance across both topology scales.
+Key insights from Tables 1 and 2:
+
+
+=== PAGE 9 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+9
+1. Bidirectional Resilience: In turbulent bidirectional flows, quantum entanglement enables STQGCN (K = 6) to
+outperform classical baselines, achieving the lowest MAE (238.40 veh/hr) and MAPE (24.67%) on the single
+network, as well as the lowest MAPE (18.50%) on the hierarchical Network.
+2. Scale Generalization: Graph-structured models outperform sequence-only LSTM on the 24-node topology
+(4.22% vs 4.70% MAPE unidirectional). STQGCN maintains tight error bounds (MAE = 46.68 veh/hr,
+R2 = 0.9905), proving scalable integration of quantum graph updates across zonal boundaries.
+3. STQGCN vs. Classical STGCN: Though the STQGCN showcases strong spatiotemporal representation ca-
+pabilities, the analysis indicates that it outperforms classical STGCN only selectively under specific network
+conditions rather than uniformly across all traffic scenarios. Specifically, the STQGCN performs better in com-
+plex, bidirectional flow topologies (for example, reducing MAE to 238.40 veh/hr on the single bidirectional
+network and 175.27 veh/hr on the hierarchical bidirectional network) as well as localized networks with a high
+density. In these complex scenarios, non-linear cross-edge spatiotemporal correlations are created by the counter-
+directional vehicle interactions and shockwaves produced by bottlenecks. The VQC effectively maps these com-
+plex interactions by leveraging RY(θ) state rotations and CNOT entangling gates to construct high-dimensional
+Hilbert space representations that exceed the expressive capacity of classical linear graph projections. In con-
+trast, in smooth and highly ordered unidirectional topologies (like the hierarchical unidirectional network, where
+R2 > 0.99), spatiotemporal flow propagation is mainly deterministic and linear spatial message passing in clas-
+sical STGCN is already near-optimal. Under such low-variance conditions, quantum entanglement is beneficial
+only slightly, while non-linear quantum measurement projections can introduce minor parameter optimization
+variance, thereby allowing classical STGCN to perform better than the STQGCN (for example, 46.27 veh/hr vs.
+46.68 veh/hr MAE).
+6.1.2. Quantum Advantage and Expressivity Analysis
+Ablation across VQC depths K ∈{1, . . . , 7} under unidirectional flow showcases scale-dependent optimization
+dynamics: on the Single Network (N = 8) (Fig. 2a), the maximum accuracy is observed at depth K = 1 (MAE =
+152.87 veh/hr, MAPE = 14.45%), with K = 2 causing significant error inflation (MAE = 162.24 veh/hr) from local
+parameter redundancy, while deeper configurations (K ≥6) show slight variance rise (MAE ≈161.17–162.25 veh/hr).
+On the Hierarchical Network (N = 24) (Fig. 2b)), error decreases steadily from K = 1 (MAE = 48.27 veh/hr) to an
+optimal minimum at K = 4 (MAE = 46.68 veh/hr, MAPE = 4.22%, R2 = 0.9905), beyond which performance
+plateaus and degrades slightly (MAE = 48.00 veh/hr at K = 7).
+These results highlight three algorithmic advantages of STQGCN:
+1. Parameter Efficiency: While LSTM uses 386, 974 trainable parameters, STQGCN appends only 9 × K varia-
+tional parameters (Θ ∈R36 at K = 4). Despite four orders of magnitude fewer parameters, STQGCN delivers
+superior accuracy under complex bidirectional flow.
+2. Hilbert Space Entanglement: Embedding features via RY(θ) rotations and CNOT entangling gates constructs
+high-dimensional feature maps that model non-linear bottleneck shockwaves better than linear graph projections.
+3. Barren Plateau Mitigation at K = 4: Medium depths (K ∈[1, 4]) expand expressive capacity without gradient
+decay, whereas deeper circuits (K ≥6) risk quantum barren plateaus. Depth K = 4 optimizes expressivity while
+preserving robust parameter-shift gradients.
+6.2. Comparative Analysis: BPSO vs. QAOA Optimization
+The proposed traffic optimization framework based on QAOA has been benchmarked across 45 heterogeneous
+traffic scenarios. Each scenario was tested on networks of 4, 5 and 6 nodes, with 15 scenarios per network size. For
+each scenario, the optimization was initialized from the same traffic state and compared to a BPSO baseline. The
+reduction in peak occupancy was taken as the main performance metric and was calculated as
+
+
+=== PAGE 10 ===
+10
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+(a) Single Network (N = 8)
+(b) Hierarchical Network (N = 24)
+Fig. 2: VQC layer depth (K) ablation analysis and quantum optimization dynamics for short-term traffic forecasting: (a) Single network (N = 8)
+error evolution showing shallow optimum at K = 1 and K = 6 for unidirectional and bidirectional traffic flow respectively, and (b) Hierarchical
+network (N = 24) scale-dependent error reduction reaching minimum MAE at K = 4 and K = 6 for unidirectional and bidirectional traffic flow
+respectively
+Reduction(%) = Initial Peak −Method Peak
+Initial Peak
+× 100.
+(13)
+6.2.1. Optimization at Topology Level
+The results at the level of network topologies are presented in Table 3. The results indicate that the performance
+of QAOA improves with the size of the network. The median peak-occupancy reductions achieved by QAOA rose
+from 13.41% for the 4 node topology to 16.52% for the 5-node topology and 22.03% for the 6-node topology. For
+BPSO, the analogous figures were 11.57%, 16.05% and 18.71% respectively. For the 4-node topology, the initial peak
+occupancy was reduced by QAOA in 12 out of 15 scenarios, while for the 5-node topology, it was improved in all
+scenarios and for the 6-node topology, it was achieved in 14 out of 15 scenarios.
+Table 3: Topology-level comparison of QAOA and BPSO across 15 scenarios.
+Topology
+QAOA Med.
+BPSO Med.
+QAOA Range
+Improved
+Better
+Equal
+4-node
+13.41%
+11.57%
+−8.04–28.02%
+12/15
+5/15
+10/15
+5-node
+16.52%
+16.05%
+3.42–33.84%
+15/15
+3/15
+12/15
+6-node
+22.03%
+18.71%
+−15.34–34.38%
+14/15
+5/15
+10/15
+Moreover, when directly compared to BPSO, QAOA did not result in a higher peak occupancy in any scenario. In
+particular, QAOA resulted in a strictly lower peak occupancy than BPSO in 13 scenarios and produced equal results
+in the other 32 scenarios. Hence, within the tested scenarios, QAOA was not outperformed by BPSO in terms of the
+peak-occupancy objective, while strictly improving upon BPSO in some scenarios.
+6.2.2. Performance at Scenario Level
+The scenario-level results show that the performance of QAOA depends on the type of traffic situation and the
+availability of alternative routes. In several cases, QAOA reduced the highest road occupancy significantly. For the
+4-node network, the largest reductions were 28.02%, 27.60% and 25.99%; for the 5-node network, they were 33.84%,
+29.10% and 28.47%. In the 6-node network, the largest reduction reached 34.38%, with another major reduction
+of 27.52%. The results show that QAOA can effectively reduce traffic congestion under a range of different traffic
+conditions.
+Cases in which rerouting provides limited or negative improvement are also observed. In the 4-node topology, the
+Evening traffic Surge and Weather Network Slowdown scenarios produced reductions of −2.26% and −8.04%, respec-
+
+
+=== PAGE 11 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+11
+Table 4: Scenario-wise QAOA peak-occupancy reduction across network topologies.
+Scenario
+4-node
+5-node
+6-node
+Expressway Congestion
+12.50%
+16.52%
+27.94%
+Dual Road Congestion
+19.83%
+13.92%
+18.70%
+Separated Rd. Congestion
+23.19%
+16.05%
+23.99%
+Morning Peak
+13.41%
+28.47%
+11.93%
+Evening Surge
+−2.26%
+3.50%
+22.03%
+Central District
+0.00%
+4.79%
+16.40%
+Capacity Reduction
+28.02%
+33.84%
+34.38%
+Event Surge
+13.40%
+17.47%
+27.52%
+Scenario
+4-node
+5-node
+6-node
+School Traffic
+14.63%
+3.42%
+11.95%
+Uneven Distribution
+14.78%
+18.86%
+23.68%
+Bad Weather
+−8.04%
+16.06%
+−15.34%
+Transit Surge
+7.35%
+21.56%
+26.32%
+Heavy Freight
+25.99%
+29.10%
+13.86%
+Multiple Rd. Congestion
+3.31%
+9.48%
+18.71%
+Low Night Traffic
+27.60%
+28.09%
+25.22%
+Fig. 3: QAOA vs. BPSO latency comparison
+tively. Similarly, the 6-node topology produced a −15.34% reduction for the Weather Network Slowdown scenario.
+These cases indicate that the effectiveness of the optimization is constrained by the available detour structure and the
+distribution of traffic demand.
+The detailed results at the scenario level are presented in Table 4.
+6.2.3. Algorithm Execution Latency
+As shown in Fig. 3, the execution latency of BPSO and QAOA increases with network size. BPSO achieves low
+algorithm execution runtimes of 8.2 ms, 14.5 ms and 24.8 ms across the 4-node, 5-node and 6-node topologies re-
+spectively, thereby benefiting from the low complexity of the vector arithmetic during particle velocity and posi-
+tion updates. However, QAOA introduces a slight computational overhead due to variational angle (γ, β) evaluation
+and statevector simulation and yields latencies of 18.4 ms, 26.2 ms and 42.1 ms across the 4-node, 5-node and 6-
+node topologies respectively. Despite this higher baseline overhead, QAOA maintains sub-50 ms real-time execution
+bounds, confirming that its quantum optimization approach scales efficiently for dynamic traffic control without suf-
+fering from latency bottlenecks.
+6.2.4. Statistical Significance & Multi-Seed Variance Analysis
+All optimization benchmarks were evaluated across N = 10 independent stochastic random seeds (2026–2035)
+for all 45 scenario-topology combinations. The sample mean ± standard deviation (µ ± σ) is reflected alongside 95%
+Confidence Intervals (CI) calculated using Student’s t-distribution margin of error,
+
+µ ± t0.975,N−1 ·
+σ
+√
+N
+
+. Paired two-
+tailed Student’s t-tests were conducted between QAOA, BPSO and the unoptimized initial baseline. Across all demand
+profiles, QAOA achieved statistically significant peak congestion reduction (for example, Expressway Congestion:
+63.0% ± 6.5% peak occupancy vs. 80.3% ± 3.7% baseline, t(9) = −6.68, p < 0.001, Cohen’s d = 2.11; School Traffic:
+69.7% ± 3.2% vs. 81.0% ± 3.3%, t(9) = −18.29, p < 0.0001, Cohen’s d = 3.48). The narrow 95% CI envelopes
+(±1.8% across primary corridors) and high effect sizes (d > 2.0) confirm that QAOA’s capability of reducing the
+
+
+=== PAGE 12 ===
+12
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+overall congestion of a network is robust against fluctuations observed in traffic demand and variance in optimizer
+initialization rather than a product of a single seed selection.
+6.2.5. QUBO Hyperparameter Sensitivity Analysis & Sensitivity Ablation
+In order to address potential sensitivity to fixed parameter tuning, an ablation was performed over key QUBO
+formulation hyperparameters: the congestion detection threshold θhigh ∈[0.50, 0.70], target load occupancy δ ∈
+[0.40, 0.55] and maximum packet limit Ncap ∈[4, 12]. Varying θhigh across 0.50–0.70 demonstrated near-invariant
+peak congestion reduction (18.94% ± 6.66% across representative scenarios) and stable active variable counts
+(N = 6.2 qubits), proving that the congestion detection heuristic is robust to slight changes in the threshold value
+and does not rely on hyperparameter tuning. Varying the target occupancy δ showed a smooth, predictable trade-off
+between rerouted traffic volume and QUBO penalty terms, with mean objective cost decreasing from 0.72 at δ = 0.40
+to 0.21 at δ = 0.55 while maintaining peak reductions above 13.7%–23.0%. Finally, increasing the packet capacity
+limit Ncap from 4 to 12 confirmed performance saturation at Ncap ≥10, where average active qubit allocation stabilizes
+at N = 6.2 qubits with mean peak reduction saturating at 18.94%.
+6.2.6. Quantum Circuit Scalability
+The QAOA circuit width, gate depth and wall-clock execution time were benchmarked against BPSO across the
+4-Node, 5-Node and 6-Node mesh topologies. QAOA binary variable requirements scaled from an average of N =
+7.6 qubits on the 4-Node network to N = 7.8 qubits on the 6-Node networks. Circuit depth scaled linearly with ansatz
+depth p, measuring d = 56–58 for p = 1 (27–28 two-qubit CNOT/RZZ gates) and d = 167–173 for p = 3. In terms
+of wall-clock execution, QAOA parameter optimization via classical COBYLA averaged 4.24–5.93 ms per scenario,
+outperforming BPSO wall-clock execution time (15.78–20.75 ms for M = 30 particles across T = 20 iterations,
+totaling 600 objective evaluations).
+This convergence is facilitated by the variational parameter space: as shown in the 2D energy landscape contour
+(Fig. 4(a)) and 3D quantum loss surface (Fig. 4(b)), the COBYLA optimizer navigates the expectation value surface
+⟨HB⟩from an initial point (γ0, β0) to the optimal parameters (γ∗, β∗) achieving ⟨H⟩= 0.19 after a few iterations.
+Subsequently, QAOA maintained an exact ground state optimality gap of |EQAOA −EExact| = 0.0000 across all 4-Node
+scenarios at p = 3. Hence, these metrics validate that the QUBO formulation caps quantum circuit requirements within
+NISQ-compatible limits and maintains execution latencies that approximately align with heuristic classical swarms.
+(a) QAOA Energy Landscape Contour (p = 1) with COBYLA trajectory con-
+verging to (γ∗, β∗).
+(b) 3D Quantum Loss Surface ⟨HB⟩over variational
+parameters γ and β.
+Fig. 4: QAOA variational parameter energy landscape and COBYLA optimization trajectory for quantum traffic routing.
+6.2.7. Scalability and Prospects for Quantum Advantage
+The QUBO formulation has a solution space of size 2N, where N is the number of binary decision variables.
+While classical metaheuristic algorithms, such as PSO, do not perform an exhaustive search, their costs and solution
+
+
+=== PAGE 13 ===
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+13
+quality may degrade with an increasing N. QAOA encodes the decision variables in N qubits and a 2N-dimensional
+quantum state and is therefore efficient in large-scale optimization. Recent works report favorable scaling properties
+for particular QAOA variants on combinatorial optimization problems. These works include numerical results on
+quantum processors with up to 109 qubits, but they do not establish quantum advantage for any optimization problem.
+To assess the practical relevance of the proposed traffic optimization framework, further investigation on the solution
+quality, time-to-solution and resource requirements at higher N is required to establish a favorable scaling behavior.
+7. Conclusion
+7.1. Summary of Findings
+This paper presented a unified quantum-enhanced traffic management framework that pairs an STQGCN for short-
+term edge-level congestion forecasting with a QUBO-QAOA formulation for network-level rerouting. Across single
+and hierarchical Mumbai-modeled network topologies, STQGCN matched or exceeded LSTM and classical STGCN
+prediction accuracy, especially under bidirectional flow, while using fewer trainable parameters. The QAOA-based
+rerouting achieved median peak-occupancy reductions of 13–22% depending on network size and never produced
+a higher final peak occupancy than the BPSO baseline across all 45 distinct scenarios, thereby demonstrating that
+near-term, depth-one QAOA circuits can perform as well as or better than a classical metaheuristic algorithm on a
+combinatorial traffic problem. Hence, the results suggest the feasibility of combining the two phases, while the ac-
+companying corridor-level system architecture and Defense-in-Depth security model suggest a deployment approach
+that is compatible with the existing ATCS infrastructure.
+7.2. Limitations
+Addressing the limitations of the proposed framework, the evaluation relies on physics-informed synthetic datasets
+rather than live sensor feeds, and real-world noise, which may affect forecasting accuracy, has been neglected. Fur-
+thermore, the QUBO formulation is restricted to at most 10 binary decision variables per scenario for computational
+feasibility. Since QAOA was run on a classical simulator at depth one rather than physical quantum hardware, neither
+its scalability to more complex congestion events nor genuine quantum advantage has been established.
+7.3. Future Scope
+Future work will extend the framework by scaling the QUBO/QAOA formulation and evaluating on actual QPU
+hardware at larger N, validating the STQGCN and the rerouting pipeline against live field data from deployed Mumbai
+ATCS infrastructure, as well as ingesting and processing live CCTV video streams directly using computer vision to
+derive vehicle counts, queue lengths and incident flags in real time.
+References
+[1] S. Yarkoni, F. Neukart, E.M. Gomez Tagle, N. Magiera, B. Mehta, K. Hire, S. Narkhede, M. Hofmann, Quantum Shuttle: Traffic Navigation
+with Quantum Computing, in: Proc. 1st ACM SIGSOFT Int. Workshop on Architectures and Paradigms for Engineering Quantum Software,
+2020, pp. 22–30. doi:10.1145/3412451.3428500.
+[2] A.H. de O. Maia, M.E.S. Freire, T.L.M. Mello, R. Rodrigues-Filho, E.S. de Almeida, C. Prazeres, G. Bittencourt, M.L.M. Peixoto, Q-Edge:
+Leveraging Quantum Computing for Enhanced Software Engineering in Vehicular Networks, 2025. doi:10.1145/3672608.3707897.
+[3] S.A. Celtek, A. Durdu, M.E.M. Ali, Real-time traffic signal control with swarm optimization methods, Measurement 166 (2020) 108206.
+doi:10.1016/j.measurement.2020.108206.
+[4] R. Shikanai, M. Ohzeki, K. Tanaka, Quadratic Unconstrained Binary Formulation for Traffic Signal Optimization on Real-World Maps, J.
+Phys. Soc. Jpn. 94 (2025) 024001. doi:10.7566/JPSJ.94.024001.
+[5] L. Zhou, S.-T. Wang, S. Choi, H. Pichler, M.D. Lukin, Quantum Approximate Optimization Algorithm: Performance, Mechanism, and Imple-
+mentation on Near-Term Devices, Phys. Rev. X 10 (2020) 021067. doi:10.1103/PhysRevX.10.021067.
+[6] H.S.E. Chuo, M.K. Tan, A.C.H. Chong, R.K.Y. Chin, K.T.K. Teo, Evolvable traffic signal control for intersection congestion alleviation with
+enhanced particle swarm optimisation, in: Proc. IEEE 2nd International Conference on Automatic Control and Intelligent Systems (I2CACIS),
+2017. doi:10.1109/I2CACIS.2017.8239039.
+
+
+=== PAGE 14 ===
+14
+Dr. Sharmila Sengupta et al. / Procedia Computer Science 00 (2025) 000–000
+[7] S. Dabiri, M. Abbas, Arterial traffic signal optimization using Particle Swarm Optimization in an integrated VISSIM-MATLAB sim-
+ulation environment, in: Proc. IEEE 19th International Conference on Intelligent Transportation Systems (ITSC), 2016, pp. 766–771.
+doi:10.1109/ITSC.2016.7795641.
+[8] S. Somvanshi, M.M. Islam, S.B.B. Polock, G. Chhetri, D. Anderson, A. Dutta, S. Das, Quantum Computing in Transportation Engineering: A
+Survey, IEEE Transactions on Intelligent Transportation Systems, 2026.
+[9] K. Wang, B. Wang, W. Zhai, J.-A. Cheng, Distributed quantum model learning for traffic density estimation, Image and Vision Computing 167
+(2026) 105900. doi:10.1016/j.imavis.2026.105900.
+[10] H. Salloum, S. Zhanalin, A. Al Badr, Y. Kholodov, Mini-scale traffic flow optimization: An iterative QUBOs approach converting from hybrid
+solver to pure quantum processing unit, Scientific Reports 15 (2025) 22904. doi:10.1038/s41598-025-04568-2.
+[11] F. Neukart, G. Compostella, C. Seidel, D. von Dollen, S. Yarkoni, B. Parney, Traffic Flow Optimization Using a Quantum Annealer, Frontiers
+in ICT 4 (2017) 29. doi:10.3389/fict.2017.00029.
+[12] S. Yan, Y. Xiong, D. Lin, Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition, in: Proc. AAAI Conference
+on Artificial Intelligence, 32 (2018). doi:10.1609/AAAI.V32I1.12328.
+[13] Municipal Corporation of Greater Mumbai (MCGM), “Introduction to the Mumbai Area Traffic Control System,” Tender Document for Supply
+of Microprocessor Cards of ATC Controllers, MCGM, Mumbai, India, 2025.
+[14] Municipal Corporation of Greater Mumbai (MCGM), “Maintenance and Operation of ATC Signal Junctions,” Tender Document for Mainte-
+nance of Road Traffic ATC Signal Junctions, MCGM, Mumbai, India.
+[15] Municipal Corporation of Greater Mumbai (MCGM), “Supply of Vehicle Detection Cameras along with Accessories for ATC Traffic Signal
+System,” Tender No. ETH 7000020630, MCGM, Mumbai, India.
+[16] Centre for Development of Advanced Computing (C-DAC), “CoSiCoSt-EnV (Composite Signal Control Strategy–Enhanced Version),” C-
+DAC, Thiruvananthapuram, India.
+[17] Telecommunication Engineering Centre (TEC), Department of Telecommunications, Government of India, “IR on Radio Modems in ISM
+Band,” TEC/IR/CP/MOD-010/03/SEP.-13, New Delhi, India, 2013.
+[18] Department of Telecommunications, Government of India, Wireless Planning and Coordination (WPC) Wing, “Equipment Type Approval
+(ETA),” Government of India.
+[19] Telecommunications Standards Development Society, India (TSDSI), “Standardization of Common Data Payload for Adaptive Traffic Control
+System and Other Intelligent Transportation System Products for Interoperability,” TSDSI STD 5004, India.
+[20] Indian Computer Emergency Response Team (CERT-In), Ministry of Electronics and Information Technology, Government of India, “Cyber
+Security Guidelines for Smart City Infrastructure,” CERT-In Security Guidelines CISG-2025-01, Feb. 17, 2025.
+[21] Indian Computer Emergency Response Team (CERT-In), Ministry of Electronics and Information Technology, Government of India, “Guide-
+lines on Information Security Practices for Government Entities,” CERT-In Security Guidelines CISG-2023-01, June 29, 2023.
+[22] Indian Computer Emergency Response Team (CERT-In), Ministry of Electronics and Information Technology, Government of India, “Guide-
+lines for Secure Application Design, Development, Implementation & Operations,” CERT-In Security Guidelines CISG-2024-01, Jan. 25,
+2024.
+[23] Ministry of Electronics and Information Technology (MeitY), Government of India, “Digital Personal Data Protection Act, 2023,” Government
+of India, 2023.
+[24] Ministry of Electronics and Information Technology (MeitY), Government of India, “Digital Personal Data Protection Rules, 2025,” Govern-
+ment of India, 2025.
+
+
