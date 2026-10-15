@@ -1,0 +1,63 @@
+=== Page 1 ===
+ 
+1.  Graph  Representation  The  road  network  is  represented  as  a  directed  graph.   Nodes  (|V|  =  4):  road  junctions.  Edges  (|E|  =  5):  directed  road  segments.   Node  features  (d_v  =  6)  describe  junction  properties.  Edge  features  (d_e  =  5)  describe  road  characteristics.  ●  N  =  4  junctions  (nodes)  ●  |E|  =  5  directed  road  links  (edges)  ●  d_v  =  6  node  features  ●  d_e  =  5  edge  features   2.  Node  Features  Each  junction  has  a  6 ‑ dimensional  feature  vector:   φ_ flow   –  historical  traffic  flow  φ_ signal  –  signal  cycle  time  φ_ type   –  junction  type  φ_ x      –  x  coordinate  φ_ y      –  y  coordinate  φ_ deg    –  number  of  connecting  roads   Node  Feature  Vector    For  junction  v ₁  (a  signalized  intersection  in  the  city  center):   Index  Feature  Symbol  Value  Units  0  Average  historical  flow  
+φ_ flow  1200  veh/hr  
+1  Signal  cycle  time  φ_ signal  90  seconds  2  Junction  type  φ_ type  1  (signalized)  3  X  coordinate  φ_ x  0.35  normalized  4  Y  coordinate  φ_ y  0.72  normalized  5  Connecting  roads  φ_ deg  4  count  
+=== Page 2 ===
+ 
+ 
+x ₁  =  [1200,  90,  1,  0.35,  0.72,  4]ᵀ  ∈  ℝ⁶   Complete  node  feature  matrix  X  ∈  ℝ⁴ ˣ ⁶ :     φ_ flow  φ_ signal  φ_ type  φ_ x  φ_ y  φ_ deg  v ₁  1200  90  1  0.35  0.72  4  v ₂  800  60  1  0.65  0.80  3  v ₃  400  0  0  0.50  0.40  3  v ₄  1500  120  2  0.80  0.25  4   3.  Edge  Features  Each  road  segment  has  a  5 ‑ dimensional  feature  vector:   ε_ cap    –  road  capacity  ε_ speed  –  speed  limit  ε_ lanes  –  number  of  lanes  ε_ len    –  link  length  ε_ type   –  road  type    Edge  Feature  Vector    For  edge  e ₁₂  (arterial  road  from  v ₁  to  v ₂ ):  Index  Feature  Symbol  Value  Units  0  Road  capacity  ε_ cap  1800  veh/hr  1  Speed  limit  ε_ speed  50  km/h  2  Number  of  lanes  
+ε_ lanes  3  count  
+3  Link  length  ε_ len  1.2  km  4  Road  type  ε_ type  1  (arterial)  
+=== Page 3 ===
+ 
+ Raw  edge  feature  vector:  e ₁₂  =  [1800,  50,  3,  1.2,  1]ᵀ  ∈  ℝ⁵   4.  Feature  Normalization  Features  are  normalized  using  z ‑ score  normalization:   x̂  =  (x  −  μ)  /  σ   Values:  [1200,  800,  400,  1500]  Normalized  value  for  v ₁ :  x̂ ₁ [0]  =  (1200  -  975)  /  (414.7  +  10 ⁻⁸ )  =  225  /  414.7  ≈  0.543  After  normalizing  all  features:  x̂ ₁  ≈  [0.543,  0.267,  0.577,  -0.816,  1.155,  0.577]ᵀ    5.  Classical  Node  Embedding  Node  features  are  projected  into  an  8 ‑ dimensional  hidden  space.   Classical  Embedding  Layer  W_v  ∈  ℝ⁸ ˣ ⁶  W_v  =  [[  0.2,  -0.1,   0.3,   0.1,   0.0,  -0.2],         [-0.3,   0.4,   0.1,  -0.2,   0.3,   0.1],         [  0.1,   0.2,  -0.4,   0.3,   0.1,   0.0],         [  0.0,  -0.3,   0.2,   0.1,   0.4,  -0.1],         [  0.4,   0.1,   0.0,  -0.1,   0.2,   0.3],         [-0.2,   0.0,   0.3,   0.2,  -0.3,   0.1],         [  0.1,   0.3,  -0.1,   0.4,   0.0,   0.2],         [  0.3,  -0.2,   0.2,  -0.3,   0.1,   0.4]]   b_v  =  [0.1,  0.0,  -0.1,  0.05,  0.0,  0.1,  -0.05,  0.0]  Calculation  for  node  v ₁ :  z  =  W_v  ·  x̂ ₁  +  b_v   z[0]  =  0.2(0.543)  +  (-0.1)(0.267)  +  0.3(0.577)  +  0.1(-0.816)  +  0.0(1.155)  +  
+(-0.2)(0.577)
+ 
++
+ 
+0.1
+      =  0.109  -  0.027  +  0.173  -  0.082  +  0  -  0.115  +  0.1       =  0.158   After  computing  all  8  dimensions  and  applying  ReLU:  
+=== Page 4 ===
+ 
+h ₁⁽⁰⁾  =  ReLU(z)  =  [0.158,  0.0,  0.247,  0.0,  0.412,  0.089,  0.331,  0.0]ᵀ   6.  Message  Passing  Nodes  exchange  information  through  edges.    Message  Construction   Consider  computing  the  message  from  v ₂  to  v ₁  (for  edge  e ₂₁ ,  
+assuming
+ 
+it
+ 
+exists):
+ Given:  h ₂⁽⁰⁾  =  [0.231,  0.0,  0.189,  0.145,  0.0,  0.267,  0.0,  0.312]ᵀ   ∈  ℝ⁸  f ₂₁  =  [0.156,  0.423,  -0.211,  0.089,  0.577]ᵀ   ∈  ℝ⁵   (embedded  edge  
+features)
+  Step  1:  Concatenation   [h ₂⁽⁰⁾  ǁ  f ₂₁ ]  =  [0.231,  0.0,  0.189,  0.145,  0.0,  0.267,  0.0,  0.312,   0.156,  
+0.423,
+ 
+-0.211,
+ 
+0.089,
+ 
+0.577]ᵀ
+  
+∈
+ 
+ℝ
+¹³
+  Step  2:  First  MLP  Layer   W ₁ ᵐ  ∈  ℝ ^(2d_h  ×  2d_h)  =  ℝ ^(16  ×  16)  hidden  =  ReLU(W ₁ ᵐ  ·  [h ₂  ǁ  f ₂₁ ]  +  b ₁ ᵐ)   Step  3:  Second  MLP  Layer   W ₂ ᵐ  ∈  ℝ ^(d_h  ×  2d_h)  =  ℝ ^(8  ×  16)  m ₂ → ₁⁽ ¹ ⁾  =  W ₂ ᵐ  ·  hidden  +  b ₂ ᵐ   ∈  ℝ⁸   Example  output:   m ₂ → ₁⁽ ¹ ⁾  =  [0.145,  0.267,  0.0,  0.089,  0.312,  0.178,  0.0,  0.234]ᵀ   Neighborhood  Aggregation    For  junction  v ₃  with  incoming  edges  from  v ₁  and  v ₂ :  N_(v ₃ )  =  {v ₁ ,  v ₂ }  
+=== Page 5 ===
+ 
+m ₁ → ₃  =  [0.2,  0.1,  0.3,  0.0,  0.15,  0.25,  0.1,  0.0]ᵀ  m ₂ → ₃  =  [0.1,  0.3,  0.0,  0.2,  0.1,  0.0,  0.2,  0.15]ᵀ   7.  Neighborhood  Aggregation  Messages  from  neighboring  nodes  are  aggregated.   Aggregation  (sum):  a ₃⁽ ¹ ⁾  =  m ₁ → ₃  +  m ₂ → ₃  =  [0.3,  0.4,  0.3,  0.2,  0.25,  0.25,  0.3,  0.15]ᵀ   8.  Residual  Update  The  aggregated  message  is  added  to  the  previous  node  embedding.   Residual  combination:  h ₃⁽⁰⁾  =  [0.15,  0.0,  0.22,  0.1,  0.0,  0.18,  0.05,  0.0]ᵀ   h̃ ₃⁽ ¹ ⁾  =  h ₃⁽⁰⁾  +  a ₃⁽ ¹ ⁾  =  [0.45,  0.4,  0.52,  0.3,  0.25,  0.43,  0.35,  0.15]ᵀ   9.  Quantum  Update  Layer  A  hybrid  quantum  circuit  processes  node  embeddings.   Steps:  1.  Classical  projection  (8  →  4  values)  2.  Angle  embedding  using  RY  rotations  3.  Variational  quantum  circuit  with  entanglement  4.  Measurement  of  Pauli ‑ Z  expectation  values  5.  Classical  projection  back  to  embedding  space   Quantum  Update  Layer    Let's  use  n_q  =  4  qubits    StepA:Classical  Pre-projection   Given:  h̃ ₃⁽ ¹ ⁾  =  [0.45,  0.4,  0.52,  0.3,  0.25,  0.43,  0.35,  0.15]ᵀ   W_in  ∈  ℝ⁴ ˣ ⁸  =  [[  0.3,  -0.2,   0.1,   0.4,  -0.1,   0.2,   0.0,   0.3],                           [-0.1,   0.4,   0.2,  -0.3,   0.1,   0.0,   0.3,  -0.2],                           [  0.2,   0.1,  -0.4,   0.0,   0.3,  -0.2,   0.1,   0.4],  
+=== Page 6 ===
+ 
+                         [  0.0,  -0.3,   0.3,   0.2,  -0.2,   0.4,  -0.1,   0.0]]   b_in  =  [0.0,  0.1,  -0.1,  0.05]   Compute:  z  =  W_in  ·  h̃  +  b_in   z[0]  =  0.3(0.45)  +  (-0.2)(0.4)  +  0.1(0.52)  +  0.4(0.3)  +  (-0.1)(0.25)        +  0.2(0.43)  +  0.0(0.35)  +  0.3(0.15)  +  0.0      =  0.135  -  0.08  +  0.052  +  0.12  -  0.025  +  0.086  +  0  +  0.045      =  0.333   z  =  [0.333,  0.187,  -0.142,  0.211]ᵀ   Apply  tanh  and  scale  by  π:   α  =  π  ·  tanh(z)   =  π  ·  [tanh(0.333),  tanh(0.187),  tanh(-0.142),  tanh(0.211)]   =  π  ·  [0.321,  0.185,  -0.141,  0.208]   =  [1.008,  0.581,  -0.443,  0.653]  radians   α  ∈  [-π,  π] ⁴  ✓   Step  B:  Angle  Embedding   Each  qubit  starts  in  |0 ⟩  and  is  rotated  by  R_Y( α_ q):   R_Y( θ)  =  [cos( θ/2)    -sin( θ/2)]                   [sin( θ/2)     cos( θ/2)]   For  qubit  0  with  α ₀  =  1.008  rad:   R_Y(1.008)  =  [cos(0.504)    -sin(0.504)]   =   [0.876   -0.482]                          [sin(0.504)     cos(0.504)]       [0.482    0.876]   |ψ ₀ ⟩  =  R_Y(1.008)|0 ⟩  =  [0.876   -0.482]  [1]   =   [0.876]                                          [0.482    0.876]  [0]       [0.482]        =  0.876|0 ⟩  +  0.482|1 ⟩   All  qubit  states  after  embedding:  
+=== Page 7 ===
+ 
+ |ψ ₀ ⟩  =  0.876|0 ⟩  +  0.482|1 ⟩  |ψ ₁ ⟩  =  0.958|0 ⟩  +  0.287|1 ⟩  |ψ ₂ ⟩  =  0.976|0 ⟩  -   0.220|1 ⟩  |ψ ₃ ⟩  =  0.947|0 ⟩  +  0.322|1 ⟩   Full  4-qubit  initial  state:   |ψ_ init ⟩  =  |ψ ₀ ⟩  ⊗  |ψ ₁ ⟩  ⊗  |ψ ₂ ⟩  ⊗  |ψ ₃ ⟩   ∈  ℂ ^16   For  K  =  2  variational  layers,  each  layer  has:  ●  4  qubits  ×  3  angles  =  12  parameters  per  layer  ●  Total:  24  trainable  quantum  parameters  Θ   Single-qubit  rotation    U_q^(k)  =  R_Z( θ ₂ )  ·  R_Y( θ ₁ )  ·  R_Z( θ ₀ )   Example  for  qubit  0,  layer  1:   θ_{1,0}  =  [0.5,  1.2,  -0.3]   (learned  parameters)   R_Z(0.5)  =  [e^(-i·0.25)     0       ]                     [     0       e^(i·0.25)  ]   R_Y(1.2)  =  [cos(0.6)    -sin(0.6)]                      [sin(0.6)     cos(0.6)]   R_Z(-0.3)  =  [e^(i·0.15)     0        ]                       [     0       e^(-i·0.15)]    CNOT  ring  creates  entanglement:   CNOT ₀ → ₁ :  flips  qubit  1  if  qubit  0  is  |1 ⟩  CNOT ₁ → ₂ :  flips  qubit  2  if  qubit  1  is  |1 ⟩  CNOT ₂ → ₃ :  flips  qubit  3  if  qubit  2  is  |1 ⟩  CNOT ₃ → ₀ :  flips  qubit  0  if  qubit  3  is  |1 ⟩  (completes  the  ring)   Step  D:  Measurement  
+=== Page 8 ===
+ 
+ After  applying  U( Θ),  we  measure  the  expectation  value  of  Z  on  each  qubit:   o_q  =  ⟨ ψ_ final|  Z_q  |ψ_ final ⟩  =  P(|0 ⟩ )  -  P(|1 ⟩ )   ∈  [-1,  +1]   Example  measurement  outcomes  (simulated):  o  =  [0.342,  -0.156,  0.578,  0.089]ᵀ   Interpretation:  ●  o ₀  =  0.342  means  qubit  0  is  measured  as  |0 ⟩  ~67%  of  the  time  ●  o ₁  =  -0.156  means  qubit  1  is  measured  as  |1 ⟩  ~58%  of  the  time     Step  E:  Classical  Post-projection   
+W_out  ∈  ℝ⁸ ˣ ⁴   q ₃⁽ ¹ ⁾  =  W_out  ·  o  +  b_out       =  [[  0.2,  -0.1,   0.3,   0.0],     [0.342]         [-0.3,   0.4,   0.1,   0.2],     [-0.156]         [  0.1,   0.2,  -0.4,   0.3],   ·  [0.578]         [  0.0,  -0.3,   0.2,  -0.1],     [0.089]         [  0.4,   0.1,   0.0,   0.3],         [-0.2,   0.0,   0.3,   0.1],         [  0.1,   0.3,  -0.1,   0.4],         [  0.3,  -0.2,   0.2,  -0.3]]   q ₃⁽ ¹ ⁾  =  [0.232,  -0.098,  0.145,  0.067,  0.178,  0.012,  0.089,  0.156]ᵀ   Step  F:  Residual  +  LayerNorm   pre_norm  =  h̃ ₃⁽ ¹ ⁾  +  q ₃⁽ ¹ ⁾          =  [0.45,  0.4,  0.52,  0.3,  0.25,  0.43,  0.35,  0.15]          +  [0.232,  -0.098,  0.145,  0.067,  0.178,  0.012,  0.089,  0.156]          =  [0.682,  0.302,  0.665,  0.367,  0.428,  0.442,  0.439,  0.306]   LayerNorm  calculation:  
+=== Page 9 ===
+ 
+μ  =  mean(pre_norm)  =  0.454  σ  =  std(pre_norm)  =  0.138   h ₃⁽ ¹ ⁾  =  γ  ⊙  (pre_norm  -  μ)/(σ  +  ε)  +  β  With  γ  =  [1,1,1,1,1,1,1,1]  and  β  =  [0,0,0,0,0,0,0,0]:  h ₃⁽ ¹ ⁾  =  [1.65,  -1.10,  1.53,  -0.63,  -0.19,  -0.09,  -0.11,  -1.07]ᵀ   10.  Layer  Normalization  Final  node  representation:    Original  (problematic):  h_i^(ℓ)  =  LN(  h_i^(ℓ-1)  +  ∑...  +  Q_ Θ( h_i^(ℓ-1)  +  ∑...)  )  This  double-counts  the  aggregation  term.  Corrected  form:  h̃_i^(ℓ)  =  h_i^(ℓ-1)  +  ∑_{j ∈ N ⁻ (i)}  MLP_msg([h_j^(ℓ-1)  ǁ  f_ij])  h_i^(ℓ)  =  LayerNorm(  h̃_i^(ℓ)  +  Q_ Θ^(ℓ)( h̃_i^(ℓ))  )  Or  equivalently:  h_i^(ℓ)  =  LayerNorm(  h̃_i^(ℓ)  +  Q_ Θ^(ℓ)( h̃_i^(ℓ))  )         where  h̃_i^(ℓ)  =  h_i^(ℓ-1)  +  ∑_{j ∈ N ⁻ (i)}  MLP_msg([h_j^(ℓ-1)  ǁ  f_ij])   11.  Edge-Level  Traffic  Prediction   Predicting  traffic  on  edge  (v ₁  →  v ₂ ):  h ₁ ^(L)  =  [1.2,  -0.5,  0.8,  0.3,  -0.2,  1.1,  0.0,  0.6]ᵀ  h ₂ ^(L)  =  [0.9,  0.3,  -0.4,  0.7,  0.5,  -0.1,  0.8,  0.2]ᵀ  f ₁₂  =  [0.4,  0.1,  0.6,  -0.3,  0.2,  0.5,  -0.1,  0.3]ᵀ   r ₁₂  =  [h ₁ ^(L)  ǁ  h ₂ ^(L)  ǁ  f ₁₂ ]  ∈  ℝ ² ⁴   Prediction  MLP:  W_pred  ∈  ℝ⁸ ˣ² ⁴  hidden  =  ReLU(W_pred  ·  r ₁₂  +  b_pred)   ∈  ℝ⁸  w_out  ∈  ℝ⁸  ŷ ₁₂  =  w_outᵀ  ·  hidden  +  b_out   ∈  ℝ   Example  output:  ŷ ₁₂  =  0.73   (normalized  traffic  volume)   
+=== Page 10 ===
+ 
+12.  Denormalized  Traffic  Output  Convert  normalized  prediction  to  actual  traffic  volume:   To  get  actual  vehicles/hour,  denormalize:  y_actual  =  ŷ ₁₂  ·  σ_ traffic  +  μ_ traffic          =  0.73  ·  450  +  1200          =  1529  veh/hr   13.  Training  Loss  Mean  Squared  Error   Loss  Function  &  Optimization   6.1  MSE  Loss  Calculation   Ground  truth  for  5  training  edges:  y  =  [0.65,  0.82,  0.41,  0.93,  0.28]  Predictions:  ŷ  =  [0.73,  0.75,  0.45,  0.88,  0.31]  Squared  errors:  (ŷ  -  y)²  =  [0.0064,  0.0049,  0.0016,  0.0025,  0.0009]  L  =  (1/5)  ×  (0.0064  +  0.0049  +  0.0016  +  0.0025  +  0.0009)  =  0.00326   14.  Quantum  Gradient  Computation  Quantum  parameters  are  trained  using  the  Parameter ‑ Shift  Rule:   For  quantum  parameter  θ  affecting  measurement  ⟨ Z_q ⟩ :  ∂ ⟨ Z_q ⟩ /∂ θ  =  (1/2)[ ⟨ Z_q ⟩ ( θ  +  π/2)  -  ⟨ Z_q ⟩ ( θ  -  π/2)]   Example:  Current  θ ₃  =  1.2  rad  ⟨ Z ₀⟩  at  θ ₃  =  1.2  +  π/2  =  2.77:   forward_eval  =  0.412  ⟨ Z ₀⟩  at  θ ₃  =  1.2  -  π/2  =  -0.37:  backward_eval  =  -0.156  ∂ ⟨ Z ₀⟩ /∂ θ ₃  =  (1/2)(0.412  -  (-0.156))  =  0.284  Cost:  2  circuit  evaluations  per  quantum  parameter  per  gradient  computation.   

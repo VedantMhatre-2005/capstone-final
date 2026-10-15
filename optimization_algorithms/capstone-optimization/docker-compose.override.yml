@@ -1,0 +1,16 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/app           # bind mount for hot-reload
+      - results-data:/app/results
+    environment:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUNBUFFERED: "1"
+      DEBUG: "1"
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload  # enables hot-reload in dev
+
+  frontend:
+    volumes:
+      - ./frontend/src:/app/src  # mount source for visibility (static build only)
+    environment:
+      NODE_ENV: development

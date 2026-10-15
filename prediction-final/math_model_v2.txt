@@ -1,0 +1,241 @@
+=== Page 1 ===
+Dataset  1.  Node  Features  (  and  )  These  provide  the  real-time  status  of  traffic  at  specific  junctions  or  sensor  locations.  
+●  Traffic  Flow/Volume:  Number  of  vehicles  passing  the  node  per  time  interval.  ●  Average  Speed:  Mean  velocity  of  vehicles  at  the  node  at  time  .  ●  Lane  Occupancy:  Percentage  of  time  the  sensor  is  occupied,  indicating  density.  ●  Queue  Length:  Number  of  vehicles  or  length  of  the  backup  at  the  intersection.  ●  Intersection  Type:  Functional  characteristics  (e.g.,  signalized,  roundabout,  or  
+priority-based).
+ 
+2.  Edge  Features  (  and  )  These  define  the  road  segment  properties  connecting  the  nodes.   
+●  Road  Capacity:  Theoretical  maximum  vehicle  throughput  for  the  segment.  ●  Segment  Length:  Physical  distance  between  two  nodes.  ●  Road  Quality  Index:  Measured  via  the  International  Roughness  Index  (IRI)  or  
+Pavement
+ 
+Condition
+ 
+Index
+ 
+(PCI
+)
+ 
+to
+ 
+account
+ 
+for
+ 
+surface
+ 
+friction
+ 
+and
+ 
+damage.
+ ●  Speed  Limit:  Regulatory  maximum  speed  for  the  segment.  ●  Lane  Count:  Number  of  available  lanes  for  traffic  flow.  ●  Incident  Flags:  Binary  indicators  for  active  accidents  or  road  construction.  
+3.  Weather  Features  (  and  )  Weather  acts  as  a  dynamic  modulator  for  the  node  embeddings  and  the  quantum  update  stage.  
+●  Precipitation  Intensity:  Rainfall  rates  (mm/hr).  ●  Visibility:  Distance  of  clear  sight  (meters),  affected  by  fog  or  haze.  ●  Temperature:  Ambient  temperature  ( C),  impacting  road  surface  conditions.  
+4.  Global  Temporal  Features  ( )  These  capture  the  periodic  and  cyclic  nature  of  urban  mobility  required  for  the   transition.  
+●  Hour  of  Day:  Cyclic  representation  (Sine/Cosine  transform)  to  preserve  the  24-hour  
+proximity.
+ ●  Day  of  Week:  Indicator  for  weekday  vs.  weekend  patterns.  ●  Holiday  Flag:  Binary  indicator  for  public  holidays  or  school  breaks.  ●  Special  Events:  Flags  for  nearby  major  social  gatherings  (concerts,  sporting  events).  
+ 
+1.  City  as  a  Dynamic  Graph  
+
+=== Page 2 ===
+The  foundation  of  the  model  represents  the  urban  environment  as  a  graph  that  evolves  over  
+discrete
+ 
+time
+ 
+intervals.
+ 
+ 
+Explanation:  
+●  :  Graph  representation  of  the  city  at  time  . 
+●  :  Set  of  nodes  (e.g.,  intersections,  traffic  signals). 
+●  :  Set  of  edges  (roads  connecting  intersections). 
+●  :  Traffic  feature  matrix  at  time   (e.g.,  traffic  density,  queue  length). 
+●  :  Weather  feature  matrix  at  time   (e.g.,  precipitation,  visibility). 
+●  :  Global  temporal  feature  vector  (e.g.,  hour  of  day,  day  of  week). 
+This  models  the  city  as  a  dynamic  system  where  traffic  conditions  are  modulated  by  both  
+infrastructure
+ 
+and
+ 
+environmental
+ 
+context.
+ 
+2.  Node  Embedding  (Contextualized)  
+Raw  sensor  data  is  transformed  into  a  learned  latent  representation  that  incorporates  external  
+factors.
+ 
+ 
+Terms:  
+●  :  Raw  traffic  feature  vector  of  node   at  time  .
+1
+ 
+●  :  Weather  features  at  node   at  time  . 
+●  :  Learnable  weight  matrix. 
+●  :  Bias  vector. 
+●  :  Activation  function  . 
+●  :  Initial  contextualized  embedding  of  node   at  time  . 
+
+=== Page 3 ===
+●    
+ 
+3.  Message  Passing  (Spatio-Temporal  Construction)  
+Each  node  receives  information  from  its  neighbors,  weighted  by  the  current  road  and  
+environmental
+ 
+state.
+ 
+ 
+Terms:  
+●  :  Embedding  of  neighbor  node   at  time  .
+1
+ 
+●  :  Edge  features  from   to   (distance,  lanes,  current  capacity)  at  time  . 
+●  :  Multi-layer  perceptron. 
+●  :  Message  sent  from  node   to   at  time  .  
+
+=== Page 4 ===
+ 
+4.  Graph  Convolutional  Update  
+The  global  state  of  the  network  is  updated  by  propagating  neighborhood  information  through  the  
+graph
+ 
+topology.
+ 
+ 
+Explanation:  
+●  :  Node  features  at  layer   and  time  . 
+●  :  Adjacency  matrix  (connectivity)  at  time  . 
+●  :  Learnable  weights. 
+●  :  Activation  function. 
+
+=== Page 5 ===
+   
+5.  Neighborhood  Aggregation  
+Node   sums  the  influences  of  all  connected  nodes  to  determine  the  local  traffic  "pressure."  
+ 
+Terms:  
+●  :  Set  of  neighbors  of  node  . 
+●  :  Messages  from  neighbors  at  time  . 
+●  :  Aggregated  message  for  node   at  time  . 
+
+=== Page 6 ===
+●    
+6.  Residual  Update  
+The  model  combines  original  node  features  with  new  neighborhood  influence  to  prevent  
+information
+ 
+loss.
+ 
+ 
+Terms:  
+●  :  Original  contextual  embedding. 
+●  :  Aggregated  neighbor  information  at  time  . 
+●  :  Updated  spatio-temporal  embedding. 
+
+=== Page 7 ===
+ 
+7.  Quantum  Interface:  Compression  
+Classical  features  are  compressed  to  fit  the  dimensional  constraints  of  the  quantum  variational  
+circuit.
+ 
+ 
+Explanation:  
+●  :  Node  embeddings  from  the  classical  GNN  at  time  . 
+●  :  Compression  matrix. 
+●  :  Quantum-enhanced  representation  at  time  . 
+
+=== Page 8 ===
+  
+8.  Pre-Projection  
+Embeddings  are  mapped  to  bounded  angles  suitable  for  encoding  into  quantum  qubit  rotations.  
+ 
+Terms:  
+●  :  Input  embedding  at  time  . 
+●  :  Activation  function  mapping  to  range  . 
+●  :  Vector  of  rotation  angles  for  time  . 
+
+=== Page 9 ===
+ 
+9.  Angle  Embedding  
+Classical  data  is  encoded  into  quantum  states  via  Y-axis  rotations  on  qubits.  
+ 
+Explanation:  Encodes  the  contextual  traffic  state  into  the  quantum  Hilbert  space  as  a  rotation  
+ for  qubit   at  time  .  
+ 
+
+=== Page 10 ===
+ 
+10.  Variational  Evolution  
+Trainable  quantum  gates  explore  high-dimensional  correlations  between  traffic  and  
+environmental
+ 
+features.
+ 
+ 
+Terms:  
+●  :  Trainable  parameters  for  layer   at  time  . 
+●  :  Unitary  evolution  operation. 
+●    
+11.  Entanglement  
+Links  qubits  to  model  the  inter-dependencies  between  different  spatial  points  in  the  city.  
+ 
+Explanation:  Ensures  the  state  of  one  qubit  (representing  a  junction)  is  dependent  on  another,  
+modeling
+ 
+complex
+ 
+congestion
+ 
+propagation.
+ 
+ 
+
+=== Page 11 ===
+ 
+ 
+12.  Measurement  
+The  quantum  state  is  collapsed  into  classical  expectation  values  for  post-processing.  
+ 
+Terms:  
+●  :  Final  quantum  state  at  time  . 
+●  :  Measured  classical  value  for  qubit  . 
+
+=== Page 12 ===
+ 
+13.  Post-Projection  The  measured  quantum  insights  are  mapped  back  to  the  classical  feature  space,  biased  by  
+current
+ 
+context.
+ 
+ 
+Explanation:  Fuses  the  quantum  output  with  weather  and  temporal  data  to  generate  the  final  
+enhanced  feature  vector  .  
+ 
+
+=== Page 13 ===
+ 
+ 
+14.  Quantum-Enhanced  Update  
+The  final  node  representation  is  stabilized  and  normalized  to  produce  the  most  robust  feature  
+state.
+ 
+ 
+Explanation:  Integrates  the  quantum  "correction"  into  the  classical  spatio-temporal  embedding.  
+ 
+ 
+ 
+
+=== Page 14 ===
+15.  Edge  Prediction  (Future  Forecast  for  )  
+The  model  predicts  the  traffic  state  for  the  next  instance  based  on  the  current  context  and  
+upcoming
+ 
+forecasts.
+ 
+ 
+Terms:  
+●  :  Predicted  traffic  property  for  the  road  between  nodes   at  time  . 
+●  :  Forecasted  time  and  weather  parameters  for  the  next  instance. 
+  
