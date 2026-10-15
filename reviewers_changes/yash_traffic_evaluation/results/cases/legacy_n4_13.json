@@ -1,0 +1,3241 @@
+{
+  "scenario": {
+    "id": "legacy_n4_13",
+    "suite": "legacy",
+    "n_nodes": 4,
+    "family": "Freight Corridor",
+    "level": "13",
+    "name": "13. Late Night Heavy Freight Arterial",
+    "capacities": {
+      "A--B": 2300.0,
+      "A--C": 1900.0,
+      "A--D": 1800.0,
+      "B--C": 1400.0,
+      "B--D": 2200.0,
+      "C--D": 1900.0
+    },
+    "loads": {
+      "A--B": 1764.9,
+      "A--C": 747.8,
+      "A--D": 572.3,
+      "B--C": 474.9,
+      "B--D": 670.1,
+      "C--D": 592.3
+    },
+    "parameters": {
+      "legacy_index": 13,
+      "bottleneck_edges": [
+        [
+          "A",
+          "B"
+        ]
+      ],
+      "scenario_seed": 2026
+    },
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ]
+  },
+  "problem": {
+    "capacities": {
+      "A--B": 2300.0,
+      "A--C": 1900.0,
+      "A--D": 1800.0,
+      "B--C": 1400.0,
+      "B--D": 2200.0,
+      "C--D": 1900.0
+    },
+    "loads": {
+      "A--B": 1764.9,
+      "A--C": 747.8,
+      "A--D": 572.3,
+      "B--C": 474.9,
+      "B--D": 670.1,
+      "C--D": 592.3
+    },
+    "packets": [
+      {
+        "id": "P1",
+        "origin": [
+          "A",
+          "B"
+        ],
+        "routes": [
+          [
+            "A",
+            "D",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "B"
+          ]
+        ]
+      },
+      {
+        "id": "P2",
+        "origin": [
+          "A",
+          "B"
+        ],
+        "routes": [
+          [
+            "A",
+            "D",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "B"
+          ]
+        ]
+      },
+      {
+        "id": "P3",
+        "origin": [
+          "A",
+          "B"
+        ],
+        "routes": [
+          [
+            "A",
+            "D",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "B"
+          ]
+        ]
+      },
+      {
+        "id": "P4",
+        "origin": [
+          "A",
+          "B"
+        ],
+        "routes": [
+          [
+            "A",
+            "D",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "B"
+          ]
+        ]
+      },
+      {
+        "id": "P5",
+        "origin": [
+          "A",
+          "B"
+        ],
+        "routes": [
+          [
+            "A",
+            "D",
+            "B"
+          ],
+          [
+            "A",
+            "C",
+            "B"
+          ]
+        ]
+      }
+    ],
+    "qubo": {
+      "variables": [
+        {
+          "name": "q_P1",
+          "packet": "P1",
+          "origin": [
+            "A",
+            "B"
+          ],
+          "routes": [
+            [
+              "A",
+              "D",
+              "B"
+            ],
+            [
+              "A",
+              "C",
+              "B"
+            ]
+          ]
+        },
+        {
+          "name": "q_P2",
+          "packet": "P2",
+          "origin": [
+            "A",
+            "B"
+          ],
+          "routes": [
+            [
+              "A",
+              "D",
+              "B"
+            ],
+            [
+              "A",
+              "C",
+              "B"
+            ]
+          ]
+        },
+        {
+          "name": "q_P3",
+          "packet": "P3",
+          "origin": [
+            "A",
+            "B"
+          ],
+          "routes": [
+            [
+              "A",
+              "D",
+              "B"
+            ],
+            [
+              "A",
+              "C",
+              "B"
+            ]
+          ]
+        },
+        {
+          "name": "q_P4",
+          "packet": "P4",
+          "origin": [
+            "A",
+            "B"
+          ],
+          "routes": [
+            [
+              "A",
+              "D",
+              "B"
+            ],
+            [
+              "A",
+              "C",
+              "B"
+            ]
+          ]
+        },
+        {
+          "name": "q_P5",
+          "packet": "P5",
+          "origin": [
+            "A",
+            "B"
+          ],
+          "routes": [
+            [
+              "A",
+              "D",
+              "B"
+            ],
+            [
+              "A",
+              "C",
+              "B"
+            ]
+          ]
+        }
+      ],
+      "constant": 0.41652771920558107,
+      "linear": {
+        "q_P1": -0.2240991132255341,
+        "q_P2": -0.2240991132255341,
+        "q_P3": -0.2240991132255341,
+        "q_P4": -0.2240991132255341,
+        "q_P5": -0.2240991132255341
+      },
+      "quadratic": {
+        "q_P1--q_P2": 0.16539116399202575,
+        "q_P1--q_P3": 0.16539116399202575,
+        "q_P1--q_P4": 0.16539116399202575,
+        "q_P1--q_P5": 0.16539116399202575,
+        "q_P2--q_P3": 0.16539116399202575,
+        "q_P2--q_P4": 0.16539116399202575,
+        "q_P2--q_P5": 0.16539116399202575,
+        "q_P3--q_P4": 0.16539116399202575,
+        "q_P3--q_P5": 0.16539116399202575,
+        "q_P4--q_P5": 0.16539116399202575
+      }
+    },
+    "routes": {
+      "A--B": [
+        [
+          "A",
+          "D",
+          "B"
+        ],
+        [
+          "A",
+          "C",
+          "B"
+        ]
+      ]
+    },
+    "allocation": [
+      {
+        "origin": [
+          "A",
+          "B"
+        ],
+        "requested_packets": 5,
+        "allocated_packets": 5,
+        "candidate_detours": 2,
+        "unallocated_packets": 0,
+        "reason": "allocated"
+      }
+    ],
+    "packet_cap": 10,
+    "edge_order": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ],
+    "status": "ready",
+    "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+    "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f"
+  },
+  "exact": {
+    "min_j_cost": 0.1337206567465386,
+    "min_j_bits": [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "min_j_peak_pct": 56.794444444444444,
+    "max_ground_state_peak_pct": 56.794444444444444,
+    "min_peak_pct": 56.794444444444444,
+    "min_peak_bits": [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "min_peak_j_cost": 0.1337206567465386,
+    "n_ground_states": 10,
+    "n_states": 32,
+    "max_qubo_physical_error": 3.3306690738754696e-16,
+    "enumeration_and_validation_ms": 0.5231999966781586
+  },
+  "results": [
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "baseline",
+      "backend": "unmanaged_input",
+      "bitstring": null,
+      "solve_ms": null,
+      "qubo_cost": null,
+      "moved_packets": 0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 76.73478260869565,
+      "peak_reduction_relative_pct": 0.0,
+      "peak_relief_pp": 0.0,
+      "mean_ratio": 0.40573554246837995,
+      "std_ratio": 0.16437232811094685,
+      "n_congested_after": 1,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 474.9,
+      "outcome_vs_initial": "unchanged"
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "Exact J",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": null,
+      "moved_packets": 5,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": null,
+      "moved_packets": 5,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 15.474400002858602,
+      "moved_packets": 5,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 197.2581000009086,
+      "moved_packets": 5,
+      "evaluations": 27,
+      "initial_point": [
+        2.4314546363447995,
+        2.757554564287996
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 15.179200010607019,
+      "moved_packets": 5,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 268.1630999868503,
+      "moved_packets": 5,
+      "evaluations": 36,
+      "initial_point": [
+        2.1436716007436747,
+        0.33816743455556175
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 15.375100003439002,
+      "moved_packets": 5,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 214.64199999172706,
+      "moved_packets": 5,
+      "evaluations": 28,
+      "initial_point": [
+        1.4755220140840315,
+        2.8127011920619296
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 14.82719999330584,
+      "moved_packets": 5,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 240.0764999911189,
+      "moved_packets": 5,
+      "evaluations": 31,
+      "initial_point": [
+        0.2877596343719485,
+        1.345506569694254
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 14.588799997000024,
+      "moved_packets": 5,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Freight Corridor",
+      "level": "13",
+      "scenario": "13. Late Night Heavy Freight Arterial",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "4e00fdacd7284922b817536567cd161331c025959382cb915d1bea034f751f0f",
+      "qubo_hash": "67ed41c21a2fbf328e10b69fe3033ff871000813599c751db16bebba85ad1540",
+      "packet_cap": 10,
+      "n_qubits": 5,
+      "requested_packets": 5,
+      "allocated_packets": 5,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.1337206567465386,
+      "exact_min_peak_pct": 56.794444444444444,
+      "exact_min_j_peak_pct": 56.794444444444444,
+      "n_states": 32,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.1337206567465386,
+      "solve_ms": 240.3828000096837,
+      "moved_packets": 5,
+      "evaluations": 31,
+      "initial_point": [
+        0.5621402961142088,
+        4.020693000692235
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 76.73478260869565,
+      "final_peak_pct": 56.794444444444444,
+      "peak_reduction_relative_pct": 25.986048942023785,
+      "peak_relief_pp": 19.94033816425121,
+      "mean_ratio": 0.48917536732696915,
+      "std_ratio": 0.08981645809395755,
+      "n_congested_after": 0,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 592.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 56.794444444444444,
+      "guard_rejected": false
+    }
+  ],
+  "edges": [
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1764.9,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.7673478260869565,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 747.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.39357894736842103,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 572.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.3179444444444444,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 474.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.3392142857142857,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 670.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.3045909090909091,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2300.0,
+      "before_load_veh_hr": 1764.9,
+      "after_load_veh_hr": 1014.9000000000001,
+      "before_ratio": 0.7673478260869565,
+      "after_ratio": 0.44126086956521743,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 747.8,
+      "after_load_veh_hr": 1047.8,
+      "before_ratio": 0.39357894736842103,
+      "after_ratio": 0.5514736842105263,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 572.3,
+      "after_load_veh_hr": 1022.3,
+      "before_ratio": 0.3179444444444444,
+      "after_ratio": 0.5679444444444445,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 1400.0,
+      "before_load_veh_hr": 474.9,
+      "after_load_veh_hr": 774.9,
+      "before_ratio": 0.3392142857142857,
+      "after_ratio": 0.5535,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 670.1,
+      "after_load_veh_hr": 1120.1,
+      "before_ratio": 0.3045909090909091,
+      "after_ratio": 0.5091363636363636,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n4_13",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 592.3,
+      "after_load_veh_hr": 592.3,
+      "before_ratio": 0.31173684210526315,
+      "after_ratio": 0.31173684210526315,
+      "delta_load_veh_hr": 0.0
+    }
+  ],
+  "solver_traces": {
+    "QAOA_42": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": -0.01122932195899251
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": 0.13679612896060017
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.4314546363447995,
+            3.757554564287996
+          ],
+          "expectation": 0.01643414900465622
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            1.4484728041890533,
+            2.573851767216932
+          ],
+          "expectation": -0.01658739082675295
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            1.438315749728627,
+            1.5739033514250533
+          ],
+          "expectation": -0.009729772373675744
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.0996362062826308,
+            2.9320598463567986
+          ],
+          "expectation": 0.03365157963028007
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            1.3589207844040867,
+            2.4866426177403267
+          ],
+          "expectation": -0.02531537386475427
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.3999438826232402,
+            2.240031374256779
+          ],
+          "expectation": -0.022204039418456452
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.3240371246134444,
+            2.5224634256543133
+          ],
+          "expectation": -0.020007604529142065
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.3778399980699174,
+            2.3884486089909807
+          ],
+          "expectation": -0.024111402249613955
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.3090092641722935,
+            2.48366937907663
+          ],
+          "expectation": -0.017705101200630458
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.3581774747381625,
+            2.499120497798275
+          ],
+          "expectation": -0.024726646612083764
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.3832007045985042,
+            2.4806856491024445
+          ],
+          "expectation": -0.024121883386048034
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.351207461885353,
+            2.4802782909320937
+          ],
+          "expectation": -0.025117489347363117
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.367086644726985,
+            2.4808703802896566
+          ],
+          "expectation": -0.02528393045545202
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.3611815926860724,
+            2.4911022977638377
+          ],
+          "expectation": -0.025487369809774306
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.3661844354485866,
+            2.499760909909763
+          ],
+          "expectation": -0.025523739518579492
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.3587037797904413,
+            2.5063971581664406
+          ],
+          "expectation": -0.024992344247582343
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.3706694018609802,
+            2.497550689043039
+          ],
+          "expectation": -0.024960900838280092
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.3667369906652675,
+            2.500882151512861
+          ],
+          "expectation": -0.025732105172404724
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.3663978382765596,
+            2.503359039814185
+          ],
+          "expectation": -0.0255237395185795
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.3671854873065068,
+            2.500661129426189
+          ],
+          "expectation": -0.025778956017643993
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.3680103613146024,
+            2.5012264460372733
+          ],
+          "expectation": -0.02556010922738468
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.367106503605446,
+            2.5001674072624502
+          ],
+          "expectation": -0.025778956017643993
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.3674323483883761,
+            2.5006216375756583
+          ],
+          "expectation": -0.025778956017643993
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.3671775889364006,
+            2.500611757209815
+          ],
+          "expectation": -0.025778956017643993
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            1.3672348595228807,
+            2.500653231056083
+          ],
+          "expectation": -0.025778956017643993
+        }
+      ]
+    },
+    "QAOA_123": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": 0.003361624645859362
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": 0.005074143646844069
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.1436716007436747,
+            1.3381674345555616
+          ],
+          "expectation": 0.015152307672557293
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            1.999936372805266,
+            -0.6514487457130784
+          ],
+          "expectation": -0.0028580035595179194
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            1.7269982583838432,
+            -1.6134803385914402
+          ],
+          "expectation": -0.011788168876985135
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            2.023473912357624,
+            -3.591383821221677
+          ],
+          "expectation": 0.051363917280280946
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            0.7438676864864985,
+            -1.4305752304047097
+          ],
+          "expectation": -0.02167736644711694
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            -0.13402302410079903,
+            -1.909436275243951
+          ],
+          "expectation": 0.05284301459234283
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            0.7978226514955331,
+            -0.9334948930839968
+          ],
+          "expectation": -0.011921807500992742
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            0.5951916551826162,
+            -1.631561393400392
+          ],
+          "expectation": -0.055896915057044624
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            0.47104223479853613,
+            -2.1159031337225502
+          ],
+          "expectation": -0.07834684491306527
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            0.10874115869581086,
+            -2.4604868394528228
+          ],
+          "expectation": -0.03790724356017734
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            0.5571881612311043,
+            -2.2064784027482314
+          ],
+          "expectation": -0.06413228468264413
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            0.4356335670118178,
+            -1.8684233845599778
+          ],
+          "expectation": -0.07425289979159923
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            0.3733804113975955,
+            -2.1374012324757765
+          ],
+          "expectation": -0.08441785159608081
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            0.2816690165784364,
+            -2.1772637469514633
+          ],
+          "expectation": -0.07592726547141682
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            0.39331166863543876,
+            -2.183256929885356
+          ],
+          "expectation": -0.08548001360064694
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            0.49195592345157546,
+            -2.1668462324056903
+          ],
+          "expectation": -0.07479844542367702
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            0.3518211050957768,
+            -2.2111591365572534
+          ],
+          "expectation": -0.08440244416014382
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            0.4173492166751075,
+            -2.1901268850701165
+          ],
+          "expectation": -0.08240567740058251
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            0.3846818614639276,
+            -2.188309298456881
+          ],
+          "expectation": -0.0865637664155094
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            0.3764666184709019,
+            -2.194011033505578
+          ],
+          "expectation": -0.08599600143570708
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            0.3875327289882762,
+            -2.1924169199533936
+          ],
+          "expectation": -0.08570934152734035
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            0.3818612482868533,
+            -2.1787153346615917
+          ],
+          "expectation": -0.08663157953361682
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            0.39105941359221014,
+            -2.174791847052929
+          ],
+          "expectation": -0.08586037519949219
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            0.3769606350497836,
+            -2.17970729731243
+          ],
+          "expectation": -0.08560023240092478
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            0.3842354419353816,
+            -2.1779322608979603
+          ],
+          "expectation": -0.08663157953361686
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            0.3839222124299314,
+            -2.1769825834385483
+          ],
+          "expectation": -0.08652739670670424
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            0.38471028066508767,
+            -2.177775646145235
+          ],
+          "expectation": -0.08652739670670422
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            0.3835261050863527,
+            -2.178637130555847
+          ],
+          "expectation": -0.08663157953361685
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            0.38458787676432515,
+            -2.178286929322475
+          ],
+          "expectation": -0.08652739670670422
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            0.3843241090415102,
+            -2.1778441521907244
+          ],
+          "expectation": -0.08652739670670422
+        },
+        {
+          "evaluation": 33,
+          "parameters": [
+            0.3840206634785799,
+            -2.178060207036995
+          ],
+          "expectation": -0.08663157953361683
+        },
+        {
+          "evaluation": 34,
+          "parameters": [
+            0.3842098527075747,
+            -2.1778893052066
+          ],
+          "expectation": -0.08663157953361686
+        },
+        {
+          "evaluation": 35,
+          "parameters": [
+            0.3843213533181023,
+            -2.1778810824423465
+          ],
+          "expectation": -0.08652739670670422
+        },
+        {
+          "evaluation": 36,
+          "parameters": [
+            0.38414953055266093,
+            -2.177983439353574
+          ],
+          "expectation": -0.08663157953361686
+        }
+      ]
+    },
+    "QAOA_456": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            1.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": -0.009287781031082383
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            2.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": -0.025184367928274404
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.4755220140840315,
+            3.8127011920619296
+          ],
+          "expectation": -0.0025845594750356477
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            3.050846406428753,
+            1.9947758632126653
+          ],
+          "expectation": -0.023304354744189695
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            2.8568703276112153,
+            3.1360793975272525
+          ],
+          "expectation": -0.09154053914722841
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            3.6665876176635583,
+            3.7228995660544513
+          ],
+          "expectation": 0.2525108551761244
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.3570463769720122,
+            3.122812206135715
+          ],
+          "expectation": 0.026981874557773206
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.8535535297633308,
+            3.261035385187053
+          ],
+          "expectation": -0.09329068493187467
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            3.1026395698056795,
+            3.282392928491972
+          ],
+          "expectation": -0.010112546122311161
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.8035711346994105,
+            3.2597086660478993
+          ],
+          "expectation": -0.09914033067491812
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.703999301640453,
+            3.2689525862811726
+          ],
+          "expectation": -0.08610752271191273
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.8414215390275093,
+            3.2923789414094484
+          ],
+          "expectation": -0.0953533791972588
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.811738703539798,
+            3.2502460649658746
+          ],
+          "expectation": -0.0986662673855943
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.779335022213702,
+            3.2535758973762405
+          ],
+          "expectation": -0.09743640719808286
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.808186013948263,
+            3.2685801309505247
+          ],
+          "expectation": -0.09875996907607283
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.7936397272593827,
+            3.258539415749563
+          ],
+          "expectation": -0.10010386468950272
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.7737075554752457,
+            3.260185176354161
+          ],
+          "expectation": -0.09783217623286515
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.7968948502665105,
+            3.2490840376921577
+          ],
+          "expectation": -0.09981227848163306
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.7886399082916893,
+            3.2584968682432423
+          ],
+          "expectation": -0.09824398124101266
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.7936290903828023,
+            3.2597893704914864
+          ],
+          "expectation": -0.10010386468950272
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.7961396367432294,
+            3.2585606895027235
+          ],
+          "expectation": -0.09954658084613449
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.7931397453626134,
+            3.258535160998931
+          ],
+          "expectation": -0.09988501789924341
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.794639691052921,
+            3.258547925250827
+          ],
+          "expectation": -0.10001016299902422
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.7931397453626134,
+            3.258535160998931
+          ],
+          "expectation": -0.09988501789924341
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.7936386635717247,
+            3.2586644112237555
+          ],
+          "expectation": -0.10010386468950272
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.7938897182077675,
+            3.258541543124879
+          ],
+          "expectation": -0.0997913162087649
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.793589729069706,
+            3.2585389902745
+          ],
+          "expectation": -0.09999968186259012
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.7937397236387365,
+            3.2585402666996894
+          ],
+          "expectation": -0.0998954990356775
+        }
+      ]
+    },
+    "QAOA_789": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.2877596343719485,
+            1.345506569694254
+          ],
+          "expectation": 0.06845817388043901
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.2877596343719486,
+            1.345506569694254
+          ],
+          "expectation": -0.015248421512825974
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.2877596343719486,
+            2.345506569694254
+          ],
+          "expectation": -0.01823094163469647
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.287125466645514,
+            2.3811146205277915
+          ],
+          "expectation": 0.02282871184234924
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            0.789065137657594,
+            2.3816147259309903
+          ],
+          "expectation": 0.12170796518150376
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.5377455361594878,
+            2.3481615475605984
+          ],
+          "expectation": -0.007633749086704772
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            1.2872286387986798,
+            2.3955037500517617
+          ],
+          "expectation": -0.018100870235412757
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.1880181035786719,
+            2.3383213741496762
+          ],
+          "expectation": -0.005900369812774556
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.387754218747443,
+            2.344465850917581
+          ],
+          "expectation": -0.01849538219533865
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.459061482849425,
+            2.27435683519
+          ],
+          "expectation": -0.01595055565398678
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.3916186123045353,
+            2.394316291862831
+          ],
+          "expectation": -0.01881841181251057
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.41145486540699,
+            2.4402131660794417
+          ],
+          "expectation": -0.01980227956253517
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.3887976874765986,
+            2.537612613142711
+          ],
+          "expectation": -0.018891779767549147
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.4614312539019816,
+            2.4417495882212004
+          ],
+          "expectation": -0.015544305482770407
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.3907677270801144,
+            2.4542503420007127
+          ],
+          "expectation": -0.01906870201207211
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.4142623005912442,
+            2.444350593744817
+          ],
+          "expectation": -0.01913525805532316
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.4077486953845715,
+            2.430925308212047
+          ],
+          "expectation": -0.01960439504514402
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.4160987943406873,
+            2.4383600810682324
+          ],
+          "expectation": -0.019228959745801695
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.4029325888503739,
+            2.4454448772997357
+          ],
+          "expectation": -0.019609949882075168
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.4161813932555174,
+            2.4418440966411445
+          ],
+          "expectation": -0.01933314257271431
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.4104552381545123,
+            2.4379217155877
+          ],
+          "expectation": -0.020114828043273015
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.4085259720291619,
+            2.4333089146796207
+          ],
+          "expectation": -0.019547063063470677
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.4116084383815322,
+            2.4374393990563625
+          ],
+          "expectation": -0.01990646238944778
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.4090921731882016,
+            2.4400174383502846
+          ],
+          "expectation": -0.019547063063470677
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.409851739253116,
+            2.437124351758565
+          ],
+          "expectation": -0.019651245890383282
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.4105419100431622,
+            2.4389179524991413
+          ],
+          "expectation": -0.020114828043273015
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            1.4099571196987917,
+            2.437965051532025
+          ],
+          "expectation": -0.019593913908709935
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            1.4104444041684312,
+            2.43779718597377
+          ],
+          "expectation": -0.020114828043273015
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            1.4107042973823727,
+            2.4379000476155377
+          ],
+          "expectation": -0.02011482804327301
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            1.4104054263089403,
+            2.4379260491821326
+          ],
+          "expectation": -0.0200106452163604
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            1.4105548618456565,
+            2.437913048398835
+          ],
+          "expectation": -0.020114828043273015
+        }
+      ]
+    },
+    "QAOA_2026": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": 0.28912042543068295
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": 0.002139731445069236
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.5621402961142088,
+            5.020693000692235
+          ],
+          "expectation": 0.0017698509826580477
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.562139465523853,
+            5.0219818684207755
+          ],
+          "expectation": -0.023617854300015974
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            3.5620333467199172,
+            5.036549858902336
+          ],
+          "expectation": 0.29400286793449526
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            2.222168094225686,
+            5.388614472941492
+          ],
+          "expectation": 0.1394288818177618
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.4704813143936737,
+            4.936989025596234
+          ],
+          "expectation": 0.019914106838508826
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.812136512059615,
+            5.020766663336823
+          ],
+          "expectation": -0.09549697242019495
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            3.0242183107109897,
+            4.888398575487834
+          ],
+          "expectation": -0.06040832202351198
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.8386101296294126,
+            5.063183023067098
+          ],
+          "expectation": -0.09905092674651432
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.7868501424090044,
+            5.148745302857571
+          ],
+          "expectation": -0.09300025379893873
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.9385204049171127,
+            5.067418219867249
+          ],
+          "expectation": -0.08727889584281706
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.807169959579428,
+            5.024304806708473
+          ],
+          "expectation": -0.09536134618398008
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.8636101071715223,
+            5.063216532677981
+          ],
+          "expectation": -0.09965568997255002
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.871216605889415,
+            5.0870312587367605
+          ],
+          "expectation": -0.09898374216583504
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.868373052383278,
+            5.061695232934403
+          ],
+          "expectation": -0.09881174622081504
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.8537242681033583,
+            5.064723246293226
+          ],
+          "expectation": -0.09978576137183374
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.8478439561755637,
+            5.0566348637829925
+          ],
+          "expectation": -0.09862926913936092
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.854289398216742,
+            5.07470726492076
+          ],
+          "expectation": -0.09979624250826781
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.844383373275333,
+            5.076074989257089
+          ],
+          "expectation": -0.09887400450199131
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.859284285601822,
+            5.074481211806715
+          ],
+          "expectation": -0.09910888726561586
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.8543459114952534,
+            5.07595598676703
+          ],
+          "expectation": -0.09953054487276923
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.8528382143100104,
+            5.072671567185623
+          ],
+          "expectation": -0.09973891052659446
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.855133645221411,
+            5.0741713106362285
+          ],
+          "expectation": -0.09968157854492112
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.8534942963565384,
+            5.074100789008707
+          ],
+          "expectation": -0.09963472769968183
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.8543267039053486,
+            5.075205871264079
+          ],
+          "expectation": -0.09979624250826781
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.8540400950450824,
+            5.074725917765063
+          ],
+          "expectation": -0.09978576137183372
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.8542856676478814,
+            5.0746574042864285
+          ],
+          "expectation": -0.09979624250826781
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            2.8543891194854054,
+            5.074699803783039
+          ],
+          "expectation": -0.09953054487276923
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            2.8541896769480783,
+            5.074714726058481
+          ],
+          "expectation": -0.09990042533518044
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            2.854089955679415,
+            5.074722187196202
+          ],
+          "expectation": -0.09978576137183372
+        }
+      ]
+    }
+  }
+}

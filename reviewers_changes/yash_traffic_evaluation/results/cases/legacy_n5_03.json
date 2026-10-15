@@ -1,0 +1,4335 @@
+{
+  "scenario": {
+    "id": "legacy_n5_03",
+    "suite": "legacy",
+    "n_nodes": 5,
+    "family": "Non-Adjacent Bottlenecks",
+    "level": "3",
+    "name": "3. Non-Adjacent Dual Arterial Bottleneck",
+    "capacities": {
+      "A--B": 2400.0,
+      "A--C": 1800.0,
+      "A--D": 1800.0,
+      "A--E": 1600.0,
+      "B--C": 2400.0,
+      "B--D": 2000.0,
+      "B--E": 1750.0,
+      "C--D": 1500.0,
+      "C--E": 2200.0,
+      "D--E": 1900.0
+    },
+    "loads": {
+      "A--B": 1038.1,
+      "A--C": 682.0,
+      "A--D": 1405.1,
+      "A--E": 681.7,
+      "B--C": 827.3,
+      "B--D": 794.9,
+      "B--E": 601.9,
+      "C--D": 504.9,
+      "C--E": 1799.9,
+      "D--E": 630.6
+    },
+    "parameters": {
+      "legacy_index": 3,
+      "bottleneck_edges": [
+        [
+          "A",
+          "D"
+        ],
+        [
+          "C",
+          "E"
+        ]
+      ],
+      "scenario_seed": 2026
+    },
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "A",
+        "E"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "B",
+        "E"
+      ],
+      [
+        "C",
+        "D"
+      ],
+      [
+        "C",
+        "E"
+      ],
+      [
+        "D",
+        "E"
+      ]
+    ]
+  },
+  "problem": {
+    "capacities": {
+      "A--B": 2400.0,
+      "A--C": 1800.0,
+      "A--D": 1800.0,
+      "A--E": 1600.0,
+      "B--C": 2400.0,
+      "B--D": 2000.0,
+      "B--E": 1750.0,
+      "C--D": 1500.0,
+      "C--E": 2200.0,
+      "D--E": 1900.0
+    },
+    "loads": {
+      "A--B": 1038.1,
+      "A--C": 682.0,
+      "A--D": 1405.1,
+      "A--E": 681.7,
+      "B--C": 827.3,
+      "B--D": 794.9,
+      "B--E": 601.9,
+      "C--D": 504.9,
+      "C--E": 1799.9,
+      "D--E": 630.6
+    },
+    "packets": [
+      {
+        "id": "P1",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "E",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P2",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "E",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P3",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "E",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P4",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "E",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P5",
+        "origin": [
+          "C",
+          "E"
+        ],
+        "routes": [
+          [
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "C",
+            "B",
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "P6",
+        "origin": [
+          "C",
+          "E"
+        ],
+        "routes": [
+          [
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "C",
+            "B",
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "P7",
+        "origin": [
+          "C",
+          "E"
+        ],
+        "routes": [
+          [
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "C",
+            "B",
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "P8",
+        "origin": [
+          "C",
+          "E"
+        ],
+        "routes": [
+          [
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "C",
+            "B",
+            "E"
+          ]
+        ]
+      },
+      {
+        "id": "P9",
+        "origin": [
+          "C",
+          "E"
+        ],
+        "routes": [
+          [
+            "C",
+            "D",
+            "E"
+          ],
+          [
+            "C",
+            "B",
+            "E"
+          ]
+        ]
+      }
+    ],
+    "qubo": {
+      "variables": [
+        {
+          "name": "q_P1",
+          "packet": "P1",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "E",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P2",
+          "packet": "P2",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "E",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P3",
+          "packet": "P3",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "E",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P4",
+          "packet": "P4",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "E",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P5",
+          "packet": "P5",
+          "origin": [
+            "C",
+            "E"
+          ],
+          "routes": [
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "C",
+              "B",
+              "E"
+            ]
+          ]
+        },
+        {
+          "name": "q_P6",
+          "packet": "P6",
+          "origin": [
+            "C",
+            "E"
+          ],
+          "routes": [
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "C",
+              "B",
+              "E"
+            ]
+          ]
+        },
+        {
+          "name": "q_P7",
+          "packet": "P7",
+          "origin": [
+            "C",
+            "E"
+          ],
+          "routes": [
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "C",
+              "B",
+              "E"
+            ]
+          ]
+        },
+        {
+          "name": "q_P8",
+          "packet": "P8",
+          "origin": [
+            "C",
+            "E"
+          ],
+          "routes": [
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "C",
+              "B",
+              "E"
+            ]
+          ]
+        },
+        {
+          "name": "q_P9",
+          "packet": "P9",
+          "origin": [
+            "C",
+            "E"
+          ],
+          "routes": [
+            [
+              "C",
+              "D",
+              "E"
+            ],
+            [
+              "C",
+              "B",
+              "E"
+            ]
+          ]
+        }
+      ],
+      "constant": 2.071211790739758,
+      "linear": {
+        "q_P1": -0.3902682541972442,
+        "q_P2": -0.3902682541972442,
+        "q_P3": -0.3902682541972442,
+        "q_P4": -0.3902682541972442,
+        "q_P5": -0.5790769235541505,
+        "q_P6": -0.5790769235541505,
+        "q_P7": -0.5790769235541505,
+        "q_P8": -0.5790769235541505,
+        "q_P9": -0.5790769235541505
+      },
+      "quadratic": {
+        "q_P1--q_P2": 0.18585832274321304,
+        "q_P1--q_P3": 0.18585832274321304,
+        "q_P1--q_P4": 0.18585832274321304,
+        "q_P1--q_P5": 0.025829242746756097,
+        "q_P1--q_P6": 0.025829242746756097,
+        "q_P1--q_P7": 0.025829242746756097,
+        "q_P1--q_P8": 0.025829242746756097,
+        "q_P1--q_P9": 0.025829242746756097,
+        "q_P2--q_P3": 0.18585832274321304,
+        "q_P2--q_P4": 0.18585832274321304,
+        "q_P2--q_P5": 0.025829242746756097,
+        "q_P2--q_P6": 0.025829242746756097,
+        "q_P2--q_P7": 0.025829242746756097,
+        "q_P2--q_P8": 0.025829242746756097,
+        "q_P2--q_P9": 0.025829242746756097,
+        "q_P3--q_P4": 0.18585832274321304,
+        "q_P3--q_P5": 0.025829242746756097,
+        "q_P3--q_P6": 0.025829242746756097,
+        "q_P3--q_P7": 0.025829242746756097,
+        "q_P3--q_P8": 0.025829242746756097,
+        "q_P3--q_P9": 0.025829242746756097,
+        "q_P4--q_P5": 0.025829242746756097,
+        "q_P4--q_P6": 0.025829242746756097,
+        "q_P4--q_P7": 0.025829242746756097,
+        "q_P4--q_P8": 0.025829242746756097,
+        "q_P4--q_P9": 0.025829242746756097,
+        "q_P5--q_P6": 0.15324496941310786,
+        "q_P5--q_P7": 0.15324496941310786,
+        "q_P5--q_P8": 0.15324496941310786,
+        "q_P5--q_P9": 0.15324496941310786,
+        "q_P6--q_P7": 0.15324496941310786,
+        "q_P6--q_P8": 0.15324496941310786,
+        "q_P6--q_P9": 0.15324496941310786,
+        "q_P7--q_P8": 0.15324496941310786,
+        "q_P7--q_P9": 0.15324496941310786,
+        "q_P8--q_P9": 0.15324496941310786
+      }
+    },
+    "routes": {
+      "A--D": [
+        [
+          "A",
+          "C",
+          "D"
+        ],
+        [
+          "A",
+          "E",
+          "D"
+        ]
+      ],
+      "C--E": [
+        [
+          "C",
+          "D",
+          "E"
+        ],
+        [
+          "C",
+          "B",
+          "E"
+        ]
+      ]
+    },
+    "allocation": [
+      {
+        "origin": [
+          "A",
+          "D"
+        ],
+        "requested_packets": 4,
+        "allocated_packets": 4,
+        "candidate_detours": 2,
+        "unallocated_packets": 0,
+        "reason": "allocated"
+      },
+      {
+        "origin": [
+          "C",
+          "E"
+        ],
+        "requested_packets": 5,
+        "allocated_packets": 5,
+        "candidate_detours": 2,
+        "unallocated_packets": 0,
+        "reason": "allocated"
+      }
+    ],
+    "packet_cap": 10,
+    "edge_order": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "A",
+        "E"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "B",
+        "E"
+      ],
+      [
+        "C",
+        "D"
+      ],
+      [
+        "C",
+        "E"
+      ],
+      [
+        "D",
+        "E"
+      ]
+    ],
+    "status": "ready",
+    "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+    "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430"
+  },
+  "exact": {
+    "min_j_cost": 0.2863296693245765,
+    "min_j_bits": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "min_j_peak_pct": 68.68,
+    "max_ground_state_peak_pct": 68.68,
+    "min_peak_pct": 68.68,
+    "min_peak_bits": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    "min_peak_j_cost": 0.2863296693245765,
+    "n_ground_states": 30,
+    "n_states": 512,
+    "max_qubo_physical_error": 8.881784197001252e-16,
+    "enumeration_and_validation_ms": 13.38860001123976
+  },
+  "results": [
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "baseline",
+      "backend": "unmanaged_input",
+      "bitstring": null,
+      "solve_ms": null,
+      "qubo_cost": null,
+      "moved_packets": 0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 81.81363636363636,
+      "peak_reduction_relative_pct": 0.0,
+      "peak_relief_pp": 0.0,
+      "mean_ratio": 0.4590836457621326,
+      "std_ratio": 0.17373598319195546,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 504.9,
+      "outcome_vs_initial": "unchanged"
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "Exact J",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": null,
+      "moved_packets": 9,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": null,
+      "moved_packets": 9,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": 20.150199998170137,
+      "moved_packets": 9,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.28632966932457604,
+      "solve_ms": 650.0385999970604,
+      "moved_packets": 9,
+      "evaluations": 35,
+      "initial_point": [
+        2.4314546363447995,
+        2.757554564287996
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": 19.768500002101064,
+      "moved_packets": 9,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "qubo_cost": 0.28632966932457604,
+      "solve_ms": 568.1236000091303,
+      "moved_packets": 9,
+      "evaluations": 28,
+      "initial_point": [
+        2.1436716007436747,
+        0.33816743455556175
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": 19.569700001738966,
+      "moved_packets": 9,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "qubo_cost": 0.28632966932457604,
+      "solve_ms": 505.5846000032034,
+      "moved_packets": 9,
+      "evaluations": 27,
+      "initial_point": [
+        1.4755220140840315,
+        2.8127011920619296
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": 19.22160001413431,
+      "moved_packets": 9,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.28632966932457604,
+      "solve_ms": 852.9928999923868,
+      "moved_packets": 9,
+      "evaluations": 50,
+      "initial_point": [
+        0.2877596343719485,
+        1.345506569694254
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "qubo_cost": 0.2863296693245765,
+      "solve_ms": 20.329599996330217,
+      "moved_packets": 9,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "suite": "legacy",
+      "n_nodes": 5,
+      "family": "Non-Adjacent Bottlenecks",
+      "level": "3",
+      "scenario": "3. Non-Adjacent Dual Arterial Bottleneck",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "82bf196526c3fbc850833539a22685bb3ac025720e37a40ba62a0aa1c2e95430",
+      "qubo_hash": "843a653aa0db136bd08943fd93e2ee292f018083640d69509fbc8a0099db56f3",
+      "packet_cap": 10,
+      "n_qubits": 9,
+      "requested_packets": 9,
+      "allocated_packets": 9,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.2863296693245765,
+      "exact_min_peak_pct": 68.68,
+      "exact_min_j_peak_pct": 68.68,
+      "n_states": 512,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.28632966932457604,
+      "solve_ms": 575.0095000112196,
+      "moved_packets": 9,
+      "evaluations": 32,
+      "initial_point": [
+        0.5621402961142088,
+        4.020693000692235
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 81.81363636363636,
+      "final_peak_pct": 68.68,
+      "peak_reduction_relative_pct": 16.05311406189232,
+      "peak_relief_pp": 13.133636363636356,
+      "mean_ratio": 0.5400459948165869,
+      "std_ratio": 0.09195026588580614,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 794.9,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 68.68,
+      "guard_rejected": false
+    }
+  ],
+  "edges": [
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 682.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.3788888888888889,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 1405.1,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.780611111111111,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 681.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.4260625,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 827.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.34470833333333334,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 601.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.3439428571428571,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 504.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.3366,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1799.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.8181363636363637,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 630.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.3318947368421053,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1038.1,
+      "after_load_veh_hr": 1038.1,
+      "before_ratio": 0.4325416666666666,
+      "after_ratio": 0.4325416666666666,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 682.0,
+      "after_load_veh_hr": 982.0,
+      "before_ratio": 0.3788888888888889,
+      "after_ratio": 0.5455555555555556,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1800.0,
+      "before_load_veh_hr": 1405.1,
+      "after_load_veh_hr": 805.0999999999999,
+      "before_ratio": 0.780611111111111,
+      "after_ratio": 0.4472777777777777,
+      "delta_load_veh_hr": -600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--E",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 681.7,
+      "after_load_veh_hr": 981.7,
+      "before_ratio": 0.4260625,
+      "after_ratio": 0.6135625,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 827.3,
+      "after_load_veh_hr": 1427.3,
+      "before_ratio": 0.34470833333333334,
+      "after_ratio": 0.5947083333333333,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 794.9,
+      "after_load_veh_hr": 794.9,
+      "before_ratio": 0.39744999999999997,
+      "after_ratio": 0.39744999999999997,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--E",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 601.9,
+      "after_load_veh_hr": 1201.9,
+      "before_ratio": 0.3439428571428571,
+      "after_ratio": 0.6868000000000001,
+      "delta_load_veh_hr": 600.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 1500.0,
+      "before_load_veh_hr": 504.9,
+      "after_load_veh_hr": 954.9,
+      "before_ratio": 0.3366,
+      "after_ratio": 0.6365999999999999,
+      "delta_load_veh_hr": 450.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "C--E",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 1799.9,
+      "after_load_veh_hr": 1049.9,
+      "before_ratio": 0.8181363636363637,
+      "after_ratio": 0.4772272727272728,
+      "delta_load_veh_hr": -750.0
+    },
+    {
+      "scenario_id": "legacy_n5_03",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "D--E",
+      "capacity_veh_hr": 1900.0,
+      "before_load_veh_hr": 630.6,
+      "after_load_veh_hr": 1080.6,
+      "before_ratio": 0.3318947368421053,
+      "after_ratio": 0.5687368421052631,
+      "delta_load_veh_hr": 449.9999999999999
+    }
+  ],
+  "solver_traces": {
+    "QAOA_42": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": -0.14668388437177027
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": 0.3467795297016347
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.4314546363447995,
+            3.757554564287996
+          ],
+          "expectation": -0.12634782009546458
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            1.4323027247860747,
+            2.716378629222161
+          ],
+          "expectation": 0.026890034479992917
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            2.928095757854394,
+            2.6996961472193233
+          ],
+          "expectation": -0.18372620910845247
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            3.409377505155341,
+            2.5641679962139077
+          ],
+          "expectation": 0.31635646713993193
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.89421372010304,
+            2.5793757103940864
+          ],
+          "expectation": -0.19965195589005033
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.6469389060385504,
+            2.6161882942394525
+          ],
+          "expectation": -0.23327197378429299
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            2.4329755173068697,
+            2.4868837379297246
+          ],
+          "expectation": -0.14274791103934528
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.6435099796258243,
+            2.7161294892676096
+          ],
+          "expectation": -0.23189983310539122
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.596968308524472,
+            2.6144738310330893
+          ],
+          "expectation": -0.21962296523803446
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.7469262229068616,
+            2.6145956657592464
+          ],
+          "expectation": -0.24124686632210168
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.845984638993584,
+            2.600905150707217
+          ],
+          "expectation": -0.21724043569509058
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.7168586631257354,
+            2.574646424855214
+          ],
+          "expectation": -0.23460314752172792
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.7369389126808534,
+            2.6221125557045277
+          ],
+          "expectation": -0.2425936700294432
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.7360354891744514,
+            2.6470962268912865
+          ],
+          "expectation": -0.23886494080845933
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.733932156702741,
+            2.6181176316141244
+          ],
+          "expectation": -0.24014836228245137
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.7410925885845283,
+            2.631209092215048
+          ],
+          "expectation": -0.24370645435451518
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.7388268941244265,
+            2.640949042349082
+          ],
+          "expectation": -0.24344219123835964
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.7460639454110254,
+            2.6317435183592823
+          ],
+          "expectation": -0.24549312015045852
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.7559446528497626,
+            2.6332835250183857
+          ],
+          "expectation": -0.24126035976654747
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.7431870323389265,
+            2.6276540964960375
+          ],
+          "expectation": -0.2452213868835502
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.7470863008768367,
+            2.6310242900912577
+          ],
+          "expectation": -0.24347772885868743
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.744068853975828,
+            2.633250040899837
+          ],
+          "expectation": -0.24577911358320512
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.743582286092439,
+            2.63412368367286
+          ],
+          "expectation": -0.24625196350086237
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.7445793488650185,
+            2.6358574269720645
+          ],
+          "expectation": -0.2460359919983619
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.7426423895671284,
+            2.634465143072656
+          ],
+          "expectation": -0.2443173103631413
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.7443829022785384,
+            2.634722861211287
+          ],
+          "expectation": -0.24620110825241592
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            2.743242507851805,
+            2.6344904952691754
+          ],
+          "expectation": -0.24486560145738048
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            2.7434905831933603,
+            2.634038739112701
+          ],
+          "expectation": -0.2458151637771615
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            2.743831556691573,
+            2.6341427668698523
+          ],
+          "expectation": -0.24665683252199183
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            2.7439924816370436,
+            2.6339514473415093
+          ],
+          "expectation": -0.245757055832842
+        },
+        {
+          "evaluation": 33,
+          "parameters": [
+            2.7438698205972414,
+            2.6341749518589466
+          ],
+          "expectation": -0.24669281153235328
+        },
+        {
+          "evaluation": 34,
+          "parameters": [
+            2.743821703331367,
+            2.634262614443467
+          ],
+          "expectation": -0.24668916345634992
+        },
+        {
+          "evaluation": 35,
+          "parameters": [
+            2.7439597428379954,
+            2.634218701037428
+          ],
+          "expectation": -0.24631213128450552
+        }
+      ]
+    },
+    "QAOA_123": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": -0.022599091841698324
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": -0.0072478109824810335
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.1436716007436747,
+            1.3381674345555616
+          ],
+          "expectation": -0.04574711717407105
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            1.5909853631811277,
+            2.171556853020277
+          ],
+          "expectation": 0.0008902376614975198
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            2.634515346060079,
+            1.4334166743623151
+          ],
+          "expectation": -0.16861118102570982
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            3.6301109465401193,
+            1.5271684759705426
+          ],
+          "expectation": 0.26067525961041904
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.2318085603520204,
+            1.7297732918768958
+          ],
+          "expectation": -0.07308193424572859
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.7086045004387245,
+            1.5340933707893298
+          ],
+          "expectation": -0.18020061164192736
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            2.9544469958893496,
+            1.488689985115909
+          ],
+          "expectation": -0.11350325910623021
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.6683338218679187,
+            1.563729032540788
+          ],
+          "expectation": -0.1792432690617021
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.7829400281405676,
+            1.6009830510194556
+          ],
+          "expectation": -0.17718730553713039
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.702098381644046,
+            1.4845184737321544
+          ],
+          "expectation": -0.17451260063898158
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.726006033966108,
+            1.5520429287475457
+          ],
+          "expectation": -0.1823139268479263
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.7449834600175946,
+            1.5683173657719212
+          ],
+          "expectation": -0.17738195706338822
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.729260921370983,
+            1.5482474435372484
+          ],
+          "expectation": -0.17897069272126007
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.7176142364013693,
+            1.5574814702461868
+          ],
+          "expectation": -0.1846211870016939
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.7076211664643375,
+            1.557853697641194
+          ],
+          "expectation": -0.1857939682403743
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.7037671613038503,
+            1.5670811915709095
+          ],
+          "expectation": -0.1844761503219889
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.7049273457980623,
+            1.5536414143864796
+          ],
+          "expectation": -0.18385370044893246
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.706568095650659,
+            1.5585271528077629
+          ],
+          "expectation": -0.18400524118616082
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.7100064150137952,
+            1.5571049724864745
+          ],
+          "expectation": -0.18354530106435568
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.707226047711112,
+            1.5569350675900584
+          ],
+          "expectation": -0.18557085608795051
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.708588260869846,
+            1.557599279853227
+          ],
+          "expectation": -0.18550537706068018
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.707354123089566,
+            1.558276412481235
+          ],
+          "expectation": -0.18502808007417063
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.7077268451743475,
+            1.557920458484887
+          ],
+          "expectation": -0.1853967154845367
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.707488744458333,
+            1.5576416495043814
+          ],
+          "expectation": -0.18572002742189642
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.70759446212686,
+            1.5578959691251981
+          ],
+          "expectation": -0.18571118956627644
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.7075708629856448,
+            1.5577672710247417
+          ],
+          "expectation": -0.18571118956627644
+        }
+      ]
+    },
+    "QAOA_456": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            1.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": 0.006000783825557829
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            2.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": -0.1746272793621662
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.4755220140840315,
+            3.8127011920619296
+          ],
+          "expectation": -0.1459864666634423
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            3.4631831882900155,
+            2.656095301476497
+          ],
+          "expectation": 0.3498982171991908
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            1.976235306212681,
+            2.7860031894589508
+          ],
+          "expectation": 0.0022392462181012878
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            2.7247158237278164,
+            2.792640154321649
+          ],
+          "expectation": -0.24604506369404266
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            3.2221975789373207,
+            2.7425212633356093
+          ],
+          "expectation": 0.07442120423368671
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.7121861009813064,
+            2.6682697155192727
+          ],
+          "expectation": -0.24187354885806156
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            2.4776144725318514,
+            2.830599635839821
+          ],
+          "expectation": -0.17365694269966245
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.7744639992487667,
+            2.787628265223045
+          ],
+          "expectation": -0.24789835604145713
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.8551132819522946,
+            2.84675265274128
+          ],
+          "expectation": -0.22881074082755595
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.775096762440835,
+            2.7376322692759416
+          ],
+          "expectation": -0.24600050341633412
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.792719899634096,
+            2.8047081393771753
+          ],
+          "expectation": -0.2459054718255459
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.776072103777845,
+            2.7777584121429046
+          ],
+          "expectation": -0.25019892053048765
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.784036425970271,
+            2.759412579591199
+          ],
+          "expectation": -0.24411945013341377
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.766433087853198,
+            2.780420999607084
+          ],
+          "expectation": -0.24691243297985246
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.7827706107643313,
+            2.7851833703348405
+          ],
+          "expectation": -0.2445345437466253
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.776675908353699,
+            2.772795004036152
+          ],
+          "expectation": -0.2458375081272375
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.777411201189965,
+            2.7798695298849676
+          ],
+          "expectation": -0.2464804839259535
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.7756498802294325,
+            2.778026231625329
+          ],
+          "expectation": -0.25110404156554544
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.774657378336691,
+            2.7779040023616295
+          ],
+          "expectation": -0.25016855033713475
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.7757574320058773,
+            2.7790204311100317
+          ],
+          "expectation": -0.25094559128183797
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.7761323986411544,
+            2.777895174453265
+          ],
+          "expectation": -0.24981997107377166
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.775400161993633,
+            2.7780380976570704
+          ],
+          "expectation": -0.2504276252880933
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.775647507023084,
+            2.777976287978169
+          ],
+          "expectation": -0.25110404156554544
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.7757497675237524,
+            2.778021485212632
+          ],
+          "expectation": -0.25058752192444494
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.7755499929351126,
+            2.7780309780380255
+          ],
+          "expectation": -0.2510553246169375
+        }
+      ]
+    },
+    "QAOA_789": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.2877596343719485,
+            1.345506569694254
+          ],
+          "expectation": 0.17668660889229745
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.2877596343719486,
+            1.345506569694254
+          ],
+          "expectation": 0.03578908618994235
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.2877596343719486,
+            2.345506569694254
+          ],
+          "expectation": 0.09177650252558753
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.217079065562918,
+            0.9762297158150901
+          ],
+          "expectation": -0.06440072571801676
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            3.0538575284542784,
+            0.42868811553144737
+          ],
+          "expectation": -0.02093573064193256
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.8937568860135547,
+            0.5948339001439564
+          ],
+          "expectation": -0.004606167935713973
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.1217301116451344,
+            1.0570602607024309
+          ],
+          "expectation": -0.04336366492029299
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.4661683648847177,
+            0.9549102185561333
+          ],
+          "expectation": -0.11545628443383626
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            2.9646636978815417,
+            0.9161493751650858
+          ],
+          "expectation": -0.06346692826545827
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.424352601991596,
+            1.2013882946068568
+          ],
+          "expectation": -0.11606364502158155
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.3254058297879494,
+            1.1869129268920215
+          ],
+          "expectation": -0.09810865109302186
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.4171149181341782,
+            1.25086168070868
+          ],
+          "expectation": -0.12465063837173342
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.4786131102937765,
+            1.3297158014703823
+          ],
+          "expectation": -0.13045152919170452
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.4221365851233845,
+            1.4122409619045073
+          ],
+          "expectation": -0.12208814895547761
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.52795361166702,
+            1.3216216724723382
+          ],
+          "expectation": -0.14348039577365332
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.6181270904922394,
+            1.2783927039840928
+          ],
+          "expectation": -0.15538341761484098
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.7156121969132503,
+            1.3006784399172904
+          ],
+          "expectation": -0.15909565051028388
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.7614438359635813,
+            1.211799528684309
+          ],
+          "expectation": -0.14857606342326846
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.7195932952258874,
+            1.3505196964847679
+          ],
+          "expectation": -0.16252665903716368
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.7356703800090183,
+            1.3978644675252538
+          ],
+          "expectation": -0.1631194176646516
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.7848348916659886,
+            1.388762226398387
+          ],
+          "expectation": -0.16496381670400795
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.8348341356649778,
+            1.3884872727121758
+          ],
+          "expectation": -0.14324409484153777
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.7729678065302616,
+            1.4107661417404667
+          ],
+          "expectation": -0.16774858973652346
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.7668807413297833,
+            1.4350137733205846
+          ],
+          "expectation": -0.1686853165209803
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.783161861762756,
+            1.4539854658504314
+          ],
+          "expectation": -0.16965600685168827
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.7897343265229293,
+            1.4781060526379928
+          ],
+          "expectation": -0.17090662390888323
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.788616345337608,
+            1.52809355225609
+          ],
+          "expectation": -0.17309541972106926
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.818955164510338,
+            1.6233802567389526
+          ],
+          "expectation": -0.1775011610589894
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            2.8512434610755655,
+            1.8207567140607819
+          ],
+          "expectation": -0.18225424559421813
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            3.051241273097278,
+            1.8216922281054153
+          ],
+          "expectation": -0.06545132547977739
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            2.753276510901213,
+            1.8408185353523787
+          ],
+          "expectation": -0.19455316721582158
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            2.659488448239514,
+            1.8755143463699242
+          ],
+          "expectation": -0.20414028189742345
+        },
+        {
+          "evaluation": 33,
+          "parameters": [
+            2.491757318296482,
+            1.9844467476472007
+          ],
+          "expectation": -0.1742180149729753
+        },
+        {
+          "evaluation": 34,
+          "parameters": [
+            2.616822284836806,
+            1.7850732135790672
+          ],
+          "expectation": -0.19324903933877685
+        },
+        {
+          "evaluation": 35,
+          "parameters": [
+            2.6433099067689776,
+            1.9228245439586695
+          ],
+          "expectation": -0.20637495347287207
+        },
+        {
+          "evaluation": 36,
+          "parameters": [
+            2.5938265448484144,
+            1.9299937066042345
+          ],
+          "expectation": -0.1923330635746167
+        },
+        {
+          "evaluation": 37,
+          "parameters": [
+            2.6657023073082806,
+            1.933941216036563
+          ],
+          "expectation": -0.20691164397253697
+        },
+        {
+          "evaluation": 38,
+          "parameters": [
+            2.6657957635174525,
+            1.9439407793238754
+          ],
+          "expectation": -0.20780012586366772
+        },
+        {
+          "evaluation": 39,
+          "parameters": [
+            2.661363299814355,
+            1.9634434269779948
+          ],
+          "expectation": -0.20883463747607026
+        },
+        {
+          "evaluation": 40,
+          "parameters": [
+            2.665307204126973,
+            1.9830507118173832
+          ],
+          "expectation": -0.20552994441065336
+        },
+        {
+          "evaluation": 41,
+          "parameters": [
+            2.6564614786045078,
+            1.9644294030561493
+          ],
+          "expectation": -0.20895141240150233
+        },
+        {
+          "evaluation": 42,
+          "parameters": [
+            2.653136882492355,
+            1.9549982281192149
+          ],
+          "expectation": -0.20853566707176271
+        },
+        {
+          "evaluation": 43,
+          "parameters": [
+            2.653720764502415,
+            1.9740464964949482
+          ],
+          "expectation": -0.20980268524019094
+        },
+        {
+          "evaluation": 44,
+          "parameters": [
+            2.652252019479946,
+            1.9939924932877628
+          ],
+          "expectation": -0.21508202860064837
+        },
+        {
+          "evaluation": 45,
+          "parameters": [
+            2.6796795210412396,
+            2.0231083336174738
+          ],
+          "expectation": -0.21156403773950944
+        },
+        {
+          "evaluation": 46,
+          "parameters": [
+            2.635282034993024,
+            2.0045764257570124
+          ],
+          "expectation": -0.21019681130494952
+        },
+        {
+          "evaluation": 47,
+          "parameters": [
+            2.6607085545024223,
+            1.9993298161572952
+          ],
+          "expectation": -0.21401610914809271
+        },
+        {
+          "evaluation": 48,
+          "parameters": [
+            2.653460253768994,
+            1.9891406719902738
+          ],
+          "expectation": -0.2151436821285665
+        },
+        {
+          "evaluation": 49,
+          "parameters": [
+            2.651118365067747,
+            1.9882657106705743
+          ],
+          "expectation": -0.2142718029311814
+        },
+        {
+          "evaluation": 50,
+          "parameters": [
+            2.653635246032934,
+            1.9886722942500243
+          ],
+          "expectation": -0.21487177130282478
+        }
+      ]
+    },
+    "QAOA_2026": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": 0.6607770098169773
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": -0.004647741848794127
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.5621402961142088,
+            5.020693000692235
+          ],
+          "expectation": -0.0020349411593348463
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.56213258744084,
+            4.016766515328276
+          ],
+          "expectation": -0.1956584055084733
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            3.5620390368892725,
+            4.003088344711217
+          ],
+          "expectation": 0.5592858751786787
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            2.249353461220238,
+            3.6266777841392335
+          ],
+          "expectation": -0.03198055833525301
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            2.4646104046435795,
+            4.094961296883426
+          ],
+          "expectation": -0.12864019304114083
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            2.8100972665361756,
+            3.9849307191053556
+          ],
+          "expectation": -0.2613985140778259
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            3.019806711499201,
+            4.121026085276654
+          ],
+          "expectation": -0.15623394561435516
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            2.8037301072915914,
+            3.9353377832862884
+          ],
+          "expectation": -0.2625908579478109
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            2.901360518800789,
+            3.9136974794865553
+          ],
+          "expectation": -0.2327787928212673
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            2.7038489694398598,
+            3.940212032094404
+          ],
+          "expectation": -0.2565241401031588
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            2.8478255200604945,
+            3.911766729581796
+          ],
+          "expectation": -0.25449553037849143
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            2.778730179525178,
+            3.935277686080751
+          ],
+          "expectation": -0.26379195796424093
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            2.755302653642083,
+            3.92655123027115
+          ],
+          "expectation": -0.2606984385077833
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            2.776984888363258,
+            3.93996319125737
+          ],
+          "expectation": -0.259572701947739
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            2.7835434355818927,
+            3.9265122673153696
+          ],
+          "expectation": -0.2635184361497294
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            2.783112888907869,
+            3.937684314109108
+          ],
+          "expectation": -0.2649075598809444
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            2.7912275073056207,
+            3.943528368203559
+          ],
+          "expectation": -0.26118321152058926
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            2.778204804950926,
+            3.9386386263596833
+          ],
+          "expectation": -0.26256949106763944
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            2.783351466970513,
+            3.938911335098344
+          ],
+          "expectation": -0.2642405792089078
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            2.7843714570813165,
+            3.9355242200943055
+          ],
+          "expectation": -0.26355639375785866
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            2.782126528058881,
+            3.937519716795693
+          ],
+          "expectation": -0.2655353356114571
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            2.781333918507643,
+            3.936909987266077
+          ],
+          "expectation": -0.26634777871169424
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            2.7800659206652654,
+            3.9353633194052464
+          ],
+          "expectation": -0.26444858224863693
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            2.780754712889089,
+            3.937725168749819
+          ],
+          "expectation": -0.2648403372671076
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            2.781332953266716,
+            3.936409988197768
+          ],
+          "expectation": -0.2666948383281938
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            2.781037431754524,
+            3.9360066681811166
+          ],
+          "expectation": -0.26491262901916357
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            2.781433783270879,
+            3.93633610781972
+          ],
+          "expectation": -0.2659670984638463
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            2.7812381204924232,
+            3.936641303447849
+          ],
+          "expectation": -0.2658280546825107
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            2.781249995271421,
+            3.9363541494028613
+          ],
+          "expectation": -0.26582805468251075
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            2.781348595262329,
+            3.936508757261615
+          ],
+          "expectation": -0.2665292809799981
+        }
+      ]
+    }
+  }
+}

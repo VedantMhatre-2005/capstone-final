@@ -1,0 +1,3501 @@
+{
+  "scenario": {
+    "id": "legacy_n4_09",
+    "suite": "legacy",
+    "n_nodes": 4,
+    "family": "Localized Dropoff",
+    "level": "9",
+    "name": "9. School Zone Perimeter Dropoff",
+    "capacities": {
+      "A--B": 2200.0,
+      "A--C": 2000.0,
+      "A--D": 1750.0,
+      "B--C": 1600.0,
+      "B--D": 2400.0,
+      "C--D": 2000.0
+    },
+    "loads": {
+      "A--B": 851.2,
+      "A--C": 644.9,
+      "A--D": 1492.0,
+      "B--C": 485.3,
+      "B--D": 1828.0,
+      "C--D": 678.9
+    },
+    "parameters": {
+      "legacy_index": 9,
+      "bottleneck_edges": [
+        [
+          "A",
+          "D"
+        ],
+        [
+          "B",
+          "D"
+        ]
+      ],
+      "scenario_seed": 2026
+    },
+    "nodes": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "edges": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ]
+  },
+  "problem": {
+    "capacities": {
+      "A--B": 2200.0,
+      "A--C": 2000.0,
+      "A--D": 1750.0,
+      "B--C": 1600.0,
+      "B--D": 2400.0,
+      "C--D": 2000.0
+    },
+    "loads": {
+      "A--B": 851.2,
+      "A--C": 644.9,
+      "A--D": 1492.0,
+      "B--C": 485.3,
+      "B--D": 1828.0,
+      "C--D": 678.9
+    },
+    "packets": [
+      {
+        "id": "P1",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "B",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P2",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "B",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P3",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "B",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P4",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "B",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P5",
+        "origin": [
+          "A",
+          "D"
+        ],
+        "routes": [
+          [
+            "A",
+            "C",
+            "D"
+          ],
+          [
+            "A",
+            "B",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P6",
+        "origin": [
+          "B",
+          "D"
+        ],
+        "routes": [
+          [
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "B",
+            "A",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P7",
+        "origin": [
+          "B",
+          "D"
+        ],
+        "routes": [
+          [
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "B",
+            "A",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P8",
+        "origin": [
+          "B",
+          "D"
+        ],
+        "routes": [
+          [
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "B",
+            "A",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P9",
+        "origin": [
+          "B",
+          "D"
+        ],
+        "routes": [
+          [
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "B",
+            "A",
+            "D"
+          ]
+        ]
+      },
+      {
+        "id": "P10",
+        "origin": [
+          "B",
+          "D"
+        ],
+        "routes": [
+          [
+            "B",
+            "C",
+            "D"
+          ],
+          [
+            "B",
+            "A",
+            "D"
+          ]
+        ]
+      }
+    ],
+    "qubo": {
+      "variables": [
+        {
+          "name": "q_P1",
+          "packet": "P1",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P2",
+          "packet": "P2",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P3",
+          "packet": "P3",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P4",
+          "packet": "P4",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P5",
+          "packet": "P5",
+          "origin": [
+            "A",
+            "D"
+          ],
+          "routes": [
+            [
+              "A",
+              "C",
+              "D"
+            ],
+            [
+              "A",
+              "B",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P6",
+          "packet": "P6",
+          "origin": [
+            "B",
+            "D"
+          ],
+          "routes": [
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "A",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P7",
+          "packet": "P7",
+          "origin": [
+            "B",
+            "D"
+          ],
+          "routes": [
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "A",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P8",
+          "packet": "P8",
+          "origin": [
+            "B",
+            "D"
+          ],
+          "routes": [
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "A",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P9",
+          "packet": "P9",
+          "origin": [
+            "B",
+            "D"
+          ],
+          "routes": [
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "A",
+              "D"
+            ]
+          ]
+        },
+        {
+          "name": "q_P10",
+          "packet": "P10",
+          "origin": [
+            "B",
+            "D"
+          ],
+          "routes": [
+            [
+              "B",
+              "C",
+              "D"
+            ],
+            [
+              "B",
+              "A",
+              "D"
+            ]
+          ]
+        }
+      ],
+      "constant": 1.3084767626693343,
+      "linear": {
+        "q_P1": -0.3218754367158898,
+        "q_P2": -0.3218754367158898,
+        "q_P3": -0.3218754367158898,
+        "q_P4": -0.3218754367158898,
+        "q_P5": -0.3218754367158898,
+        "q_P6": -0.39253955444634137,
+        "q_P7": -0.39253955444634137,
+        "q_P8": -0.39253955444634137,
+        "q_P9": -0.39253955444634137,
+        "q_P10": -0.39253955444634137
+      },
+      "quadratic": {
+        "q_P1--q_P2": 0.11090501642066324,
+        "q_P1--q_P3": 0.11090501642066324,
+        "q_P1--q_P4": 0.11090501642066324,
+        "q_P1--q_P5": 0.11090501642066324,
+        "q_P1--q_P6": 0.05499993482344101,
+        "q_P1--q_P7": 0.05499993482344101,
+        "q_P1--q_P8": 0.05499993482344101,
+        "q_P1--q_P9": 0.05499993482344101,
+        "q_P1--q_P10": 0.05499993482344101,
+        "q_P2--q_P3": 0.11090501642066324,
+        "q_P2--q_P4": 0.11090501642066324,
+        "q_P2--q_P5": 0.11090501642066324,
+        "q_P2--q_P6": 0.05499993482344101,
+        "q_P2--q_P7": 0.05499993482344101,
+        "q_P2--q_P8": 0.05499993482344101,
+        "q_P2--q_P9": 0.05499993482344101,
+        "q_P10--q_P2": 0.05499993482344101,
+        "q_P3--q_P4": 0.11090501642066324,
+        "q_P3--q_P5": 0.11090501642066324,
+        "q_P3--q_P6": 0.05499993482344101,
+        "q_P3--q_P7": 0.05499993482344101,
+        "q_P3--q_P8": 0.05499993482344101,
+        "q_P3--q_P9": 0.05499993482344101,
+        "q_P10--q_P3": 0.05499993482344101,
+        "q_P4--q_P5": 0.11090501642066324,
+        "q_P4--q_P6": 0.05499993482344101,
+        "q_P4--q_P7": 0.05499993482344101,
+        "q_P4--q_P8": 0.05499993482344101,
+        "q_P4--q_P9": 0.05499993482344101,
+        "q_P10--q_P4": 0.05499993482344101,
+        "q_P5--q_P6": 0.05499993482344101,
+        "q_P5--q_P7": 0.05499993482344101,
+        "q_P5--q_P8": 0.05499993482344101,
+        "q_P5--q_P9": 0.05499993482344101,
+        "q_P10--q_P5": 0.05499993482344101,
+        "q_P6--q_P7": 0.1615945633880365,
+        "q_P6--q_P8": 0.1615945633880365,
+        "q_P6--q_P9": 0.1615945633880365,
+        "q_P10--q_P6": 0.1615945633880365,
+        "q_P7--q_P8": 0.1615945633880365,
+        "q_P7--q_P9": 0.1615945633880365,
+        "q_P10--q_P7": 0.1615945633880365,
+        "q_P8--q_P9": 0.1615945633880365,
+        "q_P10--q_P8": 0.1615945633880365,
+        "q_P10--q_P9": 0.1615945633880365
+      }
+    },
+    "routes": {
+      "A--D": [
+        [
+          "A",
+          "C",
+          "D"
+        ],
+        [
+          "A",
+          "B",
+          "D"
+        ]
+      ],
+      "B--D": [
+        [
+          "B",
+          "C",
+          "D"
+        ],
+        [
+          "B",
+          "A",
+          "D"
+        ]
+      ]
+    },
+    "allocation": [
+      {
+        "origin": [
+          "A",
+          "D"
+        ],
+        "requested_packets": 5,
+        "allocated_packets": 5,
+        "candidate_detours": 2,
+        "unallocated_packets": 0,
+        "reason": "allocated"
+      },
+      {
+        "origin": [
+          "B",
+          "D"
+        ],
+        "requested_packets": 5,
+        "allocated_packets": 5,
+        "candidate_detours": 2,
+        "unallocated_packets": 0,
+        "reason": "allocated"
+      }
+    ],
+    "packet_cap": 10,
+    "edge_order": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "A",
+        "C"
+      ],
+      [
+        "A",
+        "D"
+      ],
+      [
+        "B",
+        "C"
+      ],
+      [
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "D"
+      ]
+    ],
+    "status": "ready",
+    "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+    "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9"
+  },
+  "exact": {
+    "min_j_cost": 0.37214609944733573,
+    "min_j_bits": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "min_j_peak_pct": 78.94500000000001,
+    "max_ground_state_peak_pct": 78.94500000000001,
+    "min_peak_pct": 72.78181818181818,
+    "min_peak_bits": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "min_peak_j_cost": 0.3820805652196544,
+    "n_ground_states": 100,
+    "n_states": 1024,
+    "max_qubo_physical_error": 7.771561172376096e-16,
+    "enumeration_and_validation_ms": 29.629900003783405
+  },
+  "results": [
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "baseline",
+      "backend": "unmanaged_input",
+      "bitstring": null,
+      "solve_ms": null,
+      "qubo_cost": null,
+      "moved_packets": 0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 85.25714285714285,
+      "peak_reduction_relative_pct": 0.0,
+      "peak_relief_pp": 0.0,
+      "mean_ratio": 0.494393281024531,
+      "std_ratio": 0.22411428493761146,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 485.3,
+      "outcome_vs_initial": "unchanged"
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "Exact J",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": null,
+      "moved_packets": 10,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "exhaustive_enumeration",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.3820805652196544,
+      "solve_ms": null,
+      "moved_packets": 10,
+      "evaluations": null,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.009934465772318657,
+      "qubo_gap_relative_pct": 2.669506891801921,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 72.78181818181818,
+      "peak_reduction_relative_pct": 14.632585912746766,
+      "peak_relief_pp": 12.475324675324671,
+      "mean_ratio": 0.6218959866522367,
+      "std_ratio": 0.08605458154018138,
+      "n_congested_after": 3,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 72.78181818181818,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": 21.60189999267459,
+      "moved_packets": 10,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "qubo_cost": 0.3721460994473355,
+      "solve_ms": 802.9978000122355,
+      "moved_packets": 10,
+      "evaluations": 32,
+      "initial_point": [
+        2.4314546363447995,
+        2.757554564287996
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": 21.734699999797158,
+      "moved_packets": 10,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "qubo_cost": 0.3721460994473355,
+      "solve_ms": 780.8539999969071,
+      "moved_packets": 10,
+      "evaluations": 31,
+      "initial_point": [
+        2.1436716007436747,
+        0.33816743455556175
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": 21.614199999021366,
+      "moved_packets": 10,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "qubo_cost": 0.3721460994473355,
+      "solve_ms": 671.9091999984812,
+      "moved_packets": 10,
+      "evaluations": 27,
+      "initial_point": [
+        1.4755220140840315,
+        2.8127011920619296
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": 20.779999991646037,
+      "moved_packets": 10,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "qubo_cost": 0.3721460994473355,
+      "solve_ms": 738.9370000018971,
+      "moved_packets": 10,
+      "evaluations": 26,
+      "initial_point": [
+        0.2877596343719485,
+        1.345506569694254
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "repository_particle_dynamics_on_frozen_qubo",
+      "bitstring": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "qubo_cost": 0.37214609944733573,
+      "solve_ms": 21.496900008060038,
+      "moved_packets": 10,
+      "evaluations": 630,
+      "initial_point": null,
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "suite": "legacy",
+      "n_nodes": 4,
+      "family": "Localized Dropoff",
+      "level": "9",
+      "scenario": "9. School Zone Perimeter Dropoff",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "traffic_seed": 2026,
+      "instance_hash": "c31f3698e9a066ffb31abb12d3ec53ec12bb8bdc07fb85d258f022d9e424b1c9",
+      "qubo_hash": "7cc3594b28d995152bd84bce0211f22c5130d68a1f47cfb3961f22cb3c69da74",
+      "packet_cap": 10,
+      "n_qubits": 10,
+      "requested_packets": 10,
+      "allocated_packets": 10,
+      "budget_omitted_packets": 0,
+      "route_omitted_packets": 0,
+      "exact_min_qubo_cost": 0.37214609944733573,
+      "exact_min_peak_pct": 72.78181818181818,
+      "exact_min_j_peak_pct": 78.94500000000001,
+      "n_states": 1024,
+      "status": "success",
+      "backend": "qiskit.primitives.StatevectorSampler",
+      "bitstring": [
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "qubo_cost": 0.3721460994473355,
+      "solve_ms": 686.865099996794,
+      "moved_packets": 10,
+      "evaluations": 28,
+      "initial_point": [
+        0.5621402961142088,
+        4.020693000692235
+      ],
+      "qubo_gap_absolute": 0.0,
+      "qubo_gap_relative_pct": 0.0,
+      "initial_peak_pct": 85.25714285714285,
+      "final_peak_pct": 78.94500000000001,
+      "peak_reduction_relative_pct": 7.403652815013391,
+      "peak_relief_pp": 6.312142857142845,
+      "mean_ratio": 0.6251156836219336,
+      "std_ratio": 0.08098466003049695,
+      "n_congested_after": 2,
+      "n_over_capacity_after": 0,
+      "minimum_load_veh_hr": 935.3,
+      "outcome_vs_initial": "improved",
+      "guarded_final_peak_pct": 78.94500000000001,
+      "guard_rejected": false
+    }
+  ],
+  "edges": [
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 851.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.3869090909090909,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 644.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.32245,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1492.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.8525714285714285,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 485.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.3033125,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1828.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.7616666666666667,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Unmanaged",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 678.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.33945,
+      "delta_load_veh_hr": 0.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact J",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1601.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.7278181818181818,
+      "delta_load_veh_hr": 750.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 944.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.47245,
+      "delta_load_veh_hr": 300.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1528.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.6366666666666667,
+      "delta_load_veh_hr": -300.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "Exact peak",
+      "solver_seed": null,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1428.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.71445,
+      "delta_load_veh_hr": 750.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 42,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 123,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 456,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 789,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "BPSO",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--B",
+      "capacity_veh_hr": 2200.0,
+      "before_load_veh_hr": 851.2,
+      "after_load_veh_hr": 1451.2,
+      "before_ratio": 0.3869090909090909,
+      "after_ratio": 0.6596363636363637,
+      "delta_load_veh_hr": 600.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--C",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 644.9,
+      "after_load_veh_hr": 1094.9,
+      "before_ratio": 0.32245,
+      "after_ratio": 0.54745,
+      "delta_load_veh_hr": 450.0000000000001
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "A--D",
+      "capacity_veh_hr": 1750.0,
+      "before_load_veh_hr": 1492.0,
+      "after_load_veh_hr": 1042.0,
+      "before_ratio": 0.8525714285714285,
+      "after_ratio": 0.5954285714285714,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--C",
+      "capacity_veh_hr": 1600.0,
+      "before_load_veh_hr": 485.3,
+      "after_load_veh_hr": 935.3,
+      "before_ratio": 0.3033125,
+      "after_ratio": 0.5845625,
+      "delta_load_veh_hr": 449.99999999999994
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "B--D",
+      "capacity_veh_hr": 2400.0,
+      "before_load_veh_hr": 1828.0,
+      "after_load_veh_hr": 1378.0,
+      "before_ratio": 0.7616666666666667,
+      "after_ratio": 0.5741666666666667,
+      "delta_load_veh_hr": -450.0
+    },
+    {
+      "scenario_id": "legacy_n4_09",
+      "method": "QAOA",
+      "solver_seed": 2026,
+      "edge": "C--D",
+      "capacity_veh_hr": 2000.0,
+      "before_load_veh_hr": 678.9,
+      "after_load_veh_hr": 1578.9,
+      "before_ratio": 0.33945,
+      "after_ratio": 0.7894500000000001,
+      "delta_load_veh_hr": 900.0000000000001
+    }
+  ],
+  "solver_traces": {
+    "QAOA_42": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": 0.06016330735312376
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.4314546363447995,
+            2.757554564287996
+          ],
+          "expectation": 0.1897604940093393
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            2.4314546363447995,
+            3.757554564287996
+          ],
+          "expectation": 0.12542548921958405
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            1.53830906346299,
+            2.307786862422217
+          ],
+          "expectation": -0.013629258832635176
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            0.9320124321125463,
+            1.5125482851304053
+          ],
+          "expectation": 0.015251789212256858
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.181939555748393,
+            2.6585015241791154
+          ],
+          "expectation": -0.0478756312273633
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            0.9407166069154999,
+            3.096464409543119
+          ],
+          "expectation": 0.09891898658314335
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.0942608903091682,
+            2.5694091472504663
+          ],
+          "expectation": -0.018157022695164275
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.3011168860014006,
+            2.8782667715540486
+          ],
+          "expectation": -0.07261486995053412
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.3233244098320907,
+            3.1272784698441276
+          ],
+          "expectation": -0.07669918218405045
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.5733067032025987,
+            3.1243030705060173
+          ],
+          "expectation": 0.0034411649612326794
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.2242961087889415,
+            3.141185144231178
+          ],
+          "expectation": -0.06364303301876757
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.3302777470256157,
+            3.176792620365702
+          ],
+          "expectation": -0.07634299529978389
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.4214479798035307,
+            3.107997260959311
+          ],
+          "expectation": -0.05961226874366551
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.2735643562359455,
+            3.13217102195001
+          ],
+          "expectation": -0.07615514461509121
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.3423389257044398,
+            3.1110473828152134
+          ],
+          "expectation": -0.0721369404610426
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.3133818996727142,
+            3.1283492133851762
+          ],
+          "expectation": -0.07631228658441626
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.323859781602615,
+            3.132249724923816
+          ],
+          "expectation": -0.07639152898498368
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.327710377632538,
+            3.1182916302186845
+          ],
+          "expectation": -0.07664886979420574
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.3275695980664879,
+            3.129920131604182
+          ],
+          "expectation": -0.07653189858751665
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.322663994392077,
+            3.128339766902727
+          ],
+          "expectation": -0.07725657182705754
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.3211880540141436,
+            3.1303575875094176
+          ],
+          "expectation": -0.07362001165155617
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.3222604302707388,
+            3.1280445788271405
+          ],
+          "expectation": -0.07580705417575442
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.3236501703889114,
+            3.1285054681497577
+          ],
+          "expectation": -0.07713093284440493
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.3227468450155924,
+            3.12784667890431
+          ],
+          "expectation": -0.07737457913388664
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.3224297060641106,
+            3.126898299821109
+          ],
+          "expectation": -0.07622810983232177
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            1.3224152077200426,
+            3.128220866964248
+          ],
+          "expectation": -0.07637160706520581
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            1.3226532980006078,
+            3.1277637695804223
+          ],
+          "expectation": -0.07737457913388662
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            1.3229126636633672,
+            3.127659584874341
+          ],
+          "expectation": -0.07738428076061742
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            1.3229789911224774,
+            3.1275847472623535
+          ],
+          "expectation": -0.07762391032841298
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            1.3229056621595565,
+            3.1273986750634712
+          ],
+          "expectation": -0.07752169132090805
+        },
+        {
+          "evaluation": 32,
+          "parameters": [
+            1.3230769231293937,
+            3.1275645155540386
+          ],
+          "expectation": -0.07731389765504594
+        }
+      ]
+    },
+    "QAOA_123": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            2.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": 0.014966408636968763
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            3.1436716007436747,
+            0.33816743455556175
+          ],
+          "expectation": 0.0024291048758234837
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            3.1436716007436747,
+            1.3381674345555616
+          ],
+          "expectation": 0.0011329747533476715
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            4.138370151481515,
+            1.4410012478663574
+          ],
+          "expectation": -0.001463291554232052
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            5.024330844033335,
+            1.9047615860294016
+          ],
+          "expectation": 0.10580070714492915
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            4.194143350313525,
+            0.9441216343863463
+          ],
+          "expectation": -0.018852984823404372
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            4.282463996868375,
+            0.4519839875921458
+          ],
+          "expectation": -0.01281351614007447
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            4.317177762012076,
+            0.9662017960250588
+          ],
+          "expectation": -0.02661638382659556
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            4.550290282416605,
+            1.0565265037779659
+          ],
+          "expectation": -0.024986285098972882
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            4.299112820461494,
+            1.0128243001059647
+          ],
+          "expectation": -0.03114406723883279
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            4.256379390060436,
+            1.1032336686811182
+          ],
+          "expectation": -0.027280112563525694
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            4.2539081361739175,
+            0.9914575849054359
+          ],
+          "expectation": -0.024886858533464496
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            4.398105350539217,
+            1.0269833604141612
+          ],
+          "expectation": -0.041906150747049814
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            4.59754056633454,
+            1.0420031706883721
+          ],
+          "expectation": -0.0155686652427587
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            4.372131429313857,
+            0.9304154805773397
+          ],
+          "expectation": -0.03411717592678946
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            4.445136781686652,
+            1.043955233741055
+          ],
+          "expectation": -0.03923801393312051
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            4.393862382207494,
+            1.0387412182010198
+          ],
+          "expectation": -0.04017423445819672
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            4.3975725417852916,
+            1.001989038762399
+          ],
+          "expectation": -0.037648269747693176
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            4.407940877310479,
+            1.028789575554112
+          ],
+          "expectation": -0.03637433831287785
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            4.389737100235855,
+            1.0215086561426707
+          ],
+          "expectation": -0.042009266249672786
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            4.394582117776238,
+            1.0127607532492118
+          ],
+          "expectation": -0.04036244870436052
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            4.38674543794521,
+            1.0255148958682403
+          ],
+          "expectation": -0.04164865670740794
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            4.388735540304463,
+            1.0207607405700094
+          ],
+          "expectation": -0.04239917729524832
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            4.387120873198457,
+            1.0188521153745398
+          ],
+          "expectation": -0.04069151703644529
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            4.388436374075399,
+            1.0211613645425663
+          ],
+          "expectation": -0.04143139677935323
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            4.389198769379046,
+            1.0198745019878763
+          ],
+          "expectation": -0.0420998659070294
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            4.3882461416341085,
+            1.020863156103279
+          ],
+          "expectation": -0.041304571778189636
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            4.3887611441877805,
+            1.020883090237598
+          ],
+          "expectation": -0.04239917729524832
+        },
+        {
+          "evaluation": 29,
+          "parameters": [
+            4.388980239639641,
+            1.0207095328033746
+          ],
+          "expectation": -0.042345472702758194
+        },
+        {
+          "evaluation": 30,
+          "parameters": [
+            4.388686600437428,
+            1.0207709821233364
+          ],
+          "expectation": -0.042444070474764825
+        },
+        {
+          "evaluation": 31,
+          "parameters": [
+            4.388588720703357,
+            1.0207914652299903
+          ],
+          "expectation": -0.04224324741389238
+        }
+      ]
+    },
+    "QAOA_456": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            1.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": -0.03720898281779455
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            2.4755220140840315,
+            2.8127011920619296
+          ],
+          "expectation": 0.029466014120378616
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.4755220140840315,
+            3.8127011920619296
+          ],
+          "expectation": -0.04901837900891379
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            0.4908478870788342,
+            3.987105502807256
+          ],
+          "expectation": 0.38403915358767315
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            1.9753435562971287,
+            3.8260588093539876
+          ],
+          "expectation": 0.2669892146237351
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.2255655706182609,
+            3.8173677078867225
+          ],
+          "expectation": -0.05334983011080009
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            1.1432679817175588,
+            3.874175338194024
+          ],
+          "expectation": -0.00216040639118852
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.1971617554646101,
+            3.7762189134363715
+          ],
+          "expectation": -0.0416532958801871
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.3240292506697195,
+            3.7999062156617156
+          ],
+          "expectation": -0.07663413324548728
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.4161670815882443,
+            3.838772912377919
+          ],
+          "expectation": -0.06680204774254055
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.33549188492096,
+            3.751237868494154
+          ],
+          "expectation": -0.07399873100917916
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.2996336851541184,
+            3.8053703151459866
+          ],
+          "expectation": -0.07110791925308302
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.3251220705665738,
+            3.8047853287648357
+          ],
+          "expectation": -0.07720466336287188
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.3347957113369175,
+            3.807319233705109
+          ],
+          "expectation": -0.07487893128590109
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.3166614557392993,
+            3.810116182049677
+          ],
+          "expectation": -0.07214264257449891
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.3251532842613383,
+            3.799785426195259
+          ],
+          "expectation": -0.07711487700383882
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.3238720949241796,
+            3.8047775253411444
+          ],
+          "expectation": -0.07646311263710975
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.327620405134563,
+            3.8048765668401696
+          ],
+          "expectation": -0.07792500877802994
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.3301145296468837,
+            3.805047864584
+          ],
+          "expectation": -0.07587008459576972
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.327586145585797,
+            3.8053753917426336
+          ],
+          "expectation": -0.07790383137841496
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.3266276031698296,
+            3.8047567993202764
+          ],
+          "expectation": -0.07516771309711827
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.328618987927653,
+            3.8049297871872607
+          ],
+          "expectation": -0.07597109084652114
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.3271224394122916,
+            3.804831509771437
+          ],
+          "expectation": -0.0759560240582466
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.327631669401746,
+            3.804752075409602
+          ],
+          "expectation": -0.077989305211008
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.327881472946073,
+            3.8047421663611276
+          ],
+          "expectation": -0.07757979198915534
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.327581872829519,
+            3.8047475697027284
+          ],
+          "expectation": -0.07787834145236
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            1.3277307253506638,
+            3.8047383670550694
+          ],
+          "expectation": -0.07714129358537361
+        }
+      ]
+    },
+    "QAOA_789": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.2877596343719485,
+            1.345506569694254
+          ],
+          "expectation": 0.08945419578774273
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.2877596343719486,
+            1.345506569694254
+          ],
+          "expectation": -0.05025505213746769
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.2877596343719486,
+            2.345506569694254
+          ],
+          "expectation": -0.06353333303729485
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.2832734898096634,
+            2.4401224437933555
+          ],
+          "expectation": 0.10644896193096266
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            0.7892427640976465,
+            2.383989423693335
+          ],
+          "expectation": 0.13156400502852417
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.297380347871719,
+            2.4701357872628296
+          ],
+          "expectation": -0.07037337039694697
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            1.5468955317257025,
+            2.485697696731554
+          ],
+          "expectation": -0.008516008435880108
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.2475286608442888,
+            2.473984072662738
+          ],
+          "expectation": -0.06336027795784054
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.3930626941284923,
+            2.4992027550234845
+          ],
+          "expectation": -0.05771250850901369
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.2515626089767413,
+            2.4901541488978802
+          ],
+          "expectation": -0.06203771986385483
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.3023849382804815,
+            2.4815902219865738
+          ],
+          "expectation": -0.07174922503451328
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.327017701854443,
+            2.4858595262284053
+          ],
+          "expectation": -0.06819057138244339
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.2978031643909838,
+            2.4835920581500788
+          ],
+          "expectation": -0.06993271256410256
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.312315702751609,
+            2.4804155232937206
+          ],
+          "expectation": -0.0691084845668968
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.2987395804950101,
+            2.4850124093887924
+          ],
+          "expectation": -0.06959056307543388
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.3032404851310362,
+            2.4825015614329415
+          ],
+          "expectation": -0.0702372882596848
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.3013861434950031,
+            2.479298408517615
+          ],
+          "expectation": -0.07194585129496683
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.3022161033199144,
+            2.478740585347575
+          ],
+          "expectation": -0.07182233916182584
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.3011072319099832,
+            2.478883428605159
+          ],
+          "expectation": -0.07084858769935841
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.3018964473660832,
+            2.4801584026798977
+          ],
+          "expectation": -0.07080792154036863
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.3010643944219205,
+            2.478915684682493
+          ],
+          "expectation": -0.07065658233282046
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.3015156228352787,
+            2.479512266181592
+          ],
+          "expectation": -0.07161389070649084
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.3013433719622076,
+            2.47932430438567
+          ],
+          "expectation": -0.07185694886833009
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.3014236932335324,
+            2.479205726172282
+          ],
+          "expectation": -0.07195466898930132
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.3013332302109746,
+            2.479163106440353
+          ],
+          "expectation": -0.07200926379554863
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.3012477817194126,
+            2.4791111588197166
+          ],
+          "expectation": -0.07117438867204962
+        }
+      ]
+    },
+    "QAOA_2026": {
+      "history": [
+        {
+          "evaluation": 1,
+          "parameters": [
+            0.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": 0.40619328367391855
+        },
+        {
+          "evaluation": 2,
+          "parameters": [
+            1.5621402961142088,
+            4.020693000692235
+          ],
+          "expectation": -0.0020354001626169036
+        },
+        {
+          "evaluation": 3,
+          "parameters": [
+            1.5621402961142088,
+            5.020693000692235
+          ],
+          "expectation": -0.002172349697311354
+        },
+        {
+          "evaluation": 4,
+          "parameters": [
+            2.5621402398432838,
+            5.021028473265355
+          ],
+          "expectation": 0.07390528888992119
+        },
+        {
+          "evaluation": 5,
+          "parameters": [
+            1.062141106226934,
+            5.021593062950603
+          ],
+          "expectation": 0.10606522796275364
+        },
+        {
+          "evaluation": 6,
+          "parameters": [
+            1.5623653116788008,
+            5.145692798164054
+          ],
+          "expectation": -0.0008244668981129184
+        },
+        {
+          "evaluation": 7,
+          "parameters": [
+            1.8118079238175844,
+            5.007805965464199
+          ],
+          "expectation": 0.22078400300850742
+        },
+        {
+          "evaluation": 8,
+          "parameters": [
+            1.5121403771254813,
+            5.020783006918072
+          ],
+          "expectation": -0.034044126243780753
+        },
+        {
+          "evaluation": 9,
+          "parameters": [
+            1.4121517994338133,
+            5.019271606508766
+          ],
+          "expectation": -0.07512297165542871
+        },
+        {
+          "evaluation": 10,
+          "parameters": [
+            1.3150845998591099,
+            4.995230833502793
+          ],
+          "expectation": -0.07716293188692894
+        },
+        {
+          "evaluation": 11,
+          "parameters": [
+            1.3366932880834297,
+            4.897593419602055
+          ],
+          "expectation": -0.07922039570044667
+        },
+        {
+          "evaluation": 12,
+          "parameters": [
+            1.2843629503870615,
+            4.812378774401925
+          ],
+          "expectation": -0.06702477462499049
+        },
+        {
+          "evaluation": 13,
+          "parameters": [
+            1.3863709844218368,
+            4.903261442759118
+          ],
+          "expectation": -0.08035418599314773
+        },
+        {
+          "evaluation": 14,
+          "parameters": [
+            1.4285784849833962,
+            4.876456090749753
+          ],
+          "expectation": -0.07225202198839892
+        },
+        {
+          "evaluation": 15,
+          "parameters": [
+            1.385509302833999,
+            4.928246588442927
+          ],
+          "expectation": -0.08045922780966784
+        },
+        {
+          "evaluation": 16,
+          "parameters": [
+            1.3952687516614588,
+            4.930426762423186
+          ],
+          "expectation": -0.0784376730510041
+        },
+        {
+          "evaluation": 17,
+          "parameters": [
+            1.3844192158438697,
+            4.933126312856657
+          ],
+          "expectation": -0.08115136365305496
+        },
+        {
+          "evaluation": 18,
+          "parameters": [
+            1.3751349419314594,
+            4.936841451874154
+          ],
+          "expectation": -0.0783531454510325
+        },
+        {
+          "evaluation": 19,
+          "parameters": [
+            1.3887368169431609,
+            4.935647883943777
+          ],
+          "expectation": -0.07783977578970389
+        },
+        {
+          "evaluation": 20,
+          "parameters": [
+            1.3831992847404373,
+            4.932853791109125
+          ],
+          "expectation": -0.08135239932188688
+        },
+        {
+          "evaluation": 21,
+          "parameters": [
+            1.3809945100828735,
+            4.934032336275576
+          ],
+          "expectation": -0.08129447908489497
+        },
+        {
+          "evaluation": 22,
+          "parameters": [
+            1.3833082934394503,
+            4.932365818667751
+          ],
+          "expectation": -0.08094279549945681
+        },
+        {
+          "evaluation": 23,
+          "parameters": [
+            1.3827973405349785,
+            4.9337694552701015
+          ],
+          "expectation": -0.07890953828544221
+        },
+        {
+          "evaluation": 24,
+          "parameters": [
+            1.383277005816589,
+            4.932359868610829
+          ],
+          "expectation": -0.0808195854524306
+        },
+        {
+          "evaluation": 25,
+          "parameters": [
+            1.3830758041158635,
+            4.932834360840086
+          ],
+          "expectation": -0.08130389118823295
+        },
+        {
+          "evaluation": 26,
+          "parameters": [
+            1.383247275846629,
+            4.933099141580342
+          ],
+          "expectation": -0.08079596655446747
+        },
+        {
+          "evaluation": 27,
+          "parameters": [
+            1.383229739703566,
+            4.932758541462297
+          ],
+          "expectation": -0.08083027417485691
+        },
+        {
+          "evaluation": 28,
+          "parameters": [
+            1.383190936908442,
+            4.932953442068483
+          ],
+          "expectation": -0.08118949883554127
+        }
+      ]
+    }
+  }
+}
