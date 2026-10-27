@@ -10,14 +10,17 @@ services:
     volumes:
       - results-data:/app/results # named volume
       - ./backend:/app # bind mount (dev hot-reload)
+      - "../../prediction-final/Traffic Forecasting/Dataset/Single Network/mumbai_stqgcn_dataset_10k.npz:/models/mumbai_stqgcn_dataset_10k.npz:ro"
+      - "../../prediction-final/Traffic Forecasting/Single Network/Unidirectional/STQGCN/stqgcn_K5_model.pt:/models/stqgcn_K5_model.pt:ro"
+    environment:
+      STQGCN_DATASET_PATH: /models/mumbai_stqgcn_dataset_10k.npz
+      STQGCN_CHECKPOINT_PATH: /models/stqgcn_K5_model.pt
     restart: always
 
   frontend:
     build:
-      context: ./frontend
+      context: ../../frontend
       dockerfile: Dockerfile
-      args:
-        VITE_API_BASE_URL: http://localhost:8000
 
     ports:
       - "5173:80"

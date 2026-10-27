@@ -18,9 +18,12 @@ CORS:
 import time
 import os
 import json
+from threading import Lock
 from datetime import datetime
+from typing import Dict
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
 from graph import TrafficGraph
 from pso import PSO
@@ -31,6 +34,7 @@ from predictions import (
 )
 from utils import format_congestion_table, compute_cycle_time_summary
 from final_qaoa_with_signal import run_final_qaoa_optimization as run_qaoa_optimization
+from stqgcn_service import STQGCNForecaster
 
 # ---------------------------------------------------------------------------
 # Application Initialisation
@@ -66,7 +70,7 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Volume Persistence — results survive container teardown
 # ---------------------------------------------------------------------------
-RESULTS_DIR = "/app/results"
+RESULTS_DIR = os.getenv("RESULTS_DIR", os.path.join(os.path.dirname(__file__), "results"))
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 def _save_result(network_type: str, result: dict) -> None:
@@ -94,6 +98,17 @@ def _load_latest(network_type: str) -> dict | None:
 # Shared Module Instances (constructed once at startup)
 # ---------------------------------------------------------------------------
 _pso: PSO = PSO(max_iter=20)
+_stqgcn_forecaster: STQGCNForecaster | None = None
+_stqgcn_lock = Lock()
+
+
+def _get_stqgcn_forecaster() -> STQGCNForecaster:
+    global _stqgcn_forecaster
+    if _stqgcn_forecaster is None:
+        with _stqgcn_lock:
+            if _stqgcn_forecaster is None:
+                _stqgcn_forecaster = STQGCNForecaster()
+    return _stqgcn_forecaster
 
 # In-memory cache seeded from volume on startup — survives across restarts.
 _last_results: dict = {
@@ -177,7 +192,8 @@ def _build_response(pso_result: dict, graph: TrafficGraph, initial_congestion: d
     opt_cong = {k: round(v, 2) for k, v in pso_result["optimized_congestion"].items()}
     opt_ct = {k: round(v, 2) for k, v in pso_result["optimized_cycle_times"].items()}
 
-    init_ct = ADITYA_INITIAL_CYCLE_TIMES if graph.network_type == "aditya" else INITIAL_CYCLE_TIMES
+    init_ct = (ADITYA_INITIAL_CYCLE_TIMES if graph.network_type == "aditya" else
+               ({node_id: 60.0 for node_id in graph.nodes} if graph.network_type == "qff" else INITIAL_CYCLE_TIMES))
     cycle_summary = compute_cycle_time_summary(
         init_ct,
         opt_ct,
@@ -230,7 +246,8 @@ def _build_response(pso_result: dict, graph: TrafficGraph, initial_congestion: d
 @app.get("/network")
 async def get_network(network_type: str = "vedant"):
     """
-    Return the static graph topology and predictions.
+    Return graph topology and baseline predictions. For the QFF network, run
+    the trained STQGCN once to provide a real baseline forecast.
 
     This endpoint does NOT trigger optimization. It allows the frontend to
     render the 'before' graph immediately on page load without user action.
@@ -241,17 +258,50 @@ async def get_network(network_type: str = "vedant"):
     graph = TrafficGraph(network_type=network_type)
     graph_dict = graph.to_dict()
     predictions = graph.get_initial_predictions()
+    model_info = None
+    if network_type == "qff":
+        capacities = {edge.id: edge.capacity for edge in graph.edges}
+        model_info = _get_stqgcn_forecaster().predict(capacities, predictions)
+        predictions = model_info["predictions"]
     return {
         "nodes":       graph_dict["nodes"],
         "edges":       graph_dict["edges"],
         "edge_features": {e.id: e.to_dict() for e in graph.edges},
         "predictions": predictions,
         "thresholds":  {e.id: e.threshold for e in graph.edges},
+        "prediction_model": model_info["model"] if model_info else None,
+        "prediction_latency_ms": model_info["latency_ms"] if model_info else None,
     }
 
 
-from pydantic import BaseModel
-from typing import Dict
+class STQGCNPredictionRequest(BaseModel):
+    network_type: str = "qff"
+    capacities: Dict[str, float] = Field(default_factory=dict)
+    observations: Dict[str, float] = Field(default_factory=dict)
+    temporal_features: list[float] | None = None
+    edge_overrides: Dict[str, Dict[str, float]] = Field(default_factory=dict)
+
+
+@app.post("/predict")
+async def predict_traffic(request: STQGCNPredictionRequest):
+    """Forecast the QFF 8-node corridor flows with the trained STQGCN K=5 model."""
+    if request.network_type != "qff":
+        raise HTTPException(status_code=422, detail="The trained STQGCN checkpoint supports the qff network only.")
+    try:
+        graph = TrafficGraph(network_type="qff")
+        graph.update_capacities(request.capacities)
+        capacities = {edge.id: edge.capacity for edge in graph.edges}
+        result = _get_stqgcn_forecaster().predict(
+            capacities=capacities,
+            observations=request.observations,
+            temporal_features=request.temporal_features,
+            edge_overrides=request.edge_overrides,
+        )
+        result["thresholds"] = {edge.id: edge.threshold for edge in graph.edges}
+        return result
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"STQGCN prediction failed: {exc}")
+
 
 class OptimizationRequest(BaseModel):
     capacities: Dict[str, float]
@@ -275,7 +325,8 @@ async def run_optimization(request: OptimizationRequest, force: bool = False):
     user_predictions = request.predictions if request.predictions else graph.get_initial_predictions()
 
     # Determine initial cycle times based on network type
-    init_ct = ADITYA_INITIAL_CYCLE_TIMES if request.network_type == "aditya" else INITIAL_CYCLE_TIMES
+    init_ct = (ADITYA_INITIAL_CYCLE_TIMES if request.network_type == "aditya" else
+               ({node_id: 60.0 for node_id in graph.nodes} if request.network_type == "qff" else INITIAL_CYCLE_TIMES))
 
     try:
         # Optimization Trigger Check
@@ -354,15 +405,16 @@ async def run_optimization(request: OptimizationRequest, force: bool = False):
 class QaoaOptimizationRequest(BaseModel):
     capacities: Dict[str, float] | None = None
     predictions: Dict[str, float] | None = None
+    network_type: str = "aditya"
 
 
 @app.post("/qaoa-optimize")
 async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
     """
-    Execute QAOA traffic rerouting & signal timing optimization on Aditya's network.
+    Execute QAOA traffic rerouting & signal timing optimization on a supported network.
     """
     try:
-        graph = TrafficGraph(network_type="aditya")
+        graph = TrafficGraph(network_type=request.network_type)
         if request.capacities:
             graph.update_capacities(request.capacities)
 
@@ -371,7 +423,9 @@ async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
 
         qaoa_res = run_qaoa_optimization(user_predictions, user_capacities)
         
-        old_green = _compute_green_times(graph, user_predictions, ADITYA_INITIAL_CYCLE_TIMES, is_initial=True)
+        initial_cycle_times = (ADITYA_INITIAL_CYCLE_TIMES if request.network_type == "aditya" else
+                               ({node_id: 60.0 for node_id in graph.nodes} if request.network_type == "qff" else INITIAL_CYCLE_TIMES))
+        old_green = _compute_green_times(graph, user_predictions, initial_cycle_times, is_initial=True)
         green_times_api = {
             edge_id: {"old": old_green.get(edge_id, 0.0), "new": qaoa_res["green_times"].get(edge_id, 0.0)}
             for edge_id in graph._edge_index.keys()
@@ -380,13 +434,13 @@ async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
         # Build graph_after dictionary with QAOA loads
         graph_after = graph.to_dict()
 
-        return {
+        res = {
             "optimization_triggered": True,
             "graph_before": graph.to_dict(),
             "graph_after": graph_after,
             "before": user_predictions,
             "after": qaoa_res["optimized_congestion"],
-            "cycle_times": {node_id: {"old": 90.0, "new": 90.0} for node_id in graph.nodes},
+            "cycle_times": {node_id: {"old": initial_cycle_times.get(node_id, 60.0), "new": initial_cycle_times.get(node_id, 60.0)} for node_id in graph.nodes},
             "green_times": green_times_api,
             "latency_ms": qaoa_res["latency_ms"],
             "initial_fitness": qaoa_res["stdev_before"],
@@ -398,8 +452,8 @@ async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
             "thresholds": {e.id: e.threshold for e in graph.edges},
             "table": format_congestion_table(user_predictions, qaoa_res["optimized_congestion"], graph),
         }
-        _last_results["aditya"] = res  # keep in sync for /results
-        _save_result("aditya", res)    # persist to Docker volume
+        _last_results[request.network_type] = res
+        _save_result(request.network_type, res)
         return res
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))

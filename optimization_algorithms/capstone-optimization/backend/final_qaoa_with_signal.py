@@ -52,7 +52,12 @@ def clean_edge_key(key: str | Tuple[Any, Any]) -> Tuple[Any, Any]:
     """Convert string format 'A->B' or 'A\u2192B' or tuple ('A', 'B') into normalized tuple."""
     if isinstance(key, tuple):
         return normalize_edge(key[0], key[1])
-    clean = str(key).replace("\u2192", "").replace("->", "").replace("\u2190", "").replace("<-", "").strip()
+    raw = str(key).strip()
+    for arrow in ("\u2192", "->", "\u2190", "<-"):
+        if arrow in raw:
+            left, right = raw.split(arrow, 1)
+            return normalize_edge(left, right)
+    clean = raw
     if len(clean) == 2:
         return normalize_edge(clean[0], clean[1])
     parts = clean.split("-")

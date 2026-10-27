@@ -6,10 +6,13 @@ WORKDIR /app
 # Prevent Python from writing bytecode and buffer stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PIP_INDEX_URL=https://pypi.org/simple
 
 # Install requirements
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements-runtime.txt requirements.txt
+# This backend runs STQGCN on CPU; avoid pulling the much larger CUDA build.
+RUN pip install --no-cache-dir --timeout 180 --retries 5 --index-url https://download.pytorch.org/whl/cpu torch
+RUN pip install --no-cache-dir --timeout 180 --retries 5 --index-url https://pypi.org/simple -r requirements.txt
 
 # Copy application source code
 COPY . .

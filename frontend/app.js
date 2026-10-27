@@ -432,6 +432,7 @@ function initTrafficManagerConsole() {
     const edgeIdx = parseInt(segSelect.value);
     if (FORWARD_EDGES[edgeIdx]) {
       FORWARD_EDGES[edgeIdx][3] = C;
+      EDGE_INFRA[edgeIdx] = { ...EDGE_INFRA[edgeIdx], len: L, cap: C, speed: V, mu };
     }
   }
 
@@ -505,6 +506,27 @@ const FORWARD_EDGES = [
   [5, 6, 'V6→V7', 1950],
   [6, 2, 'V7→V3', 1800],
 ];
+
+const API_BASE_URL = window.QFF_API_BASE_URL || '/api';
+let backendNetwork = null;
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+    ...options,
+  });
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.detail || `Backend request failed (${response.status})`);
+  }
+  return response.json();
+}
+
+function getCapacity(edgeName) {
+  const local = FORWARD_EDGES.find(e => e[2] === edgeName || e[2].split('→').reverse().join('→') === edgeName);
+  if (local) return local[3];
+  return backendNetwork?.edges?.find(e => e.id === edgeName)?.capacity ?? 1800;
+}
 
 // Reverse edges (bidirectional)
 const REVERSE_EDGES = FORWARD_EDGES.map(([s, d, name, cap]) => [d, s, name.split('→').reverse().join('→'), cap]);
@@ -609,51 +631,41 @@ function renderScenarioGrid() {
 function buildFlows(baseOcc, drift) {
   const flows = [];
   FORWARD_EDGES.forEach(([src, dst, name, cap], i) => {
-    const noise = (Math.random() - 0.5) * drift;
-    const occ = Math.min(0.97, Math.max(0.12, baseOcc[i] + noise));
-    const flow = Math.round(cap * occ);
+    const capacity = getCapacity(name);
+    const occ = Math.min(0.97, Math.max(0.12, baseOcc[i]));
+    const flow = Math.round(capacity * occ);
     // Derived features (physics-based approximations)
     const speedFreeFlow = 60; // km/h free-flow
     const speed = Math.round(speedFreeFlow * Math.max(0.15, 1 - occ * 0.85));
     const density = occ > 0.01 ? Math.round(flow / Math.max(1, speed)) : 0;
     const capUtil = Math.round(occ * 100);
     const delay = Math.round(occ > 0.6 ? (occ - 0.5) * 180 + 8 : occ * 12);
-    flows.push({ src, dst, name, cap, occ, flow, speed, density, capUtil, delay });
+    flows.push({ src, dst, name, cap: capacity, occ, flow, speed, density, capUtil, delay });
   });
-  // Reverse edges (approximate reverse flows at ~80% of forward)
+  // Scenario inputs are mirrored to the reverse edge; optimization output comes from the API.
   FORWARD_EDGES.forEach(([src, dst, name, cap], i) => {
-    const revOcc = Math.min(0.90, baseOcc[i] * (0.65 + Math.random() * 0.25) + (Math.random()-0.5)*drift);
-    const flow = Math.round(cap * revOcc);
+    const revName = name.split('→').reverse().join('→');
+    const capacity = getCapacity(revName);
+    const revOcc = Math.min(0.90, Math.max(0.12, baseOcc[i]));
+    const flow = Math.round(capacity * revOcc);
     const speed = Math.round(60 * Math.max(0.15, 1 - revOcc * 0.85));
     const density = Math.round(flow / Math.max(1, speed));
     const capUtil = Math.round(revOcc * 100);
     const delay = Math.round(revOcc > 0.6 ? (revOcc - 0.5) * 180 + 8 : revOcc * 12);
-    const revName = name.split('→').reverse().join('→');
-    flows.push({ src: dst, dst: src, name: revName, cap, occ: revOcc, flow, speed, density, capUtil, delay });
+    flows.push({ src: dst, dst: src, name: revName, cap: capacity, occ: revOcc, flow, speed, density, capUtil, delay });
   });
   return flows;
 }
 
-function optimiseFlows(predFlows) {
-  return predFlows.map(f => {
-    if (f.occ > 0.60) {
-      const reduction = 0.12 + Math.random() * 0.20;
-      const newOcc = Math.max(0.32, f.occ - reduction);
-      const flow = Math.round(f.cap * newOcc);
-      const speed = Math.round(60 * Math.max(0.15, 1 - newOcc * 0.85));
-      const density = Math.round(flow / Math.max(1, speed));
-      const delay = Math.round(newOcc > 0.6 ? (newOcc - 0.5) * 180 + 8 : newOcc * 12);
-      return { ...f, occ: newOcc, flow, speed, density, capUtil: Math.round(newOcc * 100), delay };
-    } else if (f.occ < 0.45) {
-      // Absorb rerouted traffic
-      const absorb = Math.random() * 0.07;
-      const newOcc = Math.min(0.58, f.occ + absorb);
-      const flow = Math.round(f.cap * newOcc);
-      const speed = Math.round(60 * Math.max(0.15, 1 - newOcc * 0.85));
-      return { ...f, occ: newOcc, flow, speed, capUtil: Math.round(newOcc * 100), delay: Math.round(newOcc * 12) };
-    }
-    return f;
-  });
+function getTemporalFeatures() {
+  const now = new Date();
+  const hour = now.getHours() + now.getMinutes() / 60;
+  return [
+    Math.sin(2 * Math.PI * hour / 24),
+    Math.cos(2 * Math.PI * hour / 24),
+    now.getDay() === 0 || now.getDay() === 6 ? 1 : 0,
+    0,
+  ];
 }
 
 // ══════════════════════════════════════════════════════════
@@ -982,13 +994,12 @@ async function runOneCycle() {
 
   // ── Phase 1: STQGCN Prediction ─────────────────────────
   setPhaseActive(1);
-  setBadge('badge-pred', 'Predicting…', 'running');
+  setBadge('badge-pred', 'STQGCN predicting…', 'running');
   setBadge('badge-opt', 'Waiting', '');
   document.getElementById('graph-predicted').classList.add('pulsing');
   document.getElementById('graph-optimised').classList.remove('pulsing');
 
-  // Build predicted flows: add sensor noise each cycle, drift based on previous optimised state
-  const drift = 0.04 + (cycleCount > 1 ? 0.02 : 0);
+  // Scenario loads are the selected inputs; prior backend output feeds the next cycle.
   let baseOcc;
   if (cycleCount === 1 || !currentOptFlows) {
     baseOcc = sc.occ.slice();
@@ -1000,14 +1011,45 @@ async function runOneCycle() {
       return optOcc * 0.75 + orig * 0.25;
     });
   }
-  const predFlows = buildFlows(baseOcc, drift);
-
-  await delay(500);
-  renderSVGGraph(document.getElementById('svg-predicted'), predFlows, false);
-  updateFeatureTable(predFlows, null);
-  setBadge('badge-pred', 'Done ✓', 'done');
+  const scenarioFlows = buildFlows(baseOcc, 0);
+  renderSVGGraph(document.getElementById('svg-predicted'), scenarioFlows, false);
+  updateFeatureTable(scenarioFlows, null);
 
   if (!isRunning) return;
+
+  let prediction;
+  try {
+    const capacities = Object.fromEntries(scenarioFlows.map(f => [f.name, f.cap]));
+    const observations = Object.fromEntries(scenarioFlows.slice(0, 11).map(f => [f.name, f.flow]));
+    const edgeOverrides = Object.fromEntries(FORWARD_EDGES.map((edge, index) => [edge[2], {
+      length_m: EDGE_INFRA[index].len,
+      speed_limit: EDGE_INFRA[index].speed,
+      lanes: Math.max(1, Math.round(EDGE_INFRA[index].cap / 650)),
+      friction_factor: EDGE_INFRA[index].mu,
+    }]));
+    prediction = await apiRequest('/predict', {
+      method: 'POST',
+      body: JSON.stringify({
+        network_type: 'qff', capacities, observations, edge_overrides: edgeOverrides,
+        temporal_features: getTemporalFeatures(),
+      }),
+    });
+  } catch (error) {
+    stopPipeline();
+    setBadge('badge-pred', error.message || 'STQGCN unavailable', 'error');
+    return;
+  }
+
+  const predFlows = scenarioFlows.map(f => {
+    const flow = Number(prediction.predictions?.[f.name] ?? f.flow);
+    const occ = f.cap > 0 ? flow / f.cap : 0;
+    const speed = Math.round(60 * Math.max(0.15, 1 - occ * 0.85));
+    return { ...f, flow, occ, speed, density: Math.round(flow / Math.max(1, speed)),
+      capUtil: Math.round(occ * 100), delay: Math.round(occ > 0.6 ? (occ - 0.5) * 180 + 8 : occ * 12) };
+  });
+  renderSVGGraph(document.getElementById('svg-predicted'), predFlows, false);
+  updateFeatureTable(predFlows, null);
+  setBadge('badge-pred', `STQGCN ${Number(prediction.latency_ms).toFixed(0)} ms`, 'done');
 
   // ── Phase 2: QAOA Optimisation ─────────────────────────
   setPhaseActive(2);
@@ -1015,23 +1057,38 @@ async function runOneCycle() {
   document.getElementById('graph-predicted').classList.remove('pulsing');
   document.getElementById('graph-optimised').classList.add('pulsing');
 
-  await delay(600);
-
-  // Compute optimised flows
-  const optFlows = optimiseFlows(predFlows);
+  let result;
+  try {
+    const capacities = Object.fromEntries(predFlows.map(f => [f.name, f.cap]));
+    const predictions = Object.fromEntries(predFlows.map(f => [f.name, f.flow]));
+    result = await apiRequest('/qaoa-optimize', {
+      method: 'POST',
+      body: JSON.stringify({ network_type: 'qff', capacities, predictions }),
+    });
+  } catch (error) {
+    stopPipeline();
+    setBadge('badge-opt', error.message || 'Backend unavailable', 'error');
+    return;
+  }
+  const optFlows = predFlows.map(f => {
+    const flow = Number(result.after?.[f.name] ?? f.flow);
+    const occ = f.cap > 0 ? flow / f.cap : 0;
+    const speed = Math.round(60 * Math.max(0.15, 1 - occ * 0.85));
+    return { ...f, flow, occ, speed, density: Math.round(flow / Math.max(1, speed)),
+      capUtil: Math.round(occ * 100), delay: Math.round(occ > 0.6 ? (occ - 0.5) * 180 + 8 : occ * 12) };
+  });
   currentOptFlows = optFlows;
 
   // Stats
   const peakBefore = Math.max(...predFlows.slice(0,11).map(f => f.occ)) * 100;
   const peakAfter  = Math.max(...optFlows.slice(0,11).map(f => f.occ)) * 100;
   const reduction  = ((peakBefore - peakAfter) / peakBefore * 100).toFixed(1);
-  const numCongested = predFlows.slice(0,11).filter(f => f.occ > 0.6).length;
-  const bits = Array.from({ length: Math.max(1, numCongested * 2) }, () => Math.random() > 0.5 ? '1' : '0').join('');
+  const runtimes = `STQGCN ${Number(prediction.latency_ms).toFixed(0)} ms · QAOA ${Number(result.latency_ms ?? 0).toFixed(0)} ms`;
 
   document.getElementById('gs-before').textContent    = `${peakBefore.toFixed(1)}%`;
   document.getElementById('gs-after').textContent     = `${peakAfter.toFixed(1)}%`;
   document.getElementById('gs-reduction').textContent = `↓${reduction}%`;
-  document.getElementById('gs-bits').textContent      = bits;
+  document.getElementById('gs-bits').textContent      = runtimes;
 
   if (!isRunning) return;
 
@@ -1196,16 +1253,44 @@ function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 // ══════════════════════════════════════════════════════════
 // 12. INIT
 // ══════════════════════════════════════════════════════════
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   initCCTVAnimation();
   initTrafficManagerConsole();
   renderScenarioGrid();
-  // Draw initial idle graph with scenario 0
-  const sc0 = TRAFFIC_SCENARIOS[0];
-  const initFlows = buildFlows(sc0.occ, 0);
-  renderSVGGraph(document.getElementById('svg-predicted'), initFlows, false);
-  // Draw a placeholder for optimised (empty/greyed state)
-  renderSVGGraph(document.getElementById('svg-optimised'), initFlows.map(f => ({ ...f, occ: f.occ * 0.5 + 0.1 })), false);
-  updateFeatureTable(initFlows, null);
   drawCircuit(currentK);
+  try {
+    let lastError;
+    for (let attempt = 0; attempt < 15; attempt++) {
+      try {
+        backendNetwork = await apiRequest('/network?network_type=qff');
+        lastError = null;
+        break;
+      } catch (error) {
+        lastError = error;
+        if (attempt < 14) await delay(1000);
+      }
+    }
+    if (!backendNetwork) throw lastError || new Error('Backend unavailable');
+    backendNetwork.edges.forEach(edge => {
+      const forward = FORWARD_EDGES.find(e => e[2] === edge.id);
+      if (forward) forward[3] = edge.capacity;
+    });
+    const sc0 = TRAFFIC_SCENARIOS[0];
+    const initFlows = buildFlows(sc0.occ, 0).map(f => {
+      const flow = Number(backendNetwork.predictions?.[f.name] ?? f.flow);
+      const occ = f.cap > 0 ? flow / f.cap : 0;
+      return { ...f, flow, occ, capUtil: Math.round(occ * 100) };
+    });
+    renderSVGGraph(document.getElementById('svg-predicted'), initFlows, false);
+    renderSVGGraph(document.getElementById('svg-optimised'), initFlows, false);
+    updateFeatureTable(initFlows, null);
+    const status = document.getElementById('backend-status');
+    if (status) status.textContent = `Backend connected · ${backendNetwork.prediction_model || 'QFF network ready'}`;
+  } catch (error) {
+    const status = document.getElementById('backend-status');
+    if (status) status.textContent = `Backend unavailable · ${error.message}`;
+    setBadge('badge-pred', 'Backend unavailable', 'error');
+    setBadge('badge-opt', 'Disconnected', 'error');
+    document.getElementById('run-btn').disabled = true;
+  }
 });

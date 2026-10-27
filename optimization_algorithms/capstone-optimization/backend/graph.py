@@ -27,6 +27,14 @@ from predictions import (
 )
 from threshold import calculate_threshold
 
+QFF_EDGE_DEFINITIONS = [
+    ("V1", "V2", 2100), ("V1", "V4", 1900), ("V1", "V5", 1800),
+    ("V2", "V3", 2000), ("V2", "V5", 1800), ("V3", "V8", 1700),
+    ("V4", "V5", 2100), ("V5", "V6", 2000), ("V6", "V2", 1850),
+    ("V6", "V7", 1950), ("V7", "V3", 1800),
+]
+QFF_BASE_OCCUPANCY = [0.84, 0.35, 0.32, 0.38, 0.30, 0.28, 0.33, 0.36, 0.41, 0.38, 0.31]
+
 
 # ---------------------------------------------------------------------------
 # Data Structures
@@ -136,7 +144,19 @@ class TrafficGraph:
         self.edges.clear()
         self._edge_index.clear()
 
-        if self.network_type == "aditya":
+        if self.network_type == "qff":
+            # Qiskit Fall Fest demo network (V1–V8), mirrored from its UI topology.
+            for node_id in [f"V{i}" for i in range(1, 9)]:
+                self.nodes[node_id] = Node(id=node_id, label=node_id, initial_cycle_time=60.0)
+            for src, tgt, capacity in QFF_EDGE_DEFINITIONS:
+                for edge_src, edge_tgt in ((src, tgt), (tgt, src)):
+                    edge_id = f"{edge_src}\u2192{edge_tgt}"
+                    threshold = calculate_threshold(capacity, 60, 1.0, "arterial", network_type="qff")
+                    edge = Edge(edge_src, edge_tgt, 1.0, float(capacity), 60.0, 2, 1.0,
+                                "arterial", threshold, False)
+                    self.edges.append(edge)
+                    self._edge_index[edge_id] = edge
+        elif self.network_type == "aditya":
             # ------------------------------------------------------------------
             # Build Nodes (Aditya's Network)
             # ------------------------------------------------------------------
@@ -270,6 +290,17 @@ class TrafficGraph:
         """Return default predictions for the active network."""
         if self.network_type == "aditya":
             return ADITYA_INITIAL_CONGESTION.copy()
+        if self.network_type == "qff":
+            # Baseline scenario occupancy used by the QFF UI (repeated in both directions).
+            occupancy_by_pair = {
+                frozenset((src, tgt)): QFF_BASE_OCCUPANCY[index]
+                for index, (src, tgt, _) in enumerate(QFF_EDGE_DEFINITIONS)
+            }
+            result: Dict[str, float] = {}
+            for edge in self.edges:
+                occupancy = occupancy_by_pair[frozenset((edge.source, edge.target))]
+                result[edge.id] = round(edge.capacity * occupancy)
+            return result
         return INITIAL_CONGESTION.copy()
 
     def update_capacities(self, capacities: Dict[str, float]) -> None:

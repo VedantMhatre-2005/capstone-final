@@ -130,6 +130,7 @@
 
   <!-- ── Hero ───────────────────────────────────────────────────────── -->
   <header class="hero" id="hero">
+    <div id="backend-status" role="status" aria-live="polite" style="position:absolute;top:1rem;right:1rem;font:500 0.72rem 'JetBrains Mono',monospace;color:#64748b;z-index:5">Connecting to optimization backend…</div>
     <div class="qff-badge">
       <span class="dot"></span>
       Qiskit Fall Fest 2026 &nbsp;·&nbsp; Live Demo Session
@@ -201,7 +202,7 @@
     <div class="section-label">Telemetry &amp; Ingestion</div>
     <h2 class="section-title">Data Collection &amp; Multimodal Feature Ingestion</h2>
     <p class="section-desc">
-      Real-time vehicle flow is automatically extracted from junction CCTV video streams using computer vision (object detection and trajectory tracking), while physical infrastructure parameters like road length, lane capacity, and speed limits are parameterized by the Traffic Manager through an interactive control console.
+      The camera panel is an animation. The trained STQGCN model forecasts from selected scenario loads, road settings, weather selection, and time features; its forecasts are sent to the QAOA optimizer.
     </p>
 
     <div class="datacollect-grid">
@@ -210,7 +211,7 @@
       <div class="dc-card dc-card-cv">
         <div class="dc-card-header">
           <div class="dc-badge dc-badge-live">
-            <span class="pulse-rec"></span> LIVE CCTV STREAM
+            <span class="pulse-rec"></span> SIMULATED CAMERA FEED
           </div>
           <div class="cam-selector" id="cam-selector">
             <button class="cam-btn active" data-cam="0">CAM-01 (V1→V2)</button>
@@ -226,7 +227,7 @@
           <div class="cctv-hud-overlay">
             <div class="hud-top">
               <span class="hud-tag" id="hud-cam-id">CAM-01 · MUMBAI ARTERIAL V1→V2</span>
-              <span class="hud-tag hud-fps">60.0 FPS · RTSP/H.264</span>
+              <span class="hud-tag hud-fps">ANIMATED DEMO · NO LIVE STREAM</span>
             </div>
             <div class="hud-bottom">
               <div class="hud-stat">
@@ -665,7 +666,7 @@
   <section class="demo-section" id="demo">
     <div class="section-label">Interactive Demo</div>
     <h2 class="section-title">Live Quantum Traffic Simulation</h2>
-    <p class="section-desc">Select one of the 10 predefined traffic scenarios, hit <strong>Run</strong>, and watch the closed-loop pipeline run continuously — STQGCN predicts congestion on the Mumbai road network, QAOA optimises routing, and the optimised state feeds back into the next cycle automatically.</p>
+    <p class="section-desc">Select one of the 10 predefined traffic scenarios, then hit <strong>Run</strong>. Scenario loads and road settings go to the trained STQGCN predictor; its forecast goes to FastAPI's QAOA optimizer, and returned optimized flows feed into the next cycle.</p>
 
     <!-- Scenario Selector -->
     <div class="scenario-selector-wrap">
@@ -680,7 +681,7 @@
         <span class="ci-val" id="cycle-count">—</span>
       </div>
       <div class="phase-indicator">
-        <div class="pi-step" id="pi-1"><div class="pi-dot p1d"></div><span>STQGCN Predicting</span></div>
+        <div class="pi-step" id="pi-1"><div class="pi-dot p1d"></div><span>Scenario Inputs</span></div>
         <div class="pi-arrow">→</div>
         <div class="pi-step" id="pi-2"><div class="pi-dot p2d"></div><span>QAOA Optimising</span></div>
         <div class="pi-arrow">→</div>
@@ -748,7 +749,7 @@
           <div class="gs-item"><span class="gs-label">Peak Before</span><span class="gs-val gs-red" id="gs-before">—</span></div>
           <div class="gs-item"><span class="gs-label">Peak After</span><span class="gs-val gs-green" id="gs-after">—</span></div>
           <div class="gs-item"><span class="gs-label">Reduction</span><span class="gs-val gs-purple" id="gs-reduction">—</span></div>
-          <div class="gs-item"><span class="gs-label">Bitstring</span><span class="gs-val gs-mono" id="gs-bits">—</span></div>
+          <div class="gs-item"><span class="gs-label">STQGCN / QAOA Runtime</span><span class="gs-val gs-mono" id="gs-bits">—</span></div>
         </div>
       </div>
 
