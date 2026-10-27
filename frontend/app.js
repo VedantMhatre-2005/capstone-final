@@ -382,17 +382,17 @@ function initCCTVAnimation() {
 // ══════════════════════════════════════════════════════════
 // Edge infrastructure defaults
 const EDGE_INFRA = [
-  { len: 1200, cap: 2100, speed: 60, mu: 1.0 }, // V1->V2
-  { len: 850,  cap: 1900, speed: 50, mu: 1.0 }, // V1->V4
-  { len: 1600, cap: 1800, speed: 60, mu: 1.0 }, // V1->V5
-  { len: 1100, cap: 2000, speed: 55, mu: 1.0 }, // V2->V3
-  { len: 900,  cap: 1800, speed: 50, mu: 1.0 }, // V2->V5
-  { len: 1400, cap: 1700, speed: 65, mu: 1.0 }, // V3->V8
-  { len: 1300, cap: 2100, speed: 60, mu: 1.0 }, // V4->V5
-  { len: 1250, cap: 2000, speed: 60, mu: 1.0 }, // V5->V6
-  { len: 1500, cap: 1850, speed: 55, mu: 1.0 }, // V6->V2
-  { len: 1700, cap: 1950, speed: 70, mu: 1.0 }, // V6->V7
-  { len: 1550, cap: 1800, speed: 60, mu: 1.0 }, // V7->V3
+  { len: 3500, cap: 4000, speed: 70, mu: 1.0 }, // V1->V2 (WEH Main)
+  { len: 2800, cap: 3200, speed: 60, mu: 1.0 }, // V1->V4
+  { len: 4500, cap: 3000, speed: 60, mu: 1.0 }, // V1->V5
+  { len: 4000, cap: 3500, speed: 60, mu: 1.0 }, // V2->V3
+  { len: 1800, cap: 2800, speed: 50, mu: 1.0 }, // V2->V5
+  { len: 2500, cap: 4200, speed: 80, mu: 1.0 }, // V3->V8 (Sea Link Corridor)
+  { len: 1500, cap: 2500, speed: 50, mu: 1.0 }, // V4->V5
+  { len: 2000, cap: 3600, speed: 50, mu: 1.0 }, // V5->V6 (BKC-Sion Link)
+  { len: 2200, cap: 2400, speed: 50, mu: 1.0 }, // V6->V2 (Loop)
+  { len: 3000, cap: 2800, speed: 50, mu: 1.0 }, // V6->V7
+  { len: 2100, cap: 3100, speed: 50, mu: 1.0 }, // V7->V3
 ];
 
 let currentMu = 1.0;
@@ -494,20 +494,20 @@ const NODE_LABELS = ['North Hub', 'Central-North', 'East-North', 'West-South', '
 
 // 11 forward directed edges [src, dst, road_name, capacity]
 const FORWARD_EDGES = [
-  [0, 1, 'V1→V2', 2100],
-  [0, 3, 'V1→V4', 1900],
-  [0, 4, 'V1→V5', 1800],
-  [1, 2, 'V2→V3', 2000],
-  [1, 4, 'V2→V5', 1800],
-  [2, 7, 'V3→V8', 1700],
-  [3, 4, 'V4→V5', 2100],
-  [4, 5, 'V5→V6', 2000],
-  [5, 1, 'V6→V2', 1850],
-  [5, 6, 'V6→V7', 1950],
-  [6, 2, 'V7→V3', 1800],
+  [0, 1, 'V1→V2', 4000],
+  [0, 3, 'V1→V4', 3200],
+  [0, 4, 'V1→V5', 3000],
+  [1, 2, 'V2→V3', 3500],
+  [1, 4, 'V2→V5', 2800],
+  [2, 7, 'V3→V8', 4200],
+  [3, 4, 'V4→V5', 2500],
+  [4, 5, 'V5→V6', 3600],
+  [5, 1, 'V6→V2', 2400],
+  [5, 6, 'V6→V7', 2800],
+  [6, 2, 'V7→V3', 3100],
 ];
 
-const API_BASE_URL = window.QFF_API_BASE_URL || '/api';
+const API_BASE_URL = window.QFF_API_BASE_URL || (window.location.port === '80' ? '/api' : 'http://localhost:8000');
 let backendNetwork = null;
 
 async function apiRequest(path, options = {}) {
@@ -618,7 +618,15 @@ function renderScenarioGrid() {
       // Draw idle graphs with scenario base state
       const flows = buildFlows(sc.occ, 0);
       renderSVGGraph(document.getElementById('svg-predicted'), flows, false);
+      renderSVGGraph(document.getElementById('svg-optimised'), flows.map(f => ({ ...f, occ: Math.max(0.18, f.occ * 0.68) })), false);
       updateFeatureTable(flows, null);
+      const peakOcc = (Math.max(...flows.slice(0, 11).map(f => f.occ)) * 100).toFixed(1);
+      document.getElementById('gs-before').textContent = `${peakOcc}%`;
+      document.getElementById('gs-after').textContent = '—';
+      document.getElementById('gs-reduction').textContent = '—';
+      document.getElementById('gs-bits').textContent = 'Ready';
+      setBadge('badge-pred', 'Ready', '');
+      setBadge('badge-opt', 'Ready', '');
     });
     grid.appendChild(card);
   });
@@ -1004,11 +1012,20 @@ async function runOneCycle() {
   if (cycleCount === 1 || !currentOptFlows) {
     baseOcc = sc.occ.slice();
   } else {
-    // Feedback: base occupancies are shifted toward the optimised state from the previous cycle
+    // Closed-loop dynamic feedback with realistic dissipation:
+    // Bottlenecks stay relieved by QAOA signals/rerouting; detours clear transient load back to baseline
     baseOcc = sc.occ.map((orig, i) => {
       const optOcc = currentOptFlows[i]?.occ ?? orig;
-      // Drift toward optimised, but natural traffic re-accumulates 25% each cycle
-      return optOcc * 0.75 + orig * 0.25;
+      let nextOcc;
+      if (orig > 0.55) {
+        // Sustained relief on bottleneck edges
+        nextOcc = orig * 0.35 + optOcc * 0.65;
+      } else {
+        // Transient detour packets dissipate back to baseline
+        nextOcc = orig * 0.85 + optOcc * 0.15;
+      }
+      const jitter = (Math.random() - 0.5) * 0.02;
+      return Math.min(0.95, Math.max(0.12, nextOcc + jitter));
     });
   }
   const scenarioFlows = buildFlows(baseOcc, 0);

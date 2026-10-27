@@ -573,9 +573,9 @@ def run_qaoa_optimization(
     input_capacities: Optional[Dict[Any, float]] = None,
     graph: Optional[nx.Graph] = None,
     packet_size: float = 150.0,
-    max_packets: int = 10,
+    max_packets: int = 6,
     reps: int = 1,
-    maxiter: int = 50,
+    maxiter: int = 30,
 ) -> Dict[str, Any]:
     """
     Execute topology-independent QAOA traffic optimization on any connected NetworkX graph,
@@ -590,11 +590,12 @@ def run_qaoa_optimization(
     occupancy, congested, underutilized = detect_congestion(capacities, predicted_loads)
 
     # 3. Generate alternate detour routes (top 2 least occupied)
-    alt_routes = generate_alternate_routes(G, congested, occupancy, max_cutoff=3, top_k=2)
+    alt_routes = generate_alternate_routes(G, congested, occupancy, max_cutoff=4, top_k=2)
 
-    # 4. Generate packets
+    # 4. Generate packets prioritizing highest bottleneck edges
+    sorted_cong = dict(sorted(congested.items(), key=lambda item: item[1], reverse=True))
     packets, variables = generate_packets(
-        congested, predicted_loads, capacities, alt_routes,
+        sorted_cong, predicted_loads, capacities, alt_routes,
         target=0.50, packet_size=packet_size, max_packets=max_packets
     )
 
