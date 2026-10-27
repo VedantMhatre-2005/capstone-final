@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quantum-Hybrid Traffic Intelligence | QFF 2026</title>
+  <meta name="description" content="Spatio-Temporal Quantum Graph Convolutional Network (STQGCN) fused with QAOA-based traffic optimization — a closed-loop quantum-classical hybrid system for smart urban mobility." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js"></script>
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <style>
+    /* Hero Credits Guaranteed Styling */
+    .hero-credits {
+      width: 100%;
+      max-width: 480px;
+      margin: 1.5rem auto 2.5rem !important;
+      position: relative;
+      z-index: 10;
+    }
+    .credits-card {
+      background: rgba(255, 255, 255, 0.82) !important;
+      border: 1.5px solid rgba(168, 85, 247, 0.32) !important;
+      border-radius: 24px !important;
+      padding: 1.4rem 2rem !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      box-shadow: 0 12px 36px rgba(140, 60, 240, 0.12), 0 0 24px rgba(168, 85, 247, 0.08) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 0.9rem !important;
+      transition: all 0.35s ease !important;
+    }
+    .credits-card:hover {
+      border-color: rgba(168, 85, 247, 0.5) !important;
+      box-shadow: 0 16px 44px rgba(140, 60, 240, 0.18), 0 0 32px rgba(168, 85, 247, 0.15) !important;
+      transform: translateY(-2px) !important;
+    }
+    .credits-header {
+      display: flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+    }
+    .credits-sparkle {
+      color: #a855f7 !important;
+      font-size: 0.85rem !important;
+    }
+    .credits-label {
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      color: #7e22ce !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+    }
+    .credits-names-list {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0.45rem !important;
+      width: 100% !important;
+      max-width: 320px !important;
+    }
+    .credit-person {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 0.75rem !important;
+      background: rgba(168, 85, 247, 0.07) !important;
+      border: 1px solid rgba(168, 85, 247, 0.18) !important;
+      border-radius: 999px !important;
+      padding: 0.45rem 1.1rem !important;
+      transition: all 0.2s ease !important;
+    }
+    .credit-person:hover {
+      background: rgba(168, 85, 247, 0.15) !important;
+      border-color: #a855f7 !important;
+      transform: translateX(4px) !important;
+      box-shadow: 0 2px 12px rgba(168, 85, 247, 0.15) !important;
+    }
+    .cp-dot {
+      width: 7px !important;
+      height: 7px !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, #a855f7, #6366f1) !important;
+      flex-shrink: 0 !important;
+      box-shadow: 0 0 6px rgba(168, 85, 247, 0.6) !important;
+    }
+    .cp-name {
+      font-family: 'Space Grotesk', system-ui, sans-serif !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      color: #2e1065 !important;
+      letter-spacing: -0.01em !important;
+    }
+    .dept-badge-wrap {
+      margin-top: 0.25rem !important;
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+    .dept-badge {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.5rem !important;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(99, 102, 241, 0.15)) !important;
+      border: 1.5px solid rgba(168, 85, 247, 0.35) !important;
+      border-radius: 999px !important;
+      padding: 0.45rem 1.35rem !important;
+      font-size: 0.8rem !important;
+      font-weight: 700 !important;
+      color: #7e22ce !important;
+      letter-spacing: 0.02em !important;
+      box-shadow: 0 2px 10px rgba(168, 85, 247, 0.12) !important;
+      backdrop-filter: blur(8px) !important;
+      transition: all 0.2s ease !important;
+    }
+    .dept-badge:hover {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.22), rgba(99, 102, 241, 0.2)) !important;
+      border-color: #a855f7 !important;
+      transform: translateY(-1px) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Particle Canvas ─────────────────────────────────────────────── -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────── -->
+  <header class="hero" id="hero">
+    <div class="qff-badge">
+      <span class="dot"></span>
+      Qiskit Fall Fest 2026 &nbsp;·&nbsp; Live Demo Session
+    </div>
+    <h1 class="hero-title">
+      Quantum-Hybrid<br/>
+      <span class="gradient-text">Traffic Intelligence</span>
+    </h1>
+    <p class="hero-subtitle">
+      A closed-loop system fusing <strong>STQGCN</strong> traffic forecasting<br/>
+      with <strong>QAOA</strong>-based quantum route optimisation
+    </p>
+    <div class="hero-tags">
+      <span class="tag">PennyLane VQC</span>
+      <span class="tag">Qiskit QAOA</span>
+      <span class="tag">Graph Neural Network</span>
+      <span class="tag">QUBO Formulation</span>
+      <span class="tag">COBYLA Optimizer</span>
+    </div>
+
+    <div class="hero-credits">
+      <div class="credits-card">
+        <div class="credits-header">
+          <span class="credits-sparkle">✦</span>
+          <span class="credits-label">Final Year Project proposed &amp; created by</span>
+          <span class="credits-sparkle">✦</span>
+        </div>
+        <div class="credits-names-list">
+          <div class="credit-person">
+            <span class="cp-dot"></span>
+            <span class="cp-name">Vedant Mhatre</span>
+          </div>
+          <div class="credit-person">
+            <span class="cp-dot"></span>
+            <span class="cp-name">Aditya Upasani</span>
+          </div>
+          <div class="credit-person">
+            <span class="cp-dot"></span>
+            <span class="cp-name">Yash Mahajan</span>
+          </div>
+          <div class="credit-person">
+            <span class="cp-dot"></span>
+            <span class="cp-name">Sanjay Aski</span>
+          </div>
+        </div>
+        <div class="dept-badge-wrap">
+          <div class="dept-badge">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Department of Computer Engineering, VESIT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#data-collection" class="cta-btn secondary-btn" id="datacollect-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        Data Collection
+      </a>
+      <a href="#pipeline" class="cta-btn" id="explore-btn">
+        Explore Pipeline
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ── Data Collection & Feature Ingestion ────────────────────────────── -->
+  <section class="datacollect-section" id="data-collection">
+    <div class="section-label">Telemetry &amp; Ingestion</div>
+    <h2 class="section-title">Data Collection &amp; Multimodal Feature Ingestion</h2>
+    <p class="section-desc">
+      Real-time vehicle flow is automatically extracted from junction CCTV video streams using computer vision (object detection and trajectory tracking), while physical infrastructure parameters like road length, lane capacity, and speed limits are parameterized by the Traffic Manager through an interactive control console.
+    </p>
+
+    <div class="datacollect-grid">
+
+      <!-- Stream 1: CCTV Computer Vision Analytics -->
+      <div class="dc-card dc-card-cv">
+        <div class="dc-card-header">
+          <div class="dc-badge dc-badge-live">
+            <span class="pulse-rec"></span> LIVE CCTV STREAM
+          </div>
+          <div class="cam-selector" id="cam-selector">
+            <button class="cam-btn active" data-cam="0">CAM-01 (V1→V2)</button>
+            <button class="cam-btn" data-cam="1">CAM-02 (V4→V5)</button>
+            <button class="cam-btn" data-cam="2">CAM-03 (V2 Hub)</button>
+            <button class="cam-btn" data-cam="3">CAM-04 (V6→V7)</button>
+          </div>
+        </div>
+
+        <!-- Animated CCTV Video Feed Canvas -->
+        <div class="cctv-viewport-wrap">
+          <canvas id="cctv-canvas" width="600" height="340"></canvas>
+          <div class="cctv-hud-overlay">
+            <div class="hud-top">
+              <span class="hud-tag" id="hud-cam-id">CAM-01 · MUMBAI ARTERIAL V1→V2</span>
+              <span class="hud-tag hud-fps">60.0 FPS · RTSP/H.264</span>
+            </div>
+            <div class="hud-bottom">
+              <div class="hud-stat">
+                <span class="hs-lbl">CV Algorithm</span>
+                <span class="hs-val" style="color:#38bdf8">YOLOv8 + ByteTrack</span>
+              </div>
+              <div class="hud-stat">
+                <span class="hs-lbl">Vehicles in Frame</span>
+                <span class="hs-val" id="hud-veh-count">12</span>
+              </div>
+              <div class="hud-stat">
+                <span class="hs-lbl">Extracted Flow</span>
+                <span class="hs-val hs-green" id="hud-flow-val">1,840 v/h</span>
+              </div>
+              <div class="hud-stat">
+                <span class="hs-lbl">Avg Speed</span>
+                <span class="hs-val hs-purple" id="hud-speed-val">46 km/h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dc-card-footer">
+          <div class="cv-features-bar">
+            <div class="cv-feat-item">
+              <span class="cf-dot" style="background:#38bdf8"></span>
+              <span>Vehicle Bounding Boxes &amp; Class Tracking (Cars, Buses, 2W)</span>
+            </div>
+            <div class="cv-feat-item">
+              <span class="cf-dot" style="background:#34d399"></span>
+              <span>Virtual Counting Tripwire (Crossline Optical Flow)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stream 2: Traffic Manager Control Panel -->
+      <div class="dc-card dc-card-panel">
+        <div class="dc-card-header">
+          <div class="dc-badge dc-badge-manager">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            TRAFFIC MANAGER CONSOLE
+          </div>
+          <div class="tm-status-tag">Physical Infrastructure Inputs</div>
+        </div>
+
+        <div class="tm-panel-body">
+          <div class="tm-form-row">
+            <label class="tm-label" for="tm-segment-select">
+              <span>Target Road Segment</span>
+              <span class="tm-sub">Mumbai Network Edge</span>
+            </label>
+            <select class="tm-select" id="tm-segment-select">
+              <option value="0">Edge V1 → V2 (North Hub Arterial)</option>
+              <option value="1">Edge V1 → V4 (West Feeder)</option>
+              <option value="2">Edge V1 → V5 (Diagonal Express)</option>
+              <option value="3">Edge V2 → V3 (East Arterial)</option>
+              <option value="4">Edge V2 → V5 (Central Spine)</option>
+              <option value="5">Edge V3 → V8 (Far-East Corridor)</option>
+              <option value="6">Edge V4 → V5 (South Spine A)</option>
+              <option value="7">Edge V5 → V6 (South Spine B)</option>
+              <option value="8">Edge V6 → V2 (North-Bound Flyover)</option>
+              <option value="9">Edge V6 → V7 (South-East Link)</option>
+              <option value="10">Edge V7 → V3 (East Diagonal)</option>
+            </select>
+          </div>
+
+          <!-- Parameter Slider 1: Road Length -->
+          <div class="tm-slider-group">
+            <div class="tm-slider-header">
+              <span class="tm-param-name">Segment Road Length (L)</span>
+              <span class="tm-param-val" id="val-road-length">1,200 m</span>
+            </div>
+            <input type="range" class="tm-range" id="slider-road-length" min="300" max="3000" step="50" value="1200" />
+            <div class="tm-slider-scale">
+              <span>300 m (Short Block)</span>
+              <span>1,500 m</span>
+              <span>3,000 m (Expressway)</span>
+            </div>
+          </div>
+
+          <!-- Parameter Slider 2: Nominal Capacity -->
+          <div class="tm-slider-group">
+            <div class="tm-slider-header">
+              <span class="tm-param-name">Lane Capacity (C)</span>
+              <span class="tm-param-val" id="val-capacity">2,100 veh/hr</span>
+            </div>
+            <input type="range" class="tm-range" id="slider-capacity" min="800" max="3500" step="50" value="2100" />
+            <div class="tm-slider-scale">
+              <span>800 (1-Lane Local)</span>
+              <span>2,000 (2-Lane Arterial)</span>
+              <span>3,500 (3-Lane Express)</span>
+            </div>
+          </div>
+
+          <!-- Parameter Slider 3: Speed Limit -->
+          <div class="tm-slider-group">
+            <div class="tm-slider-header">
+              <span class="tm-param-name">Design Speed Limit (V<sub>max</sub>)</span>
+              <span class="tm-param-val" id="val-speed-limit">60 km/h</span>
+            </div>
+            <input type="range" class="tm-range" id="slider-speed-limit" min="30" max="100" step="5" value="60" />
+            <div class="tm-slider-scale">
+              <span>30 km/h (School/Market)</span>
+              <span>60 km/h (Urban)</span>
+              <span>100 km/h (Highway)</span>
+            </div>
+          </div>
+
+          <!-- Parameter Radio: Weather / Surface Friction -->
+          <div class="tm-form-row">
+            <label class="tm-label">
+              <span>Weather / Surface Condition (&mu;)</span>
+            </label>
+            <div class="tm-weather-pills" id="tm-weather-pills">
+              <button class="tm-pill active" data-mu="1.0">☀️ Dry (1.00)</button>
+              <button class="tm-pill" data-mu="0.75">🌧️ Wet (0.75)</button>
+              <button class="tm-pill" data-mu="0.55">⛈️ Heavy Rain (0.55)</button>
+            </div>
+          </div>
+
+          <!-- Derived Physics Output Summary -->
+          <div class="tm-derived-box">
+            <div class="tdb-item">
+              <span class="tdb-lbl">Theoretical Saturation</span>
+              <span class="tdb-val" id="tdb-sat">175 veh/km</span>
+            </div>
+            <div class="tdb-item">
+              <span class="tdb-lbl">Free-Flow Travel Time</span>
+              <span class="tdb-val" id="tdb-time">72.0 s</span>
+            </div>
+            <div class="tdb-item">
+              <span class="tdb-lbl">Density Threshold</span>
+              <span class="tdb-val" id="tdb-dens">35.0 veh/km</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Animated Multimodal Feature Tensor Fusion Banner -->
+    <div class="feature-fusion-wrap">
+      <div class="fusion-stream fstream-cv">
+        <div class="fs-icon">📹</div>
+        <div class="fs-text">
+          <strong>Computer Vision Flow Vector</strong>
+          <span>[Flow Rate, Detected Speed, Occupancy %, Density]</span>
+        </div>
+      </div>
+      <div class="fusion-operator">
+        <div class="fo-plus">⊕</div>
+        <div class="fo-label">Concatenation &amp; Normalisation</div>
+      </div>
+      <div class="fusion-stream fstream-tm">
+        <div class="fs-icon">🎛️</div>
+        <div class="fs-text">
+          <strong>Manager Static Infrastructure Vector</strong>
+          <span>[Length, Capacity, Speed Limit, Friction &mu;]</span>
+        </div>
+      </div>
+      <div class="fusion-operator">
+        <div class="fo-arrow">➔</div>
+        <div class="fo-label">Input Tensor Generator</div>
+      </div>
+      <div class="fusion-result">
+        <div class="fr-badge">STQGCN Input Tensors</div>
+        <div class="fr-math">
+          <strong>X</strong> &in; &reals;<sup>8 &times; 6</sup> &nbsp;&bull;&nbsp; <strong>E</strong> &in; &reals;<sup>22 &times; 6</sup>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pipeline Cards ─────────────────────────────────────────────── -->
+  <section class="pipeline-section" id="pipeline">
+    <div class="section-label">System Architecture</div>
+    <h2 class="section-title">Three-Phase Closed-Loop Pipeline</h2>
+    <p class="section-desc">Each phase feeds directly into the next, forming a continuously self-improving quantum-classical control loop for real-time urban traffic management.</p>
+
+    <!-- ── Network Graph Formulation Callout ────────────────────────── -->
+    <div class="network-graph-banner">
+      <div class="ng-header">
+        <div class="ng-badge">
+          <span class="ng-icon">🕸️</span>
+          <span>Traffic Network Graph Modeling &nbsp;·&nbsp; <strong>G = (V, E)</strong></span>
+        </div>
+        <div class="ng-tag">Network Abstraction</div>
+      </div>
+      <p class="ng-lead">
+        Before entering the three computational stages, the urban road network is mathematically modeled as a <strong>directed spatial graph \( G = (V, E) \)</strong> where physical infrastructure and traffic dynamics are mapped directly to graph topology:
+      </p>
+
+      <!-- ── Simple Static Sample Graph Diagram ──────────────────── -->
+      <div class="sample-graph-diagram-wrap">
+        <div class="sgd-header-simple">
+          <span class="sgd-title-simple">Graph Representation: <strong>G = (V, E)</strong></span>
+          <div class="sgd-legend-simple">
+            <span><strong style="color:#7e22ce">● Node (V):</strong> Traffic Junction</span>
+            <span>&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+            <span><strong style="color:#4f46e5">➔ Edge (E):</strong> Road Segment</span>
+          </div>
+        </div>
+
+        <div class="sgd-svg-container-simple">
+          <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" class="simple-traffic-svg">
+            <defs>
+              <marker id="simpleArr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#4f46e5" />
+              </marker>
+            </defs>
+
+            <!-- Directed Road Edges (Lines) -->
+            <!-- V1 -> V2 -->
+            <line x1="145" y1="55" x2="452" y2="55" stroke="#6366f1" stroke-width="2.5" marker-end="url(#simpleArr)" />
+            <text x="300" y="44" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#4338ca">Edge (Road Segment 1)</text>
+
+            <!-- V1 -> V3 -->
+            <line x1="120" y1="78" x2="120" y2="138" stroke="#6366f1" stroke-width="2.5" marker-end="url(#simpleArr)" />
+            <text x="65" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#4338ca">Road 2</text>
+
+            <!-- V1 -> V4 Diagonal -->
+            <line x1="136" y1="70" x2="462" y2="148" stroke="#818cf8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#simpleArr)" />
+            <text x="305" y="118" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="500" fill="#6366f1">Diagonal Road 5</text>
+
+            <!-- V2 -> V4 -->
+            <line x1="480" y1="78" x2="480" y2="138" stroke="#6366f1" stroke-width="2.5" marker-end="url(#simpleArr)" />
+            <text x="535" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#4338ca">Road 3</text>
+
+            <!-- V3 -> V4 -->
+            <line x1="145" y1="160" x2="452" y2="160" stroke="#6366f1" stroke-width="2.5" marker-end="url(#simpleArr)" />
+            <text x="300" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#4338ca">Edge (Road Segment 4)</text>
+
+            <!-- Node 1 (V1) -->
+            <g transform="translate(120, 55)">
+              <circle r="22" fill="#7e22ce" stroke="#ffffff" stroke-width="2" />
+              <text text-anchor="middle" y="4" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#ffffff">V1</text>
+              <text text-anchor="middle" y="-28" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e1030">Junction 1</text>
+            </g>
+
+            <!-- Node 2 (V2) -->
+            <g transform="translate(480, 55)">
+              <circle r="22" fill="#7e22ce" stroke="#ffffff" stroke-width="2" />
+              <text text-anchor="middle" y="4" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#ffffff">V2</text>
+              <text text-anchor="middle" y="-28" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e1030">Junction 2</text>
+            </g>
+
+            <!-- Node 3 (V3) -->
+            <g transform="translate(120, 160)">
+              <circle r="22" fill="#7e22ce" stroke="#ffffff" stroke-width="2" />
+              <text text-anchor="middle" y="4" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#ffffff">V3</text>
+              <text text-anchor="middle" y="38" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e1030">Junction 3</text>
+            </g>
+
+            <!-- Node 4 (V4) -->
+            <g transform="translate(480, 160)">
+              <circle r="22" fill="#7e22ce" stroke="#ffffff" stroke-width="2" />
+              <text text-anchor="middle" y="4" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#ffffff">V4</text>
+              <text text-anchor="middle" y="38" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1e1030">Junction 4</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="ng-components-grid">
+        <div class="ng-card ng-nodes">
+          <div class="ngc-head">
+            <div class="ngc-bullet node-bullet">V</div>
+            <div class="ngc-title">
+              <h4>Nodes (Vertices) &nbsp;➔&nbsp; Traffic Junctions</h4>
+              <span>Physical Intersections &amp; Signalized Hubs</span>
+            </div>
+          </div>
+          <p class="ngc-desc">
+            Each <strong>node</strong> in the graph represents a <strong>traffic junction or intersection</strong> (e.g., junctions <em>V<sub>1</sub></em> through <em>V<sub>8</sub></em> across the network). Node feature vectors encode queue lengths, signal phase timings, and localized junction vehicle density.
+          </p>
+          <div class="ngc-chips">
+            <span class="ngc-chip"><strong>8 Vertices</strong> (V1–V8)</span>
+            <span class="ngc-chip">Signal Phases &amp; Queue Delays</span>
+            <span class="ngc-chip">Intersection Density State</span>
+          </div>
+        </div>
+
+        <div class="ng-divider-icon">
+          <span>⇄</span>
+        </div>
+
+        <div class="ng-card ng-edges">
+          <div class="ngc-head">
+            <div class="ngc-bullet edge-bullet">E</div>
+            <div class="ngc-title">
+              <h4>Edges (Links) &nbsp;➔&nbsp; Road Segments</h4>
+              <span>Directed Corridors &amp; Arterial Links</span>
+            </div>
+          </div>
+          <p class="ngc-desc">
+            Each <strong>directed edge</strong> represents a <strong>physical road segment or transit link</strong> connecting two junctions. Edge feature vectors capture real-time vehicle flow rates (veh/hr), average transit speeds (km/h), lane capacities, segment lengths, and surface friction coefficients.
+          </p>
+          <div class="ngc-chips">
+            <span class="ngc-chip"><strong>22 Directed Edges</strong></span>
+            <span class="ngc-chip">Flow (v/h) &amp; Speed (km/h)</span>
+            <span class="ngc-chip">Road Capacity &amp; Friction &mu;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closed-loop diagram -->
+    <div class="loop-diagram">
+      <div class="loop-phases">
+        <div class="loop-phase active" id="lp1">
+          <div class="lp-icon">🧠</div>
+          <div class="lp-label">Phase 1</div>
+          <div class="lp-name">STQGCN<br/>Prediction</div>
+        </div>
+        <div class="loop-connector">
+          <div class="lc-line"></div>
+          <div class="lc-arrow">→</div>
+          <div class="lc-label">Predicted<br/>Congestion</div>
+        </div>
+        <div class="loop-phase" id="lp2">
+          <div class="lp-icon">⚛️</div>
+          <div class="lp-label">Phase 2</div>
+          <div class="lp-name">QAOA<br/>Optimisation</div>
+        </div>
+        <div class="loop-connector">
+          <div class="lc-line"></div>
+          <div class="lc-arrow">→</div>
+          <div class="lc-label">Optimal<br/>Routes</div>
+        </div>
+        <div class="loop-phase" id="lp3">
+          <div class="lp-icon">🔄</div>
+          <div class="lp-label">Phase 3</div>
+          <div class="lp-name">Feedback<br/>Re-estimation</div>
+        </div>
+      </div>
+      <div class="loop-return-arrow">
+        <svg viewBox="0 0 800 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="url(#loopGrad)"/>
+            </marker>
+            <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#a855f7"/>
+              <stop offset="100%" style="stop-color:#6366f1"/>
+            </linearGradient>
+          </defs>
+          <path d="M 720 10 Q 720 55 400 55 Q 80 55 80 10" fill="none" stroke="url(#loopGrad)" stroke-width="2.5" stroke-dasharray="8,4" marker-end="url(#arrowhead)"/>
+          <text x="400" y="50" text-anchor="middle" fill="#c084fc" font-size="11" font-family="Inter">Optimised State feeds back into Prediction</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Step Cards -->
+    <div class="cards-grid" id="cards-grid">
+
+      <!-- Card 1 – STQGCN -->
+      <div class="step-card" id="card-stqgcn" data-phase="1">
+        <div class="card-phase-badge">Phase 1</div>
+        <div class="card-icon-wrap">
+          <div class="card-icon">🧠</div>
+        </div>
+        <h3 class="card-title">STQGCN — Spatio-Temporal Quantum Graph Convolutional Network</h3>
+        <p class="card-desc">A graph neural network operating on the road network topology, capturing both spatial (cross-junction) and temporal (time-series) dependencies in vehicle flow, then routing node representations through a Variational Quantum Circuit (VQC) for quantum-enhanced feature encoding.</p>
+        <div class="card-metrics">
+          <div class="cm-item"><span class="cm-val">8</span><span class="cm-label">Qubits</span></div>
+          <div class="cm-item"><span class="cm-val">22</span><span class="cm-label">Directed Edges</span></div>
+          <div class="cm-item"><span class="cm-val">8</span><span class="cm-label">Nodes</span></div>
+          <div class="cm-item"><span class="cm-val">10 K</span><span class="cm-label">Training Samples</span></div>
+        </div>
+      </div>
+
+      <!-- Card 2 – QAOA -->
+      <div class="step-card" id="card-qaoa" data-phase="2">
+        <div class="card-phase-badge phase2">Phase 2</div>
+        <div class="card-icon-wrap phase2">
+          <div class="card-icon">⚛️</div>
+        </div>
+        <h3 class="card-title">QAOA — Quantum Approximate Optimisation Algorithm</h3>
+        <p class="card-desc">Congestion levels predicted by STQGCN are encoded into a QUBO Hamiltonian. QAOA, running on Qiskit's StatevectorSampler with COBYLA, finds the near-optimal binary routing assignment for diverting excess traffic onto underutilised alternate paths.</p>
+        <div class="card-metrics">
+          <div class="cm-item"><span class="cm-val">≤10</span><span class="cm-label">Qubits</span></div>
+          <div class="cm-item"><span class="cm-val">60%</span><span class="cm-label">Congestion Threshold</span></div>
+          <div class="cm-item"><span class="cm-val">50%</span><span class="cm-label">Target Occupancy</span></div>
+          <div class="cm-item"><span class="cm-val">COBYLA</span><span class="cm-label">Classical Optimizer</span></div>
+        </div>
+      </div>
+
+      <!-- Card 3 – Feedback Loop -->
+      <div class="step-card" id="card-feedback" data-phase="3">
+        <div class="card-phase-badge phase3">Phase 3</div>
+        <div class="card-icon-wrap phase3">
+          <div class="card-icon">🔄</div>
+        </div>
+        <h3 class="card-title">Closed-Loop Feedback — Optimised State Re-enters Prediction</h3>
+        <p class="card-desc">QAOA's optimised traffic flows become the new observed state feeding back into STQGCN at the next prediction cycle. The model forecasts from a quantum-optimised ground truth, progressively steering the network toward congestion-free equilibrium.</p>
+        <div class="card-metrics">
+          <div class="cm-item"><span class="cm-val">5 s</span><span class="cm-label">Lookahead Window</span></div>
+          <div class="cm-item"><span class="cm-val">↓Peak</span><span class="cm-label">Occ. Reduction</span></div>
+          <div class="cm-item"><span class="cm-val">90 s</span><span class="cm-label">Signal Cycle</span></div>
+          <div class="cm-item"><span class="cm-val">∞</span><span class="cm-label">Continuous Loop</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── VQC Circuit Diagram ─────────────────────────────────────────── -->
+  <section class="circuit-section" id="circuit">
+    <div class="section-label">Quantum Architecture</div>
+    <h2 class="section-title">Variational Quantum Circuit (VQC) inside STQGCN</h2>
+    <p class="section-desc">The 8-qubit VQC is the quantum heart of STQGCN. Node embeddings are angle-encoded via RY gates, evolved through K variational layers with CNOT ring entanglement, and measured as Pauli-Z expectation values.</p>
+    <div class="circuit-container" id="circuit-container">
+      <canvas id="circuit-canvas"></canvas>
+      <div class="circuit-controls">
+        <label>Number of VQC Layers &nbsp; K =</label>
+        <div class="layer-btns" id="layer-btns">
+          <button class="lb active" data-k="1">1</button>
+          <button class="lb" data-k="2">2</button>
+          <button class="lb" data-k="3">3</button>
+          <button class="lb" data-k="4">4</button>
+        </div>
+      </div>
+      <div class="circuit-legend">
+        <div class="cl-item"><div class="cl-box ry"></div><span>RY — Angle Encoding</span></div>
+        <div class="cl-item"><div class="cl-box rz"></div><span>RZ — Variational</span></div>
+        <div class="cl-item"><div class="cl-box ry2"></div><span>RY — Variational</span></div>
+        <div class="cl-item"><div class="cl-box cnot"></div><span>CNOT — Ring Entanglement</span></div>
+        <div class="cl-item"><div class="cl-box meas"></div><span>⟨Z⟩ Measurement</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Live Demo ───────────────────────────────────────────────────── -->
+  <section class="demo-section" id="demo">
+    <div class="section-label">Interactive Demo</div>
+    <h2 class="section-title">Live Quantum Traffic Simulation</h2>
+    <p class="section-desc">Select one of the 10 predefined traffic scenarios, hit <strong>Run</strong>, and watch the closed-loop pipeline run continuously — STQGCN predicts congestion on the Mumbai road network, QAOA optimises routing, and the optimised state feeds back into the next cycle automatically.</p>
+
+    <!-- Scenario Selector -->
+    <div class="scenario-selector-wrap">
+      <div class="scenario-selector-label">Select Traffic Scenario (10 Predefined)</div>
+      <div class="scenario-grid" id="scenario-grid"></div>
+    </div>
+
+    <!-- Run Controls Bar -->
+    <div class="run-controls-bar">
+      <div class="cycle-info">
+        <span class="ci-label">Cycle</span>
+        <span class="ci-val" id="cycle-count">—</span>
+      </div>
+      <div class="phase-indicator">
+        <div class="pi-step" id="pi-1"><div class="pi-dot p1d"></div><span>STQGCN Predicting</span></div>
+        <div class="pi-arrow">→</div>
+        <div class="pi-step" id="pi-2"><div class="pi-dot p2d"></div><span>QAOA Optimising</span></div>
+        <div class="pi-arrow">→</div>
+        <div class="pi-step" id="pi-3"><div class="pi-dot p3d"></div><span>State Feedback</span></div>
+      </div>
+      <button class="run-btn" id="run-btn">
+        <span class="run-btn-icon" id="run-icon">▶</span>
+        <span id="run-label">Run Pipeline</span>
+      </button>
+    </div>
+
+    <!-- Dual Graph Display -->
+    <div class="dual-graph-wrap">
+
+      <!-- Left: STQGCN Predicted -->
+      <div class="graph-panel" id="graph-predicted">
+        <div class="gp-header">
+          <div class="gp-dot gp-dot-1"></div>
+          <span>Phase 1 — STQGCN Predicted State</span>
+          <div class="gp-badge" id="badge-pred">Idle</div>
+        </div>
+        <div class="graph-svg-wrap">
+          <svg id="svg-predicted" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item"><div class="gl-dot" style="background:#ef4444"></div>Congested (&gt;60%)</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#f59e0b"></div>Moderate (45–60%)</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#10b981"></div>Free Flow (&lt;45%)</div>
+        </div>
+      </div>
+
+      <!-- Loop Arrow -->
+      <div class="graph-loop-arrow">
+        <div class="gla-label">QAOA<br/>Optimised ↓</div>
+        <div class="gla-svg-wrap">
+          <svg viewBox="0 0 50 180" xmlns="http://www.w3.org/2000/svg" style="width:50px;height:180px">
+            <defs>
+              <marker id="arrD" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 7 3, 0 6" fill="#a855f7"/>
+              </marker>
+              <marker id="arrU" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto">
+                <polygon points="0 0, 7 3, 0 6" fill="#6366f1"/>
+              </marker>
+            </defs>
+            <path d="M 25 8 L 25 80" stroke="#a855f7" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrD)"/>
+            <circle cx="25" cy="90" r="10" fill="rgba(168,85,247,0.15)" stroke="#a855f7" stroke-width="1.5"/>
+            <text x="25" y="94" text-anchor="middle" fill="#7c3aed" font-size="9" font-family="Inter" font-weight="700">↺</text>
+            <path d="M 25 172 L 25 100" stroke="#6366f1" stroke-width="2.5" stroke-dasharray="6,3" marker-end="url(#arrU)"/>
+          </svg>
+        </div>
+        <div class="gla-label">↑ State<br/>Feedback</div>
+      </div>
+
+      <!-- Right: QAOA Optimised -->
+      <div class="graph-panel" id="graph-optimised">
+        <div class="gp-header">
+          <div class="gp-dot gp-dot-2"></div>
+          <span>Phase 2+3 — QAOA Optimised State</span>
+          <div class="gp-badge gp-badge-2" id="badge-opt">Waiting</div>
+        </div>
+        <div class="graph-svg-wrap">
+          <svg id="svg-optimised" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="graph-stats">
+          <div class="gs-item"><span class="gs-label">Peak Before</span><span class="gs-val gs-red" id="gs-before">—</span></div>
+          <div class="gs-item"><span class="gs-label">Peak After</span><span class="gs-val gs-green" id="gs-after">—</span></div>
+          <div class="gs-item"><span class="gs-label">Reduction</span><span class="gs-val gs-purple" id="gs-reduction">—</span></div>
+          <div class="gs-item"><span class="gs-label">Bitstring</span><span class="gs-val gs-mono" id="gs-bits">—</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Feature Table -->
+    <div class="feature-table-wrap">
+      <div class="ft-tabs">
+        <button class="ft-tab active" id="tab-edge" onclick="switchTab('edge')">Edge Features (Live)</button>
+        <button class="ft-tab" id="tab-node" onclick="switchTab('node')">Node Features (Live)</button>
+      </div>
+      <div id="table-edge-wrap">
+        <div class="ft-scroll">
+          <table class="ft" id="ft-edge">
+            <thead>
+              <tr>
+                <th>Edge</th><th>Direction</th><th>Flow (veh/hr)</th><th>Occupancy</th>
+                <th>Speed (km/h)</th><th>Density (veh/km)</th><th>Cap. Util.</th>
+                <th>Delay (s)</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="ft-edge-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="table-node-wrap" style="display:none">
+        <div class="ft-scroll">
+          <table class="ft" id="ft-node">
+            <thead>
+              <tr>
+                <th>Node</th><th>Intersection</th><th>Traffic Density</th><th>Avg Speed (km/h)</th>
+                <th>Queue Length</th><th>Flow Rate (veh/hr)</th><th>Signal Phase</th><th>Wait Time (s)</th>
+              </tr>
+            </thead>
+            <tbody id="ft-node-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="footer-q">Q</span>
+      <span>Quantum-Hybrid Traffic Intelligence</span>
+    </div>
+    <p class="footer-text">Final Year Capstone Project &nbsp;·&nbsp; Qiskit Fall Fest 2026 Speaker Session</p>
+    <p class="footer-text" style="opacity:0.4;font-size:0.78rem;margin-top:0.3rem;">Built with PennyLane · Qiskit · PyTorch · NetworkX</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
