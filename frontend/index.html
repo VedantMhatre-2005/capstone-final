@@ -376,7 +376,7 @@
         <div class="fs-icon">📹</div>
         <div class="fs-text">
           <strong>Computer Vision Flow Vector</strong>
-          <span>[Flow Rate, Detected Speed, Occupancy %, Density]</span>
+          <span>[Flow Rate (veh/hr), Detected Speed, Traffic Density, Spatial Routing]</span>
         </div>
       </div>
       <div class="fusion-operator">
@@ -612,7 +612,7 @@
         <div class="card-metrics">
           <div class="cm-item"><span class="cm-val">≤10</span><span class="cm-label">Qubits</span></div>
           <div class="cm-item"><span class="cm-val">60%</span><span class="cm-label">Congestion Threshold</span></div>
-          <div class="cm-item"><span class="cm-val">50%</span><span class="cm-label">Target Occupancy</span></div>
+          <div class="cm-item"><span class="cm-val">Balanced</span><span class="cm-label">Target Flow (veh/hr)</span></div>
           <div class="cm-item"><span class="cm-val">COBYLA</span><span class="cm-label">Classical Optimizer</span></div>
         </div>
       </div>
@@ -627,7 +627,7 @@
         <p class="card-desc">QAOA's optimised traffic flows become the new observed state feeding back into STQGCN at the next prediction cycle. The model forecasts from a quantum-optimised ground truth, progressively steering the network toward congestion-free equilibrium.</p>
         <div class="card-metrics">
           <div class="cm-item"><span class="cm-val">5 s</span><span class="cm-label">Lookahead Window</span></div>
-          <div class="cm-item"><span class="cm-val">↓Peak</span><span class="cm-label">Occ. Reduction</span></div>
+          <div class="cm-item"><span class="cm-val">↓Peak</span><span class="cm-label">Flow Reduction</span></div>
           <div class="cm-item"><span class="cm-val">90 s</span><span class="cm-label">Signal Cycle</span></div>
           <div class="cm-item"><span class="cm-val">∞</span><span class="cm-label">Continuous Loop</span></div>
         </div>
@@ -707,9 +707,9 @@
           <svg id="svg-predicted" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
         <div class="graph-legend">
-          <div class="gl-item"><div class="gl-dot" style="background:#ef4444"></div>Congested (&gt;60%)</div>
-          <div class="gl-item"><div class="gl-dot" style="background:#f59e0b"></div>Moderate (45–60%)</div>
-          <div class="gl-item"><div class="gl-dot" style="background:#10b981"></div>Free Flow (&lt;45%)</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#ef4444"></div>Congested Flow (&gt;60% Cap)</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#f59e0b"></div>Moderate Flow (45–60% Cap)</div>
+          <div class="gl-item"><div class="gl-dot" style="background:#10b981"></div>Free Flow (&lt;45% Cap)</div>
         </div>
       </div>
 
@@ -746,9 +746,9 @@
           <svg id="svg-optimised" viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
         <div class="graph-stats">
-          <div class="gs-item"><span class="gs-label">Peak Before</span><span class="gs-val gs-red" id="gs-before">—</span></div>
-          <div class="gs-item"><span class="gs-label">Peak After</span><span class="gs-val gs-green" id="gs-after">—</span></div>
-          <div class="gs-item"><span class="gs-label">Reduction</span><span class="gs-val gs-purple" id="gs-reduction">—</span></div>
+          <div class="gs-item"><span class="gs-label">Peak Flow Before</span><span class="gs-val gs-red" id="gs-before">—</span></div>
+          <div class="gs-item"><span class="gs-label">Peak Flow After</span><span class="gs-val gs-green" id="gs-after">—</span></div>
+          <div class="gs-item"><span class="gs-label">Peak Flow Relief</span><span class="gs-val gs-purple" id="gs-reduction">—</span></div>
           <div class="gs-item"><span class="gs-label">STQGCN / QAOA Runtime</span><span class="gs-val gs-mono" id="gs-bits">—</span></div>
         </div>
       </div>
@@ -758,16 +758,17 @@
     <!-- Live Feature Table -->
     <div class="feature-table-wrap">
       <div class="ft-tabs">
-        <button class="ft-tab active" id="tab-edge" onclick="switchTab('edge')">Edge Features (Live)</button>
+        <button class="ft-tab active" id="tab-edge" onclick="switchTab('edge')">Edge Flow Rates (Live)</button>
         <button class="ft-tab" id="tab-node" onclick="switchTab('node')">Node Features (Live)</button>
+        <button class="ft-tab" id="tab-signal" onclick="switchTab('signal')">🚦 Signal Timings (Before vs After QAOA)</button>
       </div>
       <div id="table-edge-wrap">
         <div class="ft-scroll">
           <table class="ft" id="ft-edge">
             <thead>
               <tr>
-                <th>Edge</th><th>Direction</th><th>Flow (veh/hr)</th><th>Occupancy</th>
-                <th>Speed (km/h)</th><th>Density (veh/km)</th><th>Cap. Util.</th>
+                <th>Edge</th><th>Direction</th><th>Flow (veh/hr)</th><th>Road Capacity</th>
+                <th>Speed (km/h)</th><th>Density (veh/km)</th><th>Available Headroom</th>
                 <th>Delay (s)</th><th>Status</th>
               </tr>
             </thead>
@@ -780,11 +781,54 @@
           <table class="ft" id="ft-node">
             <thead>
               <tr>
-                <th>Node</th><th>Intersection</th><th>Traffic Density</th><th>Avg Speed (km/h)</th>
+                <th>Node</th><th>Intersection</th><th>Queue Delays (s)</th><th>Avg Speed (km/h)</th>
                 <th>Queue Length</th><th>Flow Rate (veh/hr)</th><th>Signal Phase</th><th>Wait Time (s)</th>
               </tr>
             </thead>
             <tbody id="ft-node-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="table-signal-wrap" style="display:none">
+        <div class="signal-meta-bar">
+          <div class="sm-item">
+            <span class="sm-lbl">Cycle Time (C)</span>
+            <span class="sm-val">90.0 s</span>
+          </div>
+          <div class="sm-item">
+            <span class="sm-lbl">Phase Clearance (Lost Time)</span>
+            <span class="sm-val">4.0 s / phase (Y+AR)</span>
+          </div>
+          <div class="sm-item">
+            <span class="sm-lbl">Signal Control Strategy</span>
+            <span class="sm-val">QAOA Dynamic Proportional Green Allocation</span>
+          </div>
+          <div class="sm-item">
+            <span class="sm-lbl">Network Intersections</span>
+            <span class="sm-val">8 Junctions · 22 Approach Phases</span>
+          </div>
+          <div class="sm-item">
+            <span class="sm-lbl">Optimization Status</span>
+            <span class="sm-val" id="sm-status" style="color:#059669">Synchronized with QAOA</span>
+          </div>
+        </div>
+        <div class="ft-scroll">
+          <table class="ft" id="ft-signal">
+            <thead>
+              <tr>
+                <th>Junction</th>
+                <th>Approach Phase</th>
+                <th>Connecting Road</th>
+                <th>Flow Before (veh/hr)</th>
+                <th>Flow After (veh/hr)</th>
+                <th>Green Before (s)</th>
+                <th>Green After (s)</th>
+                <th>Split Shift (Δ)</th>
+                <th>Green Ratio (g/C)</th>
+                <th>Optimization Action</th>
+              </tr>
+            </thead>
+            <tbody id="ft-signal-body"></tbody>
           </table>
         </div>
       </div>

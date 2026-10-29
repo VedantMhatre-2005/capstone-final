@@ -33,7 +33,11 @@ from predictions import (
     ADITYA_INITIAL_GREEN_TIMES
 )
 from utils import format_congestion_table, compute_cycle_time_summary
-from final_qaoa_with_signal import run_final_qaoa_optimization as run_qaoa_optimization
+from final_qaoa_with_signal import (
+    run_final_qaoa_optimization as run_qaoa_optimization,
+    optimize_signals,
+    build_network
+)
 from stqgcn_service import STQGCNForecaster
 
 # ---------------------------------------------------------------------------
@@ -414,12 +418,20 @@ async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
 
         qaoa_res = run_qaoa_optimization(user_predictions, user_capacities)
         
+        G_net, norm_c, norm_l = build_network(capacities=user_capacities, predicted_loads=user_predictions)
+        old_green_signals = optimize_signals(G_net, norm_c, norm_l, cycle_time=90.0, yellow_red_time=4.0)
+
         initial_cycle_times = (ADITYA_INITIAL_CYCLE_TIMES if request.network_type == "aditya" else
-                               ({node_id: 60.0 for node_id in graph.nodes} if request.network_type == "qff" else INITIAL_CYCLE_TIMES))
+                               ({node_id: 90.0 for node_id in graph.nodes} if request.network_type == "qff" else INITIAL_CYCLE_TIMES))
         old_green = _compute_green_times(graph, user_predictions, initial_cycle_times, is_initial=True)
+        
+        all_signal_keys = set(list(qaoa_res["green_times"].keys()) + list(old_green_signals.keys()) + list(graph._edge_index.keys()))
         green_times_api = {
-            edge_id: {"old": old_green.get(edge_id, 0.0), "new": qaoa_res["green_times"].get(edge_id, 0.0)}
-            for edge_id in graph._edge_index.keys()
+            edge_id: {
+                "old": old_green_signals.get(edge_id, old_green.get(edge_id, 0.0)),
+                "new": qaoa_res["green_times"].get(edge_id, 0.0)
+            }
+            for edge_id in all_signal_keys
         }
 
         # Build graph_after dictionary with QAOA loads
@@ -431,8 +443,10 @@ async def run_qaoa_endpoint(request: QaoaOptimizationRequest):
             "graph_after": graph_after,
             "before": user_predictions,
             "after": qaoa_res["optimized_congestion"],
-            "cycle_times": {node_id: {"old": initial_cycle_times.get(node_id, 60.0), "new": initial_cycle_times.get(node_id, 60.0)} for node_id in graph.nodes},
+            "cycle_times": {node_id: {"old": initial_cycle_times.get(node_id, 90.0), "new": initial_cycle_times.get(node_id, 90.0)} for node_id in graph.nodes},
             "green_times": green_times_api,
+            "green_times_before": old_green_signals,
+            "green_times_after": qaoa_res["green_times"],
             "latency_ms": qaoa_res["latency_ms"],
             "initial_fitness": qaoa_res["stdev_before"],
             "final_fitness": qaoa_res["stdev_after"],
